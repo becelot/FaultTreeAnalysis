@@ -38,6 +38,10 @@ namespace FaultTreeAnalysis.FaultTree
                           where pattern.IsMatch(line)
                           select new { Token = patternMatcher.IndexOf(pattern), Information = pattern.Match(line)};
 
+            var symbolGroup = from symbol in symbols
+                              orderby symbol.Token
+                              group symbol by symbol.Token;
+
             return ft;
         }
 
