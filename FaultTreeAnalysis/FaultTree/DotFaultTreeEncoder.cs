@@ -10,18 +10,46 @@ namespace FaultTreeAnalysis.FaultTree
 {
     enum DotParseToken
     {
-        DOT_TRANSITION,
+        DOT_TRANSITION = 0,
         DOT_ROOT,
         DOT_GATE,
-        DOT_IDENTIFIER
+        DOT_IDENTIFIER,
+        DOT_INVALID
     }
 
     class DotFaultTreeEncoder : IFaultTreeCodec
     {
-        private static Regex transition = new Regex(@"(?<from>\d*)[^-]*-\>[^\d]*(?<to>\d*).*");
-        private static Regex rootPattern = new Regex(@"(?<id>\d*)[^\[]*\[shape=point.*");
-        private static Regex gatePattern = new Regex("(?<id>\\d*)[^\\[]*\\[shape=box.*label=\"(?<typ>.*)\".*");
-        private static Regex identifierPattern = new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<identifier>.*)\".*");
+        private static List<Regex> patternMatcher = new List<Regex> {
+            new Regex(@"(?<from>\d*)[^-]*-\>[^\d]*(?<to>\d*).*"),
+            new Regex(@"(?<id>\d*)[^\[]*\[shape=point.*"),
+            new Regex("(?<id>\\d*)[^\\[]*\\[shape=box.*label=\"(?<typ>.*)\".*"),
+            new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<identifier>.*)\".*")
+        };
+
+        private class Symbol
+        {
+            public DotParseToken Token { get; set; }
+            public Match MatchingInformation { get; set; }
+
+            public Symbol(DotParseToken token, Match info)
+            {
+                this.Token = token;
+                this.MatchingInformation = info;
+            }
+        }
+
+
+        private Symbol classify(string s)
+        {
+            for (int i = 0; i < patternMatcher.Count(); i++)
+            {
+                if (!patternMatcher.ElementAt(i).IsMatch(s)) { continue;  }
+                Match m = patternMatcher.ElementAt(i).Match(s);
+
+                return new Symbol((DotParseToken)i, m);
+            }
+            return new Symbol(DotParseToken.DOT_INVALID, null);
+        }
 
         public override FaultTree read(StreamReader stream)
         {
