@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace FaultTreeAnalysis.FaultTree
 {
-    class XmlFaultTreeCodec : IFaultTreeCodec
+    class XmlFaultTreeEncoder : IFaultTreeCodec
     {
         public override FaultTree read(StreamReader stream)
         {

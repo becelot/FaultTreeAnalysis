@@ -12,7 +12,7 @@ namespace FaultTreeAnalysis.FaultTree
         {
             if (fileName.EndsWith(".xml"))
             {
-                return new XmlFaultTreeCodec();
+                return new XmlFaultTreeEncoder();
             } else if (fileName.EndsWith(".dot"))
             {
                 return new DotFaultTreeEncoder();
