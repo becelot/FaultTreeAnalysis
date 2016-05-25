@@ -19,6 +19,7 @@ namespace FaultTreeAnalysis.FaultTree
 
     class DotFaultTreeEncoder : IFaultTreeCodec
     {
+        // The .dot pattern syntax
         private static List<Regex> patternMatcher = new List<Regex> {
             new Regex(@"(?<from>\d*)[^-]*-\>[^\d]*(?<to>\d*).*"),
             new Regex(@"(?<id>\d*)[^\[]*\[shape=point.*"),
@@ -30,14 +31,17 @@ namespace FaultTreeAnalysis.FaultTree
         {
             FaultTree ft = null;
 
+            //Preprocess lines to remove .dot structures and split information into single lines 
             List<String> lines = stream.ReadToEnd().Split('\n').ToList();
             lines = lines.GetRange(1, lines.Count() - 3).SelectMany(l => l.Split(';')).Where(l => !l.Trim().Equals("")).ToList();
 
+            //Create datastructures to store parsed tokens
             var symbols = from line in lines
                           from pattern in patternMatcher
                           where pattern.IsMatch(line)
                           select new { Token = patternMatcher.IndexOf(pattern), Information = pattern.Match(line)};
 
+            //Group symbols be their token (allows for simplified FT construction)
             var symbolGroup = from symbol in symbols
                               orderby symbol.Token
                               group symbol by symbol.Token;
