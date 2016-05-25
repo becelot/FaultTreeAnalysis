@@ -26,39 +26,17 @@ namespace FaultTreeAnalysis.FaultTree
             new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<identifier>.*)\".*")
         };
 
-        private class Symbol
-        {
-            public DotParseToken Token { get; set; }
-            public Match MatchingInformation { get; set; }
-
-            public Symbol(DotParseToken token, Match info)
-            {
-                this.Token = token;
-                this.MatchingInformation = info;
-            }
-        }
-
-
-        private Symbol classify(string s)
-        {
-            for (int i = 0; i < patternMatcher.Count(); i++)
-            {
-                if (!patternMatcher.ElementAt(i).IsMatch(s)) { continue;  }
-                Match m = patternMatcher.ElementAt(i).Match(s);
-
-                return new Symbol((DotParseToken)i, m);
-            }
-            return new Symbol(DotParseToken.DOT_INVALID, null);
-        }
-
         public override FaultTree read(StreamReader stream)
         {
             FaultTree ft = null;
 
             List<String> lines = stream.ReadToEnd().Split('\n').ToList();
             lines = lines.GetRange(1, lines.Count() - 3).SelectMany(l => l.Split(';')).Where(l => !l.Trim().Equals("")).ToList();
-            
 
+            var symbols = from line in lines
+                          from pattern in patternMatcher
+                          where pattern.IsMatch(line)
+                          select new { Token = patternMatcher.IndexOf(pattern), Information = pattern.Match(line)};
 
             return ft;
         }
