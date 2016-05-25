@@ -46,6 +46,7 @@
     <Compile Include="FaultTree\DotFaultTreeEncoder.cs" />
     <Compile Include="FaultTree\FaultTree.cs" />
     <Compile Include="FaultTree\FaultTreeEncoderFactory.cs" />
+    <Compile Include="FaultTree\FaultTreeFormatException.cs" />
     <Compile Include="FaultTree\IFaultTreeCodec.cs" />
     <Compile Include="FaultTree\XmlFaultTreeCodec.cs" />
     <Compile Include="MainProgram.cs" />
