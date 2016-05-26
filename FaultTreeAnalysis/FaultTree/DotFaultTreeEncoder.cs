@@ -29,10 +29,12 @@ namespace FaultTreeAnalysis.FaultTree
             new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<label>.*)\".*")
         };
 
-        public override FaultTree read(StreamReader stream)
+        public override FaultTree read(FileStream stream)
         {
+            StreamReader sr = new StreamReader(stream);
+
             //Preprocess lines to remove .dot structures and split information into single lines 
-            List<String> lines = stream.ReadToEnd().Split('\n').ToList();
+            List<String> lines = sr.ReadToEnd().Split('\n').ToList();
             lines = lines.GetRange(1, lines.Count() - 3).SelectMany(l => l.Split(';')).Where(l => !l.Trim().Equals("")).ToList();
 
             //Create datastructures to store parsed tokens

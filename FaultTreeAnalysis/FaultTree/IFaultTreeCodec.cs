@@ -19,7 +19,7 @@ namespace FaultTreeAnalysis.FaultTree
 
         public abstract void write(FaultTree ft, FileStream stream);
 
-        public abstract FaultTree read(StreamReader fileName);
+        public abstract FaultTree read(FileStream fileName);
 
         public virtual FaultTreeFormat getFormatToken() { return FaultTreeFormat.FAULT_TREE_UNKNOWN; }
 
@@ -36,7 +36,7 @@ namespace FaultTreeAnalysis.FaultTree
             FaultTree res;
 
             //Create stream from file contents
-            using (StreamReader stream = new StreamReader(fileName))
+            using (FileStream stream = new FileStream(fileName, FileMode.Open))
             {
                 res = this.read(stream);
             }
