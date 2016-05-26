@@ -48,6 +48,9 @@
     <Compile Include="FaultTree\FaultTreeEncoderFactory.cs" />
     <Compile Include="FaultTree\FaultTreeFormatException.cs" />
     <Compile Include="FaultTree\IFaultTreeCodec.cs" />
+    <Compile Include="FaultTree\Tree\FaultTreeGateNode.cs" />
+    <Compile Include="FaultTree\Tree\FaultTreeNode.cs" />
+    <Compile Include="FaultTree\Tree\FaultTreeTerminalNode.cs" />
     <Compile Include="FaultTree\XmlFaultTreeEncoder.cs" />
     <Compile Include="MainProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

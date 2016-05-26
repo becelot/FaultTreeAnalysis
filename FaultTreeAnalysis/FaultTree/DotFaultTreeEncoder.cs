@@ -1,5 +1,7 @@
-﻿using System;
+﻿using FaultTreeAnalysis.FaultTree.Tree;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,10 +13,10 @@ namespace FaultTreeAnalysis.FaultTree
     enum DotParseToken
     {
         DOT_TRANSITION = 0,
-        DOT_ROOT,
-        DOT_GATE,
-        DOT_IDENTIFIER,
-        DOT_INVALID
+        DOT_ROOT = 1,
+        DOT_GATE = 2,
+        DOT_IDENTIFIER = 3,
+        DOT_INVALID = 4
     }
 
     class DotFaultTreeEncoder : IFaultTreeCodec
@@ -23,8 +25,8 @@ namespace FaultTreeAnalysis.FaultTree
         private static List<Regex> patternMatcher = new List<Regex> {
             new Regex(@"(?<from>\d*)[^-]*-\>[^\d]*(?<to>\d*).*"),
             new Regex(@"(?<id>\d*)[^\[]*\[shape=point.*"),
-            new Regex("(?<id>\\d*)[^\\[]*\\[shape=box.*label=\"(?<typ>.*)\".*"),
-            new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<identifier>.*)\".*")
+            new Regex("(?<id>\\d*)[^\\[]*\\[shape=box.*label=\"(?<operator>.*)\".*"),
+            new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<label>.*)\".*")
         };
 
         public override FaultTree read(StreamReader stream)
@@ -45,6 +47,26 @@ namespace FaultTreeAnalysis.FaultTree
             var symbolGroup = from symbol in symbols
                               orderby symbol.Token
                               group symbol by symbol.Token;
+
+            Debug.Assert(symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT).Count() == 1);
+
+            //Extract different node types
+            var root = symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT).ElementAt(0);
+            var terminals = from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_IDENTIFIER)
+                            select (FaultTreeNode)new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value));
+
+            var gates = from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_GATE)
+                        select (FaultTreeNode)new FaultTreeGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value); //symbol.Information.Groups["id"].Value;
+
+            //Union on all nodes
+            var nodes = (from t in terminals select new { ID = t.ID, Node = t }).Union(from g in gates select new { ID = g.ID, Node = g }).OrderBy(n => n.ID);
+
+
+            (from trans in symbolGroup.ElementAt((int)DotParseToken.DOT_TRANSITION)
+             let f = nodes.ElementAt(int.Parse(trans.Information.Groups["from"].Value))
+             let t = nodes.ElementAt(int.Parse(trans.Information.Groups["to"].Value))
+             select new { From = f, To = t }).ToList().ForEach(t => t.From.Node.Childs.Add(t.To.Node));
+            
 
             return ft;
         }
