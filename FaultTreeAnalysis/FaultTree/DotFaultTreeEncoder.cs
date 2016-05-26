@@ -31,8 +31,6 @@ namespace FaultTreeAnalysis.FaultTree
 
         public override FaultTree read(StreamReader stream)
         {
-            FaultTree ft = null;
-
             //Preprocess lines to remove .dot structures and split information into single lines 
             List<String> lines = stream.ReadToEnd().Split('\n').ToList();
             lines = lines.GetRange(1, lines.Count() - 3).SelectMany(l => l.Split(';')).Where(l => !l.Trim().Equals("")).ToList();
@@ -51,7 +49,9 @@ namespace FaultTreeAnalysis.FaultTree
             Debug.Assert(symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT).Count() == 1);
 
             //Extract different node types
-            var root = symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT).ElementAt(0);
+            var rootNode = from r in symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT)
+                           select (FaultTreeNode)new FaultTreeGateNode(int.Parse(r.Information.Groups["id"].Value), FaultTreeGateNode.FaultTreeGateOperator.FAULT_TREE_OPERATOR_EQUAL);
+
             var terminals = from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_IDENTIFIER)
                             select (FaultTreeNode)new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value));
 
@@ -59,7 +59,7 @@ namespace FaultTreeAnalysis.FaultTree
                         select (FaultTreeNode)new FaultTreeGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value); //symbol.Information.Groups["id"].Value;
 
             //Union on all nodes
-            var nodes = (from t in terminals select new { ID = t.ID, Node = t }).Union(from g in gates select new { ID = g.ID, Node = g }).OrderBy(n => n.ID);
+            var nodes = (from t in terminals select new { ID = t.ID, Node = t }).Union(from g in gates select new { ID = g.ID, Node = g }).Union(from r in rootNode select new { ID = r.ID, Node = r }).OrderBy(n => n.ID);
 
 
             (from trans in symbolGroup.ElementAt((int)DotParseToken.DOT_TRANSITION)
@@ -68,7 +68,7 @@ namespace FaultTreeAnalysis.FaultTree
              select new { From = f, To = t }).ToList().ForEach(t => t.From.Node.Childs.Add(t.To.Node));
             
 
-            return ft;
+            return new FaultTree(rootNode.ElementAt(0));
         }
 
         public override void write(FaultTree ft, StreamWriter stream)
