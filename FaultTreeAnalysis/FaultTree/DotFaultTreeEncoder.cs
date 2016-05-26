@@ -65,10 +65,7 @@ namespace FaultTreeAnalysis.FaultTree
             (from trans in symbolGroup.ElementAt((int)DotParseToken.DOT_TRANSITION)
              let f = nodes[int.Parse(trans.Information.Groups["from"].Value)]
              let t = nodes[int.Parse(trans.Information.Groups["to"].Value)]
-             select new { From = f, To = t }).ToList().ForEach(trans => {
-                 trans.From.Node.Childs.Add(trans.To.Node);
-                 Console.WriteLine("Added transition from " + trans.From.ID + " to " + trans.To.ID );
-             });
+             select new { From = f, To = t }).ToList().ForEach(trans => trans.From.Node.Childs.Add(trans.To.Node));
             
 
             return new FaultTree(rootNode.ElementAt(0));
