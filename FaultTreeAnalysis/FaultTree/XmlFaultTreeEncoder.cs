@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using FaultTreeAnalysis.FaultTree.Tree;
+using System.Runtime.Serialization;
 
 namespace FaultTreeAnalysis.FaultTree
 {
@@ -24,9 +25,12 @@ namespace FaultTreeAnalysis.FaultTree
                                from lType in lAssembly.GetTypes()
                                where typeof(FaultTreeNode).IsAssignableFrom(lType)
                                select lType).ToArray();
-
-            XmlSerializer xml = new XmlSerializer(typeof(FaultTree), listOfNodes);
-            xml.Serialize(stream, ft);
+            var setting = new DataContractSerializerSettings();
+            setting.PreserveObjectReferences = true;
+            setting.KnownTypes = listOfNodes;
+            FileStream test = new FileStream("test.xml", FileMode.Create);
+            var serializer = new DataContractSerializer(typeof(FaultTree), setting);
+            serializer.WriteObject(test, ft);
         }
 
         public override FaultTreeFormat getFormatToken()
