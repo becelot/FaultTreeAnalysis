@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FaultTreeAnalysis.FaultTree;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,15 @@ namespace FaultTreeAnalysis
         static void Main(string[] args)
         {
             List<String> files = new List<String>(Directory.GetFiles("examples")).Where(f => new Regex(@".*-ft.*").IsMatch(f)).ToList();
+
+            foreach(String s in files.Take(1))
+            {
+                IFaultTreeCodec codec = FaultTreeEncoderFactory.createFaultTreeCodec(s);
+                FaultTree.FaultTree ft = codec.read(s);
+
+                IFaultTreeCodec xmlCodec = FaultTreeEncoderFactory.createFaultTreeCodec(FaultTreeFormat.FAULT_TREE_XML);
+                xmlCodec.write(ft, s + ".xml");
+            }
 
             Console.ReadKey();
         }

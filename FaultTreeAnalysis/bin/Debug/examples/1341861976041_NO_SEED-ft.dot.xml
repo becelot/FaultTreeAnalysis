@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FaultTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Root xsi:type="FaultTreeGateNode">
+    <ID>0</ID>
+    <Childs>
+      <FaultTreeNode xsi:type="FaultTreeGateNode">
+        <ID>8</ID>
+        <Childs>
+          <FaultTreeNode xsi:type="FaultTreeGateNode">
+            <ID>7</ID>
+            <Childs>
+              <FaultTreeNode xsi:type="FaultTreeTerminalNode">
+                <ID>3</ID>
+                <Childs />
+                <Label>1</Label>
+              </FaultTreeNode>
+              <FaultTreeNode xsi:type="FaultTreeTerminalNode">
+                <ID>2</ID>
+                <Childs />
+                <Label>4</Label>
+              </FaultTreeNode>
+            </Childs>
+            <Operator>FAULT_TREE_OPERATOR_AND</Operator>
+          </FaultTreeNode>
+          <FaultTreeNode xsi:type="FaultTreeGateNode">
+            <ID>6</ID>
+            <Childs>
+              <FaultTreeNode xsi:type="FaultTreeTerminalNode">
+                <ID>5</ID>
+                <Childs />
+                <Label>2</Label>
+              </FaultTreeNode>
+              <FaultTreeNode xsi:type="FaultTreeTerminalNode">
+                <ID>4</ID>
+                <Childs />
+                <Label>3</Label>
+              </FaultTreeNode>
+              <FaultTreeNode xsi:type="FaultTreeTerminalNode">
+                <ID>1</ID>
+                <Childs />
+                <Label>5</Label>
+              </FaultTreeNode>
+            </Childs>
+            <Operator>FAULT_TREE_OPERATOR_AND</Operator>
+          </FaultTreeNode>
+          <FaultTreeNode xsi:type="FaultTreeTerminalNode">
+            <ID>1</ID>
+            <Childs />
+            <Label>5</Label>
+          </FaultTreeNode>
+        </Childs>
+        <Operator>FAULT_TREE_OPERATOR_OR</Operator>
+      </FaultTreeNode>
+    </Childs>
+    <Operator>FAULT_TREE_OPERATOR_EQUAL</Operator>
+  </Root>
+</FaultTree>

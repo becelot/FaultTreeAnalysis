@@ -38,8 +38,8 @@ namespace FaultTreeAnalysis.FaultTree
             //Create datastructures to store parsed tokens
             var symbols = from line in lines
                           from pattern in patternMatcher
-                          where pattern.IsMatch(line)
-                          select new { Token = patternMatcher.IndexOf(pattern), Information = pattern.Match(line)};
+                          where pattern.IsMatch(line.Trim())
+                          select new { Token = patternMatcher.IndexOf(pattern), Information = pattern.Match(line.Trim())};
 
             //Group symbols be their token (allows for simplified FT construction)
             var symbolGroup = from symbol in symbols
@@ -49,23 +49,26 @@ namespace FaultTreeAnalysis.FaultTree
             Debug.Assert(symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT).Count() == 1);
 
             //Extract different node types
-            var rootNode = from r in symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT)
-                           select (FaultTreeNode)new FaultTreeGateNode(int.Parse(r.Information.Groups["id"].Value), FaultTreeGateNode.FaultTreeGateOperator.FAULT_TREE_OPERATOR_EQUAL);
+            var rootNode = (from r in symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT)
+                           select new FaultTreeGateNode(int.Parse(r.Information.Groups["id"].Value), FaultTreeGateNode.FaultTreeGateOperator.FAULT_TREE_OPERATOR_EQUAL) as FaultTreeNode).ToList();
 
-            var terminals = from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_IDENTIFIER)
-                            select (FaultTreeNode)new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value));
+            var terminals = (from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_IDENTIFIER)
+                            select new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value)) as FaultTreeNode).ToList();
 
-            var gates = from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_GATE)
-                        select (FaultTreeNode)new FaultTreeGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value); //symbol.Information.Groups["id"].Value;
+            var gates = (from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_GATE)
+                        select new FaultTreeGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value) as FaultTreeNode).ToList();
 
             //Union on all nodes
-            var nodes = (from t in terminals select new { ID = t.ID, Node = t }).Union(from g in gates select new { ID = g.ID, Node = g }).Union(from r in rootNode select new { ID = r.ID, Node = r }).OrderBy(n => n.ID);
+            var nodes = (from t in terminals select new { ID = t.ID, Node = t }).Union(from g in gates select new { ID = g.ID, Node = g }).Union(from r in rootNode select new { ID = r.ID, Node = r }).OrderBy(n => n.ID).ToList();
 
 
             (from trans in symbolGroup.ElementAt((int)DotParseToken.DOT_TRANSITION)
-             let f = nodes.ElementAt(int.Parse(trans.Information.Groups["from"].Value))
-             let t = nodes.ElementAt(int.Parse(trans.Information.Groups["to"].Value))
-             select new { From = f, To = t }).ToList().ForEach(t => t.From.Node.Childs.Add(t.To.Node));
+             let f = nodes[int.Parse(trans.Information.Groups["from"].Value)]
+             let t = nodes[int.Parse(trans.Information.Groups["to"].Value)]
+             select new { From = f, To = t }).ToList().ForEach(trans => {
+                 trans.From.Node.Childs.Add(trans.To.Node);
+                 Console.WriteLine("Added transition from " + trans.From.ID + " to " + trans.To.ID );
+             });
             
 
             return new FaultTree(rootNode.ElementAt(0));

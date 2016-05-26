@@ -12,7 +12,6 @@ namespace FaultTreeAnalysis.FaultTree.Tree
     {
         public int ID { get; set; }
 
-        [XmlArray("ChildNodes")]
         public List<FaultTreeNode> Childs { get; set; }
 
         public FaultTreeNode() { Childs = new List<FaultTreeNode>(); }
