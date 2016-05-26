@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 
 namespace FaultTreeAnalysis.FaultTree.Tree
 {
-    [Serializable()]
     public abstract class FaultTreeNode
     {
         public int ID { get; set; }

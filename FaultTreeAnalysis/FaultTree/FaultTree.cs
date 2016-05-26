@@ -8,8 +8,6 @@ using System.Xml.Serialization;
 
 namespace FaultTreeAnalysis.FaultTree
 {
-    [Serializable()]
-    [XmlRoot("FaultTree")]
     public class FaultTree
     {
         public FaultTreeNode Root { get; set; }

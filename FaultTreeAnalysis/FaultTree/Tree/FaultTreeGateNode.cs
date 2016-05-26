@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace FaultTreeAnalysis.FaultTree.Tree
 {
-    [Serializable()]
     public class FaultTreeGateNode : FaultTreeNode
     {
         public enum FaultTreeGateOperator
