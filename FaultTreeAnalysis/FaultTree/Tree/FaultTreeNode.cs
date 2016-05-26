@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace FaultTreeAnalysis.FaultTree.Tree
 {
@@ -11,6 +12,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
     {
         public int ID { get; set; }
 
+        [XmlArray("ChildNodes")]
         public List<FaultTreeNode> Childs { get; set; }
 
         public FaultTreeNode() { Childs = new List<FaultTreeNode>(); }
