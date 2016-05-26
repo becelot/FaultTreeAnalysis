@@ -19,7 +19,7 @@ namespace FaultTreeAnalysis.FaultTree
             return (FaultTree)xml.Deserialize(stream);
         }
 
-        public override void write(FaultTree ft, StreamWriter stream)
+        public override void write(FaultTree ft, FileStream stream)
         {
             var listOfNodes = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
                                from lType in lAssembly.GetTypes()
@@ -28,9 +28,8 @@ namespace FaultTreeAnalysis.FaultTree
             var setting = new DataContractSerializerSettings();
             setting.PreserveObjectReferences = true;
             setting.KnownTypes = listOfNodes;
-            FileStream test = new FileStream("test.xml", FileMode.Create);
             var serializer = new DataContractSerializer(typeof(FaultTree), setting);
-            serializer.WriteObject(test, ft);
+            serializer.WriteObject(stream, ft);
         }
 
         public override FaultTreeFormat getFormatToken()

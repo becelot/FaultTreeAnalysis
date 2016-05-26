@@ -71,7 +71,7 @@ namespace FaultTreeAnalysis.FaultTree
             return new FaultTree(rootNode.ElementAt(0));
         }
 
-        public override void write(FaultTree ft, StreamWriter stream)
+        public override void write(FaultTree ft, FileStream stream)
         {
             throw new NotImplementedException();
         }

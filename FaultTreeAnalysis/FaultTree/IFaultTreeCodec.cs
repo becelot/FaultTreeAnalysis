@@ -17,7 +17,7 @@ namespace FaultTreeAnalysis.FaultTree
     public abstract class IFaultTreeCodec
     {
 
-        public abstract void write(FaultTree ft, StreamWriter stream);
+        public abstract void write(FaultTree ft, FileStream stream);
 
         public abstract FaultTree read(StreamReader fileName);
 
@@ -25,7 +25,7 @@ namespace FaultTreeAnalysis.FaultTree
 
         public void write(FaultTree ft, String fileName)
         {
-            using (StreamWriter stream = new StreamWriter(fileName))
+            using (FileStream stream = new FileStream(fileName, FileMode.Create))
             {
                 this.write(ft, stream);
             }
