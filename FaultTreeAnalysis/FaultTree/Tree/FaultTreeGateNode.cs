@@ -12,8 +12,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
         public enum FaultTreeGateOperator
         {
             FAULT_TREE_OPERATOR_AND,
-            FAULT_TREE_OPERATOR_OR,
-            FAULT_TREE_OPERATOR_EQUAL
+            FAULT_TREE_OPERATOR_OR
         }
 
         private static FaultTreeGateOperator operatorFromString(String op)

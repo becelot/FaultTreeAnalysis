@@ -52,7 +52,7 @@ namespace FaultTreeAnalysis.FaultTree
 
             //Extract different node types
             var rootNode = (from r in symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT)
-                           select new FaultTreeGateNode(int.Parse(r.Information.Groups["id"].Value), FaultTreeGateNode.FaultTreeGateOperator.FAULT_TREE_OPERATOR_EQUAL) as FaultTreeNode).ToList();
+                           select new FaultTreeGateNode(int.Parse(r.Information.Groups["id"].Value), FaultTreeGateNode.FaultTreeGateOperator.FAULT_TREE_OPERATOR_AND) as FaultTreeNode).ToList();
 
             var terminals = (from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_IDENTIFIER)
                             select new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value)) as FaultTreeNode).ToList();
