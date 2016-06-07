@@ -52,13 +52,13 @@ namespace FaultTreeAnalysis.FaultTree
 
             //Extract different node types
             var rootNode = (from r in symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT)
-                           select new FaultTreeGateNode(int.Parse(r.Information.Groups["id"].Value), FaultTreeGateNode.FaultTreeGateOperator.FAULT_TREE_OPERATOR_AND) as FaultTreeNode).ToList();
+                            select FaultTreeNodeFactory.getInstance().createGateNode(int.Parse(r.Information.Groups["id"].Value), FaultTreeNodeFactory.FaultTreeGateOperator.FAULT_TREE_OPERATOR_AND) as FaultTreeNode).ToList();
 
             var terminals = (from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_IDENTIFIER)
                             select new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value)) as FaultTreeNode).ToList();
 
             var gates = (from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_GATE)
-                        select new FaultTreeGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value) as FaultTreeNode).ToList();
+                         select FaultTreeNodeFactory.getInstance().createGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value) as FaultTreeNode).ToList();
 
             //Union on all nodes
             var nodes = (from t in terminals select new { ID = t.ID, Node = t }).Union(from g in gates select new { ID = g.ID, Node = g }).Union(from r in rootNode select new { ID = r.ID, Node = r }).OrderBy(n => n.ID).ToList();

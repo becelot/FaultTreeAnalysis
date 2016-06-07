@@ -12,7 +12,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
         [DataMember()]
         public int Label { get; set; }
 
-        public FaultTreeTerminalNode()
+        public FaultTreeTerminalNode() : base()
         {
 
         }
