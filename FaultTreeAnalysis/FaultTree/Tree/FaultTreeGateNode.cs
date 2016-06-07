@@ -23,20 +23,9 @@ namespace FaultTreeAnalysis.FaultTree.Tree
         [DataMember()]
         public FaultTreeGateOperator Operator { get; set; }
 
-        public FaultTreeGateNode()
-        {
+        public FaultTreeGateNode(int ID) : base(ID) { }
 
-        }
+        public FaultTreeGateNode() : base() { }
 
-        public FaultTreeGateNode(int id, FaultTreeGateOperator op)
-        {
-            this.ID = id;
-            this.Operator = op;
-        }
-
-        public FaultTreeGateNode(int id, string op) : this(id, FaultTreeGateNode.operatorFromString(op))
-        {
-            
-        }
     }
 }

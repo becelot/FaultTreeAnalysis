@@ -18,5 +18,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
         public List<FaultTreeNode> Childs { get; set; }
 
         public FaultTreeNode() { Childs = new List<FaultTreeNode>(); }
+
+        public FaultTreeNode(int ID) { this.ID = ID; }
     }
 }
