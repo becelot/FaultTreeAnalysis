@@ -1,4 +1,5 @@
-﻿using FaultTreeAnalysis.FaultTree;
+﻿using FaultTreeAnalysis.BDD.BDDTree;
+using FaultTreeAnalysis.FaultTree;
 using FaultTreeAnalysis.FaultTree.Transformer;
 using FaultTreeAnalysis.FaultTree.Tree;
 using System;
@@ -26,6 +27,8 @@ namespace FaultTreeAnalysis
 
                 IFaultTreeCodec xmlCodec = FaultTreeEncoderFactory.createFaultTreeCodec(FaultTreeFormat.FAULT_TREE_XML);
                 xmlCodec.write(ft, s + ".xml");
+
+                BDD.BDD test = BDDFactory.getInstance().createBDD(ft);
             }
 
             Console.ReadKey();
