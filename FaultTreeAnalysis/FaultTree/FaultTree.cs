@@ -24,5 +24,10 @@ namespace FaultTreeAnalysis.FaultTree
         {
             this.Root = root;
         }
+
+        public FaultTree reduce(TreeTransformer tr)
+        {
+            return new FaultTree( Root.reduce(tr) );
+        }
     }
 }

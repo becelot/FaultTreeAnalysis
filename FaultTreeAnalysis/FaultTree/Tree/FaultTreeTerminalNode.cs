@@ -23,5 +23,11 @@ namespace FaultTreeAnalysis.FaultTree.Tree
             this.Label = label;
         }
 
+        public FaultTreeTerminalNode(FaultTreeTerminalNode terminal) : this(terminal.ID, terminal.Label) { }
+
+        public override FaultTreeNode reduce(TreeTransformer tr)
+        {
+            return tr.transform(this);
+        }
     }
 }
