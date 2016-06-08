@@ -30,5 +30,20 @@ namespace FaultTreeAnalysis.FaultTree
         {
             return new FaultTree( Root.reduce(tr) );
         }
+
+        public FaultTree deepCopy()
+        {
+            return reduce<FaultTreeNode>(new DeepCopyTransformer());
+        }
+
+        public FaultTree replace(int label, Boolean value)
+        {
+            return reduce<FaultTreeNode>(new ReplaceTransformer(label, value));
+        }
+
+        public FaultTree simplify()
+        {
+            return reduce<FaultTreeNode>(new SimplifyTransformer());
+        }
     }
 }
