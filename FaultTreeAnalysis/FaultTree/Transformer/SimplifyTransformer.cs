@@ -11,6 +11,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
     {
         public override FaultTreeNode transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs)
         {
+            Boolean all = true;
             foreach (FaultTreeNode c in childs)
             {
                 if (c.GetType() == typeof(FaultTreeLiteralNode))
@@ -19,13 +20,23 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
                     {
                         return createNode(new FaultTreeLiteralNode(gate.ID, false));
                     }
+                } else
+                {
+                    all = false;
                 }
             }
+
+            if (all)
+            {
+                return createNode(new FaultTreeLiteralNode(gate.ID, true));
+            }
+
             return base.transform(gate, childs);
         }
 
         public override FaultTreeNode transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
         {
+            Boolean all = true;
             foreach (FaultTreeNode c in childs)
             {
                 if (c.GetType() == typeof(FaultTreeLiteralNode))
@@ -34,8 +45,17 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
                     {
                         return createNode(new FaultTreeLiteralNode(gate.ID, true));
                     }
+                } else
+                {
+                    all = false;
                 }
             }
+
+            if (all)
+            {
+                return createNode(new FaultTreeLiteralNode(gate.ID, false));
+            }
+
             return base.transform(gate, childs);
         }
     }

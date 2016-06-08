@@ -26,13 +26,6 @@ namespace FaultTreeAnalysis.BDD.BDDTree
         {
             if (label > 6)
             {
-                if (ft.Root.GetType() == typeof(FaultTreeLiteralNode))
-                {
-                    Console.WriteLine("Seems about right");
-                } else
-                {
-                    Console.WriteLine(ft.Root.GetType().ToString());
-                }
                 return new BDD(null, null);
             }
 
