@@ -1,5 +1,6 @@
 ﻿using FaultTreeAnalysis.FaultTree;
 using FaultTreeAnalysis.FaultTree.Transformer;
+using FaultTreeAnalysis.FaultTree.Tree;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,7 @@ namespace FaultTreeAnalysis
                 IFaultTreeCodec codec = FaultTreeEncoderFactory.createFaultTreeCodec(s);
                 FaultTree.FaultTree ft = codec.read(s);
 
-                ft = ft.reduce(new DeepCopyTransformer()).reduce(new ReplaceTransformer(1, false)).reduce(new SimplifyTransformer());
+                ft = ft.reduce<FaultTreeNode>(new DeepCopyTransformer()).reduce<FaultTreeNode>(new ReplaceTransformer(1, false)).reduce<FaultTreeNode>(new SimplifyTransformer());
 
                 IFaultTreeCodec xmlCodec = FaultTreeEncoderFactory.createFaultTreeCodec(FaultTreeFormat.FAULT_TREE_XML);
                 xmlCodec.write(ft, s + ".xml");

@@ -26,7 +26,7 @@ namespace FaultTreeAnalysis.FaultTree
             this.Root = root;
         }
 
-        public FaultTree reduce(TreeTransformer tr)
+        public FaultTree reduce<T>(FaultTreeTransformer<FaultTreeNode> tr)
         {
             return new FaultTree( Root.reduce(tr) );
         }

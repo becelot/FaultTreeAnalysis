@@ -7,26 +7,40 @@ using System.Threading.Tasks;
 
 namespace FaultTreeAnalysis.FaultTree.Transformer
 {
-    public abstract class TreeTransformer
+    public class TreeTransformer : FaultTreeTransformer<FaultTreeNode>
     {
-        public virtual FaultTreeNode transform(FaultTreeLiteralNode literal)
+        private Dictionary<int, FaultTreeNode> referenceSafety = new Dictionary<int, FaultTreeNode>();
+
+        protected FaultTreeNode createNode(FaultTreeNode node)
         {
-            return new FaultTreeLiteralNode(literal);
+            if (referenceSafety.ContainsKey(node.ID))
+            {
+                referenceSafety.Add(node.ID, node);
+                return referenceSafety[node.ID];
+            } else
+            {
+                return node;
+            }
         }
 
-        public virtual FaultTreeNode transform(FaultTreeTerminalNode terminal)
+        public override FaultTreeNode transform(FaultTreeLiteralNode literal)
         {
-            return new FaultTreeTerminalNode(terminal);
+            return createNode(new FaultTreeLiteralNode(literal));
         }
 
-        public virtual FaultTreeNode transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
+        public override FaultTreeNode transform(FaultTreeTerminalNode terminal)
         {
-            return new FaultTreeOrGateNode(gate.ID, childs);
+            return createNode(new FaultTreeTerminalNode(terminal));
         }
 
-        public virtual FaultTreeNode transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs)
+        public override FaultTreeNode transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
         {
-            return new FaultTreeAndGateNode(gate.ID, childs);
+            return createNode(new FaultTreeOrGateNode(gate.ID, childs));
+        }
+
+        public override FaultTreeNode transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs)
+        {
+            return createNode(new FaultTreeAndGateNode(gate.ID, childs));
         }
     }
 }

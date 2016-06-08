@@ -17,7 +17,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
         public FaultTreeLiteralNode(FaultTreeTerminalNode terminal, Boolean value) : this(terminal.ID, value) { }
         public FaultTreeLiteralNode(FaultTreeLiteralNode literal) : this(literal.ID, literal.Value) { }
 
-        public override FaultTreeNode reduce(TreeTransformer tr)
+        public override T reduce<T>(FaultTreeTransformer<T> tr)
         {
             return tr.transform(this);
         }

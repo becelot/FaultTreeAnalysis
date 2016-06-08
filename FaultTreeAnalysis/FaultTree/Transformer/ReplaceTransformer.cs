@@ -18,30 +18,15 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
             this.value = value;
         }
 
-        public override FaultTreeNode transform(FaultTreeLiteralNode literal)
-        {
-            return new FaultTreeLiteralNode(literal);
-        }
-
         public override FaultTreeNode transform(FaultTreeTerminalNode terminal)
         {
             if (terminal.Label == this.ID)
             {
-                return new FaultTreeLiteralNode(terminal, value);
+                return createNode(new FaultTreeLiteralNode(terminal, value));
             } else
             {
-                return new FaultTreeTerminalNode(terminal);
+                return createNode(new FaultTreeTerminalNode(terminal));
             }
-        }
-
-        public override FaultTreeNode transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
-        {
-            return new FaultTreeOrGateNode(gate.ID, childs);
-        }
-
-        public override FaultTreeNode transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs)
-        {
-            return new FaultTreeAndGateNode(gate.ID, childs);
         }
     }
 }

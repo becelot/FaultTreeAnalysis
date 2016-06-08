@@ -16,9 +16,9 @@ namespace FaultTreeAnalysis.FaultTree.Tree
 
         public FaultTreeAndGateNode(int ID, List<FaultTreeNode> childs) : base(ID, childs) { }
 
-        public override FaultTreeNode reduce(TreeTransformer tr)
+        public override T reduce<T>(FaultTreeTransformer<T> tr)
         {
-            List<FaultTreeNode> l = new List<FaultTreeNode>();
+            List<T> l = new List<T>();
 
             foreach (FaultTreeNode c in Childs)
             {

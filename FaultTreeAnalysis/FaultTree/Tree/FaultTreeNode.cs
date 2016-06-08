@@ -28,6 +28,6 @@ namespace FaultTreeAnalysis.FaultTree.Tree
             this.Childs = childs;
         }
 
-        public abstract FaultTreeNode reduce(TreeTransformer tr);
+        public abstract T reduce<T>(FaultTreeTransformer<T> tr);
     }
 }

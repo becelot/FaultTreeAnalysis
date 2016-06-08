@@ -17,7 +17,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
                 {
                     if ( ((FaultTreeLiteralNode)c).Value == false)
                     {
-                        return new FaultTreeLiteralNode(gate.ID, false);
+                        return createNode(new FaultTreeLiteralNode(gate.ID, false));
                     }
                 }
             }
@@ -32,7 +32,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
                 {
                     if (((FaultTreeLiteralNode)c).Value == true)
                     {
-                        return new FaultTreeLiteralNode(gate.ID, true);
+                        return createNode(new FaultTreeLiteralNode(gate.ID, true));
                     }
                 }
             }
