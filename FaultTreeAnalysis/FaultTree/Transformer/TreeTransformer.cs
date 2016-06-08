@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FaultTreeAnalysis.FaultTree
+namespace FaultTreeAnalysis.FaultTree.Transformer
 {
     public interface TreeTransformer
     {

@@ -1,5 +1,4 @@
 ﻿using FaultTreeAnalysis.FaultTree;
-using FaultTreeAnalysis.FaultTree.Visitor;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +13,7 @@ namespace FaultTreeAnalysis
     {
         static void Main(string[] args)
         {
-            List<String> files = new List<String>(Directory.GetFiles("examples")).Where(f => new Regex(@".*-ft.*").IsMatch(f)).ToList();
+            List<String> files = new List<String>(Directory.GetFiles("examples")).Where(f => new Regex(@".*-ft.dot").IsMatch(f)).ToList();
 
             foreach(String s in files.Take(1))
             {

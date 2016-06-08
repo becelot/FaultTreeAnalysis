@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FaultTreeAnalysis.FaultTree.Tree;
 
-namespace FaultTreeAnalysis.FaultTree.Visitor
+namespace FaultTreeAnalysis.FaultTree.Transformer
 {
     public class ReplaceTransformer : TreeTransformer
     {

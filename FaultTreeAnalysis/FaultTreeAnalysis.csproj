@@ -51,7 +51,7 @@
     <Compile Include="FaultTree\FaultTreeEncoderFactory.cs" />
     <Compile Include="FaultTree\FaultTreeFormatException.cs" />
     <Compile Include="FaultTree\IFaultTreeCodec.cs" />
-    <Compile Include="FaultTree\TreeTransformer.cs" />
+    <Compile Include="FaultTree\Transformer\TreeTransformer.cs" />
     <Compile Include="FaultTree\Tree\FaultTreeAndGateNode.cs" />
     <Compile Include="FaultTree\Tree\FaultTreeGateNode.cs" />
     <Compile Include="FaultTree\Tree\FaultTreeLiteralNode.cs" />
@@ -59,7 +59,7 @@
     <Compile Include="FaultTree\Tree\FaultTreeNodeFactory.cs" />
     <Compile Include="FaultTree\Tree\FaultTreeOrGateNode.cs" />
     <Compile Include="FaultTree\Tree\FaultTreeTerminalNode.cs" />
-    <Compile Include="FaultTree\Visitor\ReplaceTransformer.cs" />
+    <Compile Include="FaultTree\Transformer\ReplaceTransformer.cs" />
     <Compile Include="FaultTree\XmlFaultTreeEncoder.cs" />
     <Compile Include="MainProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
