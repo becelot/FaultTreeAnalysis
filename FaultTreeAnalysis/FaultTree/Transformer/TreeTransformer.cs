@@ -15,10 +15,10 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
         {
             if (referenceSafety.ContainsKey(node.ID))
             {
-                referenceSafety.Add(node.ID, node);
                 return referenceSafety[node.ID];
             } else
             {
+                referenceSafety.Add(node.ID, node);
                 return node;
             }
         }
