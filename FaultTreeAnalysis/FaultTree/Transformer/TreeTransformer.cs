@@ -7,11 +7,26 @@ using System.Threading.Tasks;
 
 namespace FaultTreeAnalysis.FaultTree.Transformer
 {
-    public interface TreeTransformer
+    public abstract class TreeTransformer
     {
-        FaultTreeNode transform(FaultTreeTerminalNode terminal);
-        FaultTreeNode transform(FaultTreeLiteralNode literal);
-        FaultTreeNode transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs);
-        FaultTreeNode transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs);
+        public virtual FaultTreeNode transform(FaultTreeLiteralNode literal)
+        {
+            return new FaultTreeLiteralNode(literal);
+        }
+
+        public virtual FaultTreeNode transform(FaultTreeTerminalNode terminal)
+        {
+            return new FaultTreeTerminalNode(terminal);
+        }
+
+        public virtual FaultTreeNode transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
+        {
+            return new FaultTreeOrGateNode(gate.ID, childs);
+        }
+
+        public virtual FaultTreeNode transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs)
+        {
+            return new FaultTreeAndGateNode(gate.ID, childs);
+        }
     }
 }
