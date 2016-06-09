@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using FaultTreeAnalysis.FaultTree.Tree;
+
+namespace FaultTreeAnalysis.FaultTree.Transformer
+{
+    public class MinTerminalTransformer : FaultTreeTransformer<int>
+    {
+        public override int transform(FaultTreeTerminalNode terminal)
+        {
+            return terminal.ID;
+        }
+
+        public override int transform(FaultTreeLiteralNode literal)
+        {
+            return int.MaxValue;
+        }
+
+        public override int transform(FaultTreeAndGateNode gate, List<int> childs)
+        {
+            return childs.Min();
+        }
+
+        public override int transform(FaultTreeOrGateNode gate, List<int> childs)
+        {
+            return childs.Min();
+        }
+    }
+}
