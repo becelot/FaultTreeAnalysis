@@ -23,7 +23,7 @@ namespace FaultTreeAnalysis
                 IFaultTreeCodec codec = FaultTreeEncoderFactory.createFaultTreeCodec(s);
                 FaultTree.FaultTree ft = codec.read(s);
 
-                ft = ft.deepCopy().replace(1, false).simplify();
+                //ft = ft.deepCopy().replace(1, false).simplify();
 
                 IFaultTreeCodec xmlCodec = FaultTreeEncoderFactory.createFaultTreeCodec(FaultTreeFormat.FAULT_TREE_XML);
                 xmlCodec.write(ft, s + ".xml");
