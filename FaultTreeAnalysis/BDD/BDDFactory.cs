@@ -1,4 +1,5 @@
-﻿using FaultTreeAnalysis.FaultTree.Tree;
+﻿using FaultTreeAnalysis.FaultTree.Transformer;
+using FaultTreeAnalysis.FaultTree.Tree;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,25 +23,22 @@ namespace FaultTreeAnalysis.BDD.BDDTree
             return _instance;
         }
 
-        private BDD createBDD(FaultTree.FaultTree ft, int label)
+        public BDDNode createBDD(FaultTree.FaultTree ft)
         {
-            if (label > 6)
+            int nextVariable = ft.reduce<int>(new MinTerminalTransformer());
+            if (nextVariable == int.MaxValue)
             {
-                return new BDD(null, null);
+                //ft should consist of only terminal node
+                return BDDNodeFactory.createNode(((FaultTreeLiteralNode)ft.Root).Value);
             }
 
-            FaultTree.FaultTree high = ft.deepCopy().replace(label, true).simplify();
-            FaultTree.FaultTree low = ft.deepCopy().replace(label, false).simplify();
+            FaultTree.FaultTree high = ft.deepCopy().replace(nextVariable, true).simplify();
+            FaultTree.FaultTree low = ft.deepCopy().replace(nextVariable, false).simplify();
 
-            BDD highNode = createBDD(high, label+1);
-            BDD lowNode = createBDD(low, label+1);
+            BDDNode highNode = createBDD(high);
+            BDDNode lowNode = createBDD(low);
 
-            return new BDD(highNode, lowNode);
-        } 
-
-        public BDD createBDD(FaultTree.FaultTree ft)
-        {
-            return createBDD(ft, 1);
+            return BDDNodeFactory.createNode(nextVariable, highNode, lowNode);
         }
     }
 }

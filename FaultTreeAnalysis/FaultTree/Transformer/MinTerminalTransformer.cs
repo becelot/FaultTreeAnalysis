@@ -11,7 +11,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
     {
         public override int transform(FaultTreeTerminalNode terminal)
         {
-            return terminal.ID;
+            return terminal.Label;
         }
 
         public override int transform(FaultTreeLiteralNode literal)
