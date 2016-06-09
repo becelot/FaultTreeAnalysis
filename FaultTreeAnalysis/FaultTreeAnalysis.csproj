@@ -52,6 +52,7 @@
     <Compile Include="FaultTree\FaultTreeFormatException.cs" />
     <Compile Include="FaultTree\IFaultTreeCodec.cs" />
     <Compile Include="FaultTree\Transformer\DeepCopyTransformer.cs" />
+    <Compile Include="FaultTree\Transformer\MinTerminalTransformer.cs" />
     <Compile Include="FaultTree\Transformer\SimplifyTransformer.cs" />
     <Compile Include="FaultTree\Transformer\FaultTreeTransformer.cs" />
     <Compile Include="FaultTree\Transformer\TreeTransformer.cs" />
