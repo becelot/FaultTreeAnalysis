@@ -1,11 +1,4 @@
-﻿using FaultTreeAnalysis.BDD.BDDTree;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FaultTreeAnalysis.BDD
+﻿namespace FaultTreeAnalysis.BDD
 {
     public class BDD
     {

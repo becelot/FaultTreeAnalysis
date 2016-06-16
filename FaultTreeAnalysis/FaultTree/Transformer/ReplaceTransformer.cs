@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FaultTreeAnalysis.FaultTree.Tree;
+﻿using FaultTreeAnalysis.FaultTree.Tree;
+using System;
 
 namespace FaultTreeAnalysis.FaultTree.Transformer
 {

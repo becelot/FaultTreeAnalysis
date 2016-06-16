@@ -1,11 +1,7 @@
-﻿using System;
+﻿using FaultTreeAnalysis.FaultTree.Tree;
+using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using FaultTreeAnalysis.FaultTree.Tree;
 using System.Runtime.Serialization;
 using System.Xml;
 
