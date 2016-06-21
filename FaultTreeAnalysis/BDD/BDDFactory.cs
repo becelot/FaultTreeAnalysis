@@ -6,8 +6,12 @@ namespace FaultTreeAnalysis.BDD.BDDTree
     public class BDDFactory
     {
         private static BDDFactory _instance = null;
+		private static BDDNodeFactory nodeFactory = null;
 
-        private BDDFactory() { }
+        private BDDFactory()
+		{
+			nodeFactory = new BDDNodeFactory();
+		}
 
         public static BDDFactory getInstance()
         {
@@ -24,7 +28,7 @@ namespace FaultTreeAnalysis.BDD.BDDTree
             if (nextVariable == int.MaxValue)
             {
                 //ft should consist of only terminal node
-                return BDDNodeFactory.createNode(((FaultTreeLiteralNode)ft.Root).Value);
+                return nodeFactory.createNode(((FaultTreeLiteralNode)ft.Root).Value);
             }
 
             FaultTree.FaultTree high = ft.deepCopy().replace(nextVariable, true).simplify();
@@ -33,7 +37,7 @@ namespace FaultTreeAnalysis.BDD.BDDTree
             BDDNode highNode = createBDD(high);
             BDDNode lowNode = createBDD(low);
 
-            return BDDNodeFactory.createNode(nextVariable, highNode, lowNode);
+            return nodeFactory.createNode(nextVariable, highNode, lowNode);
         }
     }
 }
