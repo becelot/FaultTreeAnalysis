@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FaultTree xmlns:i="http://www.w3.org/2001/XMLSchema-instance" z:Id="1" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/" xmlns="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree">
+  <Root xmlns:d2p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="2" i:type="d2p1:FaultTreeAndGateNode">
+    <d2p1:Childs z:Id="3" z:Size="1">
+      <d2p1:FaultTreeNode z:Id="4" i:type="d2p1:FaultTreeOrGateNode">
+        <d2p1:Childs z:Id="5" z:Size="3">
+          <d2p1:FaultTreeNode z:Id="6" i:type="d2p1:FaultTreeAndGateNode">
+            <d2p1:Childs z:Id="7" z:Size="2">
+              <d2p1:FaultTreeNode z:Id="8" i:type="d2p1:FaultTreeTerminalNode">
+                <d2p1:Childs z:Id="9" z:Size="0" />
+                <d2p1:ID>3</d2p1:ID>
+                <d2p1:Label>1</d2p1:Label>
+              </d2p1:FaultTreeNode>
+              <d2p1:FaultTreeNode z:Id="10" i:type="d2p1:FaultTreeTerminalNode">
+                <d2p1:Childs z:Id="11" z:Size="0" />
+                <d2p1:ID>2</d2p1:ID>
+                <d2p1:Label>4</d2p1:Label>
+              </d2p1:FaultTreeNode>
+            </d2p1:Childs>
+            <d2p1:ID>7</d2p1:ID>
+          </d2p1:FaultTreeNode>
+          <d2p1:FaultTreeNode z:Id="12" i:type="d2p1:FaultTreeAndGateNode">
+            <d2p1:Childs z:Id="13" z:Size="3">
+              <d2p1:FaultTreeNode z:Id="14" i:type="d2p1:FaultTreeTerminalNode">
+                <d2p1:Childs z:Id="15" z:Size="0" />
+                <d2p1:ID>5</d2p1:ID>
+                <d2p1:Label>2</d2p1:Label>
+              </d2p1:FaultTreeNode>
+              <d2p1:FaultTreeNode z:Id="16" i:type="d2p1:FaultTreeTerminalNode">
+                <d2p1:Childs z:Id="17" z:Size="0" />
+                <d2p1:ID>4</d2p1:ID>
+                <d2p1:Label>3</d2p1:Label>
+              </d2p1:FaultTreeNode>
+              <d2p1:FaultTreeNode z:Id="18" i:type="d2p1:FaultTreeTerminalNode">
+                <d2p1:Childs z:Id="19" z:Size="0" />
+                <d2p1:ID>1</d2p1:ID>
+                <d2p1:Label>5</d2p1:Label>
+              </d2p1:FaultTreeNode>
+            </d2p1:Childs>
+            <d2p1:ID>6</d2p1:ID>
+          </d2p1:FaultTreeNode>
+          <d2p1:FaultTreeNode z:Ref="18" i:nil="true" />
+        </d2p1:Childs>
+        <d2p1:ID>8</d2p1:ID>
+      </d2p1:FaultTreeNode>
+    </d2p1:Childs>
+    <d2p1:ID>0</d2p1:ID>
+  </Root>
+</FaultTree>

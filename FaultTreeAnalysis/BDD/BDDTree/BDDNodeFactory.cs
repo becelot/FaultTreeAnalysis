@@ -14,12 +14,17 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 		public BDDNodeFactory()
 		{
 			terminalZero = new BDDTerminalNode(false);
-			terminalZero.Variable = -1;
+			terminalZero.Variable = 0;
 			terminalOne = new BDDTerminalNode(true);
-			terminalOne.Variable = -2;
+			terminalOne.Variable = -1;
 
 			H = new Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode>();
 			T = new Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>>();
+		}
+
+		public BDDNode createNode(int value)
+		{
+			return this.createNode(value, terminalOne, terminalZero);
 		}
 
         public BDDNode createNode(int value, BDDNode HighNode, BDDNode LowNode)
