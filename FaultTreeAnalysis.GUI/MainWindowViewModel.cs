@@ -102,6 +102,8 @@ namespace FaultTreeAnalysis.GUI
 
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+		public FaultTree.FaultTree FaultTree { get; set; } = null;
+
         public MainWindowViewModel()
         {
             var graph = new Graph<FaultTreeGate>();
