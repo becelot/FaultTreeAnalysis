@@ -57,7 +57,7 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 			sw.WriteLine("1 [shape=box, label=\"1\", style=filled, shape=box, height=0.3, width=0.3];");
 
 			List<BDDNode> flat = new List<BDDNode>(this.flatMap());
-			flat =	(from f in flat orderby f.Variable select f).ToList();
+			flat =	(from f in flat orderby f.Variable select f).Reverse().ToList();
 
 			for (int i = 2; i < flat.Count; i++)
 			{

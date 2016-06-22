@@ -12,8 +12,6 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 		private Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>> T;
 
 
-
-
 		public BDDNodeFactory()
 		{
 			terminalZero = new BDDTerminalNode(false);
@@ -25,6 +23,8 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 			T = new Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>>();
 		}
 
+
+
 		public BDDNode createNode(int value)
 		{
 			return this.createNode(value, terminalOne, terminalZero);
@@ -32,7 +32,7 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 
         public BDDNode createNode(int value, BDDNode HighNode, BDDNode LowNode)
         {
-			if (HighNode.Variable == LowNode.Variable)
+			if (HighNode == LowNode)
 			{
 				return LowNode;
 			} else if (H.ContainsKey(new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode)))
@@ -51,5 +51,11 @@ namespace FaultTreeAnalysis.BDD.BDDTree
         {
 			return value ? terminalOne : terminalZero;
         }
-    }
+
+		internal void setBasicEventCount(int maxBasicEventNumber)
+		{
+			terminalOne.Variable = maxBasicEventNumber + 1;
+			terminalZero.Variable = maxBasicEventNumber + 2;
+		}
+	}
 }

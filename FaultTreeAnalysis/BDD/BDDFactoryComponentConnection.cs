@@ -44,7 +44,7 @@ namespace FaultTreeAnalysis.BDD
 				{
 					u = nodeFactory.createNode(((BDDTerminalNode)u1).Value || ((BDDTerminalNode)u2).Value);
 				}
-			}
+			} /*
 			else if (u1.GetType() == typeof(BDDTerminalNode))
 			{
 				if (op == BDDOperator.BDD_OPERATOR_AND)
@@ -94,7 +94,7 @@ namespace FaultTreeAnalysis.BDD
 						u = u1;
 					}
 				}
-			}
+			} */
 			else if (u1.Variable == u2.Variable)
 			{
 				u = nodeFactory.createNode(u1.Variable, app(nodeFactory, op, G, u1.HighNode, u2.HighNode), app(nodeFactory, op, G, u1.LowNode, u2.LowNode));
@@ -134,10 +134,16 @@ namespace FaultTreeAnalysis.BDD
 				op = BDDOperator.BDD_OPERATOR_OR;
 			}
 
+			Console.WriteLine(node.ID);
+
 			BDDNode current = null;
 			foreach (FaultTreeNode tn in node.Childs)
 			{
 				BDDNode n = createBDD(tn, nodeFactory);
+				if (n.Variable == 5)
+				{
+					Console.WriteLine("Here");
+				}
 				current = apply(nodeFactory, op, current, n);
 			}
 
@@ -146,8 +152,9 @@ namespace FaultTreeAnalysis.BDD
 
 		public override BDDNode createBDD(FaultTree.FaultTree ft)
 		{
-			//ft = new FaultTree.FaultTree(ft.reduce<FaultTreeNode>(new AddTransformer(1)));
+			int maxBasicEventNumber = ft.reduce<int>(new MaxTerminalTransformer());
 			BDDNodeFactory nodeFactory = new BDDNodeFactory();
+			nodeFactory.setBasicEventCount(maxBasicEventNumber);
 			return this.createBDD(ft.Root, nodeFactory);
 		}
 	}
