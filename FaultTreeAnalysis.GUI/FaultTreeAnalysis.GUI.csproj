@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FaultTreeAnalysis.GUI</RootNamespace>
     <AssemblyName>FaultTreeAnalysis.GUI</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -129,6 +129,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FaultTreeAnalysis\FaultTreeAnalysis.csproj">
+      <Project>{89e39b50-8e42-4909-9f67-00843657dbe2}</Project>
+      <Name>FaultTreeAnalysis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Graphviz4Net.WPF\Graphviz4Net.WPF.csproj">
       <Project>{EE5D79D6-D196-4345-A271-DC2E79E26DDA}</Project>
       <Name>Graphviz4Net.WPF</Name>
