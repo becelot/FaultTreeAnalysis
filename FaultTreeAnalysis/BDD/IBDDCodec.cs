@@ -11,7 +11,8 @@ namespace FaultTreeAnalysis.BDD
 	public enum BDDTreeFormat
 	{
 		BDD_TREE_UNKNOWN = 0,
-		BDD_TREE_DOT
+		BDD_TREE_DOT,
+		BDD_TREE_XML
 	};
 
 

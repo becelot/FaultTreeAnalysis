@@ -13,6 +13,9 @@ namespace FaultTreeAnalysis.BDD
 			if (fileName.EndsWith(".dot"))
 			{
 				return new DotBDDEncoder();
+			} else if (fileName.EndsWith(".xml"))
+			{
+				return new XmlBDDEncoder();
 			}
 
 			throw new BDDFormatException("The given file was not recognized as a valid format!");
@@ -23,6 +26,7 @@ namespace FaultTreeAnalysis.BDD
 			switch (format)
 			{
 				case BDDTreeFormat.BDD_TREE_DOT: return new DotBDDEncoder();
+				case BDDTreeFormat.BDD_TREE_XML: return new XmlBDDEncoder();
 				default: return null;
 			}
 		}
