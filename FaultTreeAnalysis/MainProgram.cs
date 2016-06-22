@@ -14,8 +14,10 @@ namespace FaultTreeAnalysis
         {
             List<String> files = new List<String>(Directory.GetFiles("examples")).Where(f => new Regex(@".*-ft.dot$").IsMatch(f)).ToList();
 
-            foreach(String s in files.Take(2))
+            foreach(String s in files)
             {
+				Console.WriteLine("Converting tree " + s);
+
                 IFaultTreeCodec codec = FaultTreeEncoderFactory.createFaultTreeCodec(s);
                 FaultTree.FaultTree ft = codec.read(s);
 
@@ -27,9 +29,10 @@ namespace FaultTreeAnalysis
                 BDDNode test = BDDFactory.getComponentConnectionInstance().createBDD(ft);
                 Console.WriteLine("Successfully converted tree");
 
-				using (StreamWriter fs = new StreamWriter(s + ".bdd.dot"))
+				using (StreamWriter fs = new StreamWriter(s + ".bdd.dot", false, System.Text.Encoding.UTF8, 65536))
 				{
-					fs.Write(test.ToString());
+					test.WriteToFile(fs);
+					//fs.Write(test.ToString());
 				}
             }
             Console.WriteLine("Finished construction");
