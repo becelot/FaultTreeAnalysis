@@ -1,4 +1,5 @@
-﻿using FaultTreeAnalysis.BDD.BDDTree;
+﻿using FaultTreeAnalysis.BDD;
+using FaultTreeAnalysis.BDD.BDDTree;
 using FaultTreeAnalysis.FaultTree;
 using System;
 using System.Collections.Generic;
@@ -29,11 +30,8 @@ namespace FaultTreeAnalysis
                 BDDNode test = BDDFactory.getComponentConnectionInstance().createBDD(ft);
                 Console.WriteLine("Successfully converted tree");
 
-				using (StreamWriter fs = new StreamWriter(s + ".bdd.dot", false, System.Text.Encoding.UTF8, 65536))
-				{
-					test.WriteToFile(fs);
-					//fs.Write(test.ToString());
-				}
+				IBDDCodec bCodec = BDDEncoderFactory.createFaultTreeCodec(s + ".dot");
+				bCodec.write(new BDD.BDD(test), s + ".dot");
             }
             Console.WriteLine("Finished construction");
             Console.ReadKey();

@@ -1,16 +1,22 @@
-﻿namespace FaultTreeAnalysis.BDD
+﻿using FaultTreeAnalysis.BDD.BDDTree;
+using System.Runtime.Serialization;
+
+namespace FaultTreeAnalysis.BDD
 {
-    public class BDD
+	[DataContract(Name = "BDD")]
+	public class BDD
     {
-        public BDD low;
-        public BDD high;
+		[DataMember()]
+		public BDDNode Root { get; set; }
 
-        public int ID;
+		public BDD()
+		{
 
-        public BDD(BDD low, BDD high)
-        {
-            this.low = low;
-            this.high = high;
-        }
-    }
+		}
+
+		public BDD(BDDNode root)
+		{
+			this.Root = root;
+		}
+	}
 }

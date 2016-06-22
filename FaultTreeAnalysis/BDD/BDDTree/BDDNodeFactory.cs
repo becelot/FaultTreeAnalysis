@@ -11,8 +11,6 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 		private Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode> H;
 		private Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>> T;
 
-		public int NumberGenerated = 0;
-
 
 		public BDDNodeFactory()
 		{
@@ -45,7 +43,6 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 				BDDNode n = new BDDVariableNode(value, HighNode, LowNode);
 				T.Add(n, new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode));
 				H.Add(new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode), n);
-				NumberGenerated++;
 				return n;
 			}
         }

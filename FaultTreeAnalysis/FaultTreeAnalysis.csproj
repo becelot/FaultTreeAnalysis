@@ -45,13 +45,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BDD\BDD.cs" />
+    <Compile Include="BDD\BDDEncoderFactory.cs" />
     <Compile Include="BDD\BDDFactory.cs" />
     <Compile Include="BDD\BDDFactoryComponentConnection.cs" />
     <Compile Include="BDD\BDDFactoryRecursive.cs" />
+    <Compile Include="BDD\BDDFormatException.cs" />
     <Compile Include="BDD\BDDTree\BDDNode.cs" />
     <Compile Include="BDD\BDDTree\BDDNodeFactory.cs" />
     <Compile Include="BDD\BDDTree\BDDTerminalNode.cs" />
     <Compile Include="BDD\BDDTree\BDDVariableNode.cs" />
+    <Compile Include="BDD\DotBDDEncoder.cs" />
+    <Compile Include="BDD\IBDDCodec.cs" />
     <Compile Include="FaultTree\DotFaultTreeEncoder.cs" />
     <Compile Include="FaultTree\FaultTree.cs" />
     <Compile Include="FaultTree\FaultTreeEncoderFactory.cs" />

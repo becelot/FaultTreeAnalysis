@@ -149,9 +149,7 @@ namespace FaultTreeAnalysis.BDD
 			int maxBasicEventNumber = ft.reduce<int>(new MaxTerminalTransformer());
 			BDDNodeFactory nodeFactory = new BDDNodeFactory();
 			nodeFactory.setBasicEventCount(maxBasicEventNumber);
-			BDDNode root = this.createBDD(ft.Root, nodeFactory);
-			Console.WriteLine(nodeFactory.NumberGenerated);
-			return root;
+			return this.createBDD(ft.Root, nodeFactory);
 		}
 	}
 }
