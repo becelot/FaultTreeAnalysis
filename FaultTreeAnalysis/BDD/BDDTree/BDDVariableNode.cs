@@ -1,5 +1,8 @@
-﻿namespace FaultTreeAnalysis.BDD.BDDTree
+﻿using System.Runtime.Serialization;
+
+namespace FaultTreeAnalysis.BDD.BDDTree
 {
+	[DataContract(Name = "BDDVariableNode")]
     public class BDDVariableNode : BDDNode
     {
         public BDDVariableNode() : base() { }
