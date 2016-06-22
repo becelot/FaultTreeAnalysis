@@ -14,7 +14,7 @@ namespace FaultTreeAnalysis
         {
             List<String> files = new List<String>(Directory.GetFiles("examples")).Where(f => new Regex(@".*-ft.dot$").IsMatch(f)).ToList();
 
-            foreach(String s in files)
+            foreach(String s in files.Take(1))
             {
                 IFaultTreeCodec codec = FaultTreeEncoderFactory.createFaultTreeCodec(s);
                 FaultTree.FaultTree ft = codec.read(s);
@@ -25,6 +25,7 @@ namespace FaultTreeAnalysis
                 xmlCodec.write(ft, s + ".xml");
 
                 BDDNode test = BDDFactory.getComponentConnectionInstance().createBDD(ft);
+				Console.WriteLine(test);
                 Console.WriteLine("Successfully converted tree");
             }
             Console.WriteLine("Finished construction");

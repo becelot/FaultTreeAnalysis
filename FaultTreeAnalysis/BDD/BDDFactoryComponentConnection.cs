@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FaultTreeAnalysis.FaultTree;
 using FaultTreeAnalysis.FaultTree.Tree;
+using FaultTreeAnalysis.FaultTree.Transformer;
 
 namespace FaultTreeAnalysis.BDD
 {
@@ -145,6 +146,7 @@ namespace FaultTreeAnalysis.BDD
 
 		public override BDDNode createBDD(FaultTree.FaultTree ft)
 		{
+			//ft = new FaultTree.FaultTree(ft.reduce<FaultTreeNode>(new AddTransformer(1)));
 			BDDNodeFactory nodeFactory = new BDDNodeFactory();
 			return this.createBDD(ft.Root, nodeFactory);
 		}

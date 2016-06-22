@@ -11,7 +11,7 @@ namespace FaultTreeAnalysis.BDD
 {
 	public class BDDFactoryRecursive : BDDFactory
 	{
-		public new static BDDFactory getInstance()
+		public static BDDFactory getInstance()
 		{
 			if (_instance == null)
 			{
@@ -40,6 +40,7 @@ namespace FaultTreeAnalysis.BDD
 
 		public override BDDNode createBDD(FaultTree.FaultTree ft)
 		{
+			//ft = new FaultTree.FaultTree(ft.reduce<FaultTreeNode>(new AddTransformer(1)));
 			BDDNodeFactory nodeFactory = new BDDNodeFactory();
 			return createBDD(ft, nodeFactory);
 		}

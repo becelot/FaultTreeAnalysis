@@ -11,5 +11,5 @@ namespace FaultTreeAnalysis.BDD.BDDTree
         {
             this.Value = Value;
         }
-    }
+	}
 }
