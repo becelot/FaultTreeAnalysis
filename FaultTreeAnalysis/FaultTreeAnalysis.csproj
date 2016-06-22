@@ -56,6 +56,7 @@
     <Compile Include="BDD\BDDTree\BDDVariableNode.cs" />
     <Compile Include="BDD\DotBDDEncoder.cs" />
     <Compile Include="BDD\IBDDCodec.cs" />
+    <Compile Include="BDD\XmlBDDEncoder.cs" />
     <Compile Include="FaultTree\DotFaultTreeEncoder.cs" />
     <Compile Include="FaultTree\FaultTree.cs" />
     <Compile Include="FaultTree\FaultTreeEncoderFactory.cs" />
