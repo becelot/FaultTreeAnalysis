@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="BDD\BDD.cs" />
     <Compile Include="BDD\BDDFactory.cs" />
+    <Compile Include="BDD\BDDFactoryComponentConnection.cs" />
+    <Compile Include="BDD\BDDFactoryRecursive.cs" />
     <Compile Include="BDD\BDDTree\BDDNode.cs" />
     <Compile Include="BDD\BDDTree\BDDNodeFactory.cs" />
     <Compile Include="BDD\BDDTree\BDDTerminalNode.cs" />

@@ -11,6 +11,9 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 		private Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode> H;
 		private Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>> T;
 
+
+
+
 		public BDDNodeFactory()
 		{
 			terminalZero = new BDDTerminalNode(false);
