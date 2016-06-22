@@ -134,16 +134,10 @@ namespace FaultTreeAnalysis.BDD
 				op = BDDOperator.BDD_OPERATOR_OR;
 			}
 
-			Console.WriteLine(node.ID);
-
 			BDDNode current = null;
 			foreach (FaultTreeNode tn in node.Childs)
 			{
 				BDDNode n = createBDD(tn, nodeFactory);
-				if (n.Variable == 5)
-				{
-					Console.WriteLine("Here");
-				}
 				current = apply(nodeFactory, op, current, n);
 			}
 
