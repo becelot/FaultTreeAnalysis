@@ -18,5 +18,10 @@ namespace FaultTreeAnalysis.BDD
 		{
 			this.Root = root;
 		}
+
+		public static implicit operator BDD(FaultTree.FaultTree ft)
+		{
+			return new BDD(BDDFactory.getComponentConnectionInstance().createBDD(ft));
+		}
 	}
 }
