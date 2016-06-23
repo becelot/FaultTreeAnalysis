@@ -46,6 +46,12 @@ namespace FaultTreeAnalysis.GUI
 
 		private void Button_Click(object sender, RoutedEventArgs e) => FlyoutOptions.IsOpen = true;
 
+		private void ViewChanged(object sender, RoutedEventArgs e)
+		{
+			viewModel.FaultTreeView = FaultTreeView.IsChecked.Value;
+			viewModel.BDDTreeView = BDDTreeView.IsChecked.Value;
+		}
+
 		private void LoadFromFileClick(object sender, RoutedEventArgs e)
 		{
 			// Create OpenFileDialog 

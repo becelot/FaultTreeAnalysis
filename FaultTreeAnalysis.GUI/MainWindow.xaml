@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Converter:GraphFaultTreeConverter x:Key="GraphFTConverter" />
+            <Converter:VisibilityConverter x:Key="VisibilityConverter" />
             <DataTemplate DataType="{x:Type Example:Person}">
                 <Border BorderBrush="Black" BorderThickness="1" Padding="0" CornerRadius="5" Background="White">
                     <Border.Style>
@@ -164,10 +165,12 @@
                         </Rectangle.Fill>
                     </Rectangle>
                 </MenuItem.Icon>
+                <RadioButton Content="Fault Tree View" IsChecked="True" Checked="ViewChanged" Name="FaultTreeView" />
+                <RadioButton Content="BDD View" IsChecked="False" Checked="ViewChanged" Name="BDDTreeView"/>
             </MenuItem>
         </Menu>
 
-        <Controls:ZoomControl Grid.Column="0" Grid.Row="1">
+        <Controls:ZoomControl Grid.Column="0" Grid.Row="1" Visibility="{Binding FaultTreeView, Converter={StaticResource VisibilityConverter}}">
             <WPF:GraphLayout 
                 UseContentPresenterForAllElements="True"
                 LogGraphvizOutput="True"
