@@ -5,6 +5,7 @@
         xmlns:MahApps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions" 
         xmlns:Example="clr-namespace:FaultTreeAnalysis.GUI" 
+        xmlns:FTA="clr-namespace:FaultTreeAnalysis.FaultTree.Tree;assembly=FaultTreeAnalysis"
         xmlns:Converter="clr-namespace:FaultTreeAnalysis.GUI.Converters" 
         xmlns:WPF="clr-namespace:Graphviz4Net.WPF;assembly=Graphviz4Net.WPF" 
         xmlns:ViewModels="clr-namespace:Graphviz4Net.WPF.ViewModels;assembly=Graphviz4Net.WPF" 
@@ -90,7 +91,7 @@
                 <Path Data="{Binding Data}" Stroke="Black" StrokeThickness="1" ToolTip="{Binding Edge.Label}"/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type Example:FaultTreeAndGate}">
+            <DataTemplate DataType="{x:Type FTA:FaultTreeAndGateNode}">
                 <Border BorderBrush="Black" BorderThickness="2">
                     <Grid Background="LightGray" Width="100" Height="50">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="&amp;" FontSize="24" FontWeight="Bold"></TextBlock>
@@ -98,12 +99,16 @@
                 </Border>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type Example:FaultTreeOrGate}">
+            <DataTemplate DataType="{x:Type FTA:FaultTreeOrGateNode}">
                 <Border BorderBrush="Black" BorderThickness="2">
                     <Grid Background="LightGray" Width="100" Height="50">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text=">=0" FontSize="24" FontWeight="Bold"></TextBlock>
                     </Grid>
                 </Border>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type FTA:FaultTreeTerminalNode}">
+                <Ellipse Width="40" Height="40" />
             </DataTemplate>
         </ResourceDictionary>
         
@@ -143,7 +148,7 @@
                         </Rectangle.Fill>
                     </Rectangle>
                 </MenuItem.Icon>
-                <MenuItem Header="FROM _FILE" />
+                <MenuItem Header="FROM _FILE" Click="LoadFromFileClick" />
                 <Separator />
                 <MenuItem Header="_EXAMPLES">
                     <MenuItem Header="Example _1" />

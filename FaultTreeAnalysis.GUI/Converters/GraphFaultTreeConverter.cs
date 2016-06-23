@@ -1,4 +1,5 @@
-﻿using Graphviz4Net.Graphs;
+﻿using FaultTreeAnalysis.FaultTree.Tree;
+using Graphviz4Net.Graphs;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,7 +14,22 @@ namespace FaultTreeAnalysis.GUI.Converters
 	{
 		object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			var graph = new Graph<FaultTreeGate>();
+			var graph = new Graph<FaultTreeNode>();
+			if (value == null)
+				return graph;
+
+			List<FaultTreeNode> nodes = ((FaultTree.FaultTree)value).Traverse().ToList();
+
+			foreach (FaultTreeNode n in nodes)
+			{
+				graph.AddVertex(n);
+				foreach (FaultTreeNode c in n.Childs)
+				{
+					graph.AddEdge(new Edge<FaultTreeNode>(n, c));
+				}
+			}
+
+			/*
 			var a = new FaultTreeAndGate() { Name = "Jonh" };
 			var b = new FaultTreeOrGate() { Name = "Jonh" };
 			var c = new FaultTreeAndGate() { Name = "Jonh" };
@@ -22,7 +38,7 @@ namespace FaultTreeAnalysis.GUI.Converters
 			graph.AddVertex(b);
 			graph.AddVertex(c);
 
-			graph.AddEdge(new Edge<FaultTreeGate>(a, b));
+			graph.AddEdge(new Edge<FaultTreeGate>(a, b));*/
 
 			return graph;
 		}
