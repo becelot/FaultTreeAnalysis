@@ -108,7 +108,9 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type FTA:FaultTreeTerminalNode}">
-                <Ellipse Width="40" Height="40" />
+                <Border CornerRadius="10" Width="60" Padding="4" Background="LightCoral" BorderBrush="Black" BorderThickness="1">
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Label}"></TextBlock>
+                </Border>
             </DataTemplate>
         </ResourceDictionary>
         

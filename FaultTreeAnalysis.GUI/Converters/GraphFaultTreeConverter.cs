@@ -18,11 +18,14 @@ namespace FaultTreeAnalysis.GUI.Converters
 			if (value == null)
 				return graph;
 
+			Console.WriteLine("Converting tree");
+
 			List<FaultTreeNode> nodes = ((FaultTree.FaultTree)value).Traverse().ToList();
 
 			foreach (FaultTreeNode n in nodes)
 			{
 				graph.AddVertex(n);
+
 				foreach (FaultTreeNode c in n.Childs)
 				{
 					graph.AddEdge(new Edge<FaultTreeNode>(n, c));

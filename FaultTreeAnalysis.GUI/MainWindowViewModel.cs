@@ -102,7 +102,12 @@ namespace FaultTreeAnalysis.GUI
 
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-		public FaultTree.FaultTree FaultTree { get; set; } = null;
+		private FaultTree.FaultTree faultTree;
+		public FaultTree.FaultTree FaultTree
+		{
+			get { return faultTree; }
+			set { faultTree = value; this.RaisePropertyChanged("FaultTree"); }
+		}
 
         public MainWindowViewModel()
         {

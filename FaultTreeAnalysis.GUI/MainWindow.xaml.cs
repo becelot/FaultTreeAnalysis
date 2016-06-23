@@ -1,6 +1,8 @@
 ﻿
 namespace FaultTreeAnalysis.GUI
 {
+	using FaultTree;
+	using Util;
 	using MahApps.Metro.Controls;
 	using System;
 	using System.IO;
@@ -18,6 +20,7 @@ namespace FaultTreeAnalysis.GUI
 			this.viewModel = new MainWindowViewModel();
 			this.DataContext = viewModel;
 			InitializeComponent();
+			ConsoleManager.Show();
 			//this.AddNewEdge.Click += AddNewEdgeClick;
 			//this.AddNewPerson.Click += AddNewPersonClick;
 			//this.UpdatePerson.Click += UpdatePersonClick;
@@ -65,6 +68,8 @@ namespace FaultTreeAnalysis.GUI
 			{
 				// Open document 
 				string filename = dlg.FileName;
+				viewModel.FaultTree = FaultTreeEncoderFactory.createFaultTreeCodec(filename).read(filename);
+				Console.WriteLine("created");
 			}
 		}
 	}

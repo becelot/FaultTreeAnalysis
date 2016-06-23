@@ -50,8 +50,10 @@ namespace FaultTreeAnalysis.FaultTree
 		public IEnumerable<FaultTreeNode> Traverse()
 		{
 			var stack = new Stack<FaultTreeNode>();
+
 			HashSet<FaultTreeNode> visited = new HashSet<FaultTreeNode>();
-			stack.Push(this.Root); ;
+			stack.Push(this.Root);
+
 			while (stack.Count > 0)
 			{
 				var current = stack.Pop();
@@ -62,10 +64,12 @@ namespace FaultTreeAnalysis.FaultTree
 				}
 				visited.Add(current);
 				yield return current;
-				if (current.GetType() == typeof(FaultTreeGateNode))
+				if (current is FaultTreeGateNode)
 				{
 					foreach (FaultTreeNode n  in ((FaultTreeGateNode)current).Childs)
-					stack.Push(n);
+					{
+						stack.Push(n);
+					}
 				}
 
 			}
