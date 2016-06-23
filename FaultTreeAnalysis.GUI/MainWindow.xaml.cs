@@ -49,7 +49,6 @@ namespace FaultTreeAnalysis.GUI
 		private void ViewChanged(object sender, RoutedEventArgs e)
 		{
 			viewModel.FaultTreeView = FaultTreeView.IsChecked.Value;
-			viewModel.BDDTreeView = BDDTreeView.IsChecked.Value;
 		}
 
 		private void LoadFromFileClick(object sender, RoutedEventArgs e)

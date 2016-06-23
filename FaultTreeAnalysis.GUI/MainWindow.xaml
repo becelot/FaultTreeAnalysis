@@ -5,7 +5,8 @@
         xmlns:MahApps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions" 
         xmlns:Example="clr-namespace:FaultTreeAnalysis.GUI" 
-        xmlns:FTA="clr-namespace:FaultTreeAnalysis.FaultTree.Tree;assembly=FaultTreeAnalysis"
+        xmlns:FTAFaultTree="clr-namespace:FaultTreeAnalysis.FaultTree.Tree;assembly=FaultTreeAnalysis"
+        xmlns:FTABDD="clr-namespace:FaultTreeAnalysis.BDD.BDDTree;assembly=FaultTreeAnalysis"
         xmlns:Converter="clr-namespace:FaultTreeAnalysis.GUI.Converters" 
         xmlns:WPF="clr-namespace:Graphviz4Net.WPF;assembly=Graphviz4Net.WPF" 
         xmlns:ViewModels="clr-namespace:Graphviz4Net.WPF.ViewModels;assembly=Graphviz4Net.WPF" 
@@ -21,6 +22,7 @@
             </ResourceDictionary.MergedDictionaries>
             <Converter:GraphFaultTreeConverter x:Key="GraphFTConverter" />
             <Converter:VisibilityConverter x:Key="VisibilityConverter" />
+            <Converter:BDDGraphConverter x:Key="BDDGraphConverter" />
             <DataTemplate DataType="{x:Type Example:Person}">
                 <Border BorderBrush="Black" BorderThickness="1" Padding="0" CornerRadius="5" Background="White">
                     <Border.Style>
@@ -92,7 +94,7 @@
                 <Path Data="{Binding Data}" Stroke="Black" StrokeThickness="1" ToolTip="{Binding Edge.Label}"/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type FTA:FaultTreeAndGateNode}">
+            <DataTemplate DataType="{x:Type FTAFaultTree:FaultTreeAndGateNode}">
                 <Border BorderBrush="Black" BorderThickness="2">
                     <Grid Background="LightGray" Width="100" Height="50">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="&amp;" FontSize="24" FontWeight="Bold"></TextBlock>
@@ -100,7 +102,7 @@
                 </Border>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type FTA:FaultTreeOrGateNode}">
+            <DataTemplate DataType="{x:Type FTAFaultTree:FaultTreeOrGateNode}">
                 <Border BorderBrush="Black" BorderThickness="2">
                     <Grid Background="LightGray" Width="100" Height="50">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text=">=0" FontSize="24" FontWeight="Bold"></TextBlock>
@@ -108,9 +110,21 @@
                 </Border>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type FTA:FaultTreeTerminalNode}">
+            <DataTemplate DataType="{x:Type FTAFaultTree:FaultTreeTerminalNode}">
                 <Border CornerRadius="10" Width="60" Padding="4" Background="LightCoral" BorderBrush="Black" BorderThickness="1">
                     <TextBlock HorizontalAlignment="Center" Text="{Binding Label}"></TextBlock>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type FTABDD:BDDVariableNode}">
+                <Border CornerRadius="45" Width="60" Padding="4" Background="LightCoral" BorderBrush="Black" BorderThickness="1">
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Variable}"></TextBlock>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type FTABDD:BDDTerminalNode}" >
+                <Border CornerRadius="45" Width="60" Padding="4" Background="LightCoral" BorderBrush="Black" BorderThickness="1">
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Value}"></TextBlock>
                 </Border>
             </DataTemplate>
         </ResourceDictionary>
@@ -174,7 +188,7 @@
             <WPF:GraphLayout 
                 UseContentPresenterForAllElements="True"
                 LogGraphvizOutput="True"
-                Graph="{Binding FaultTree, Converter={StaticResource GraphFTConverter}}"
+                Graph="{Binding FaultTree, Converter={StaticResource BDDGraphConverter}}"
                 x:Name="GraphLayout">
                 <WPF:GraphLayout.Resources>
                     <Style TargetType="ProgressBar">
@@ -189,5 +203,25 @@
                 </WPF:GraphLayout.Resources>
             </WPF:GraphLayout>
         </Controls:ZoomControl>
+        <!--
+        <Controls:ZoomControl Grid.Column="1" Grid.Row="1" Visibility="{Binding FaultTreeView, Converter={StaticResource VisibilityConverter}}">
+            <WPF:GraphLayout 
+                UseContentPresenterForAllElements="True"
+                LogGraphvizOutput="True"
+                Graph="{Binding FaultTree, Converter={StaticResource GraphFTConverter}}"
+                x:Name="BDDLayout">
+                <WPF:GraphLayout.Resources>
+                    <Style TargetType="ProgressBar">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ProgressBar">
+                                    <TextBlock Foreground="Black">Generating the layout...</TextBlock>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </WPF:GraphLayout.Resources>
+            </WPF:GraphLayout>
+        </Controls:ZoomControl>  -->
     </Grid>
 </MahApps:MetroWindow>

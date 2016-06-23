@@ -1,4 +1,5 @@
 ﻿using FaultTreeAnalysis.BDD.BDDTree;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace FaultTreeAnalysis.BDD
@@ -22,6 +23,11 @@ namespace FaultTreeAnalysis.BDD
 		public static implicit operator BDD(FaultTree.FaultTree ft)
 		{
 			return new BDD(BDDFactory.getComponentConnectionInstance().createBDD(ft));
+		}
+
+		public IEnumerable<BDDNode> flatMap()
+		{
+			return BDDNode.Traverse(this.Root);
 		}
 	}
 }

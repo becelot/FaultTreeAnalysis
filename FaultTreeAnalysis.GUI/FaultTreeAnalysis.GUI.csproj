@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BDDGraphConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="Util\ConsoleManager.cs" />
     <Page Include="FlyoutControls\OptionsMain.xaml">

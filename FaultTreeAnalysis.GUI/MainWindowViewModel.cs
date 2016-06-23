@@ -105,8 +105,7 @@ namespace FaultTreeAnalysis.GUI
 		private bool faultTreeView = true;
 		public bool FaultTreeView { get { return faultTreeView; } set { faultTreeView = value; this.RaisePropertyChanged("FaultTreeView"); } }
 
-		private bool bddTreeView = true;
-		public bool BDDTreeView { get { return bddTreeView; } set { bddTreeView = value; this.RaisePropertyChanged("BDDTreeView"); } }
+		public bool BDDTreeView { get { return !faultTreeView; } }
 
 
 		private FaultTree.FaultTree faultTree;
