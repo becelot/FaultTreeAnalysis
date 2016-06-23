@@ -1,6 +1,7 @@
 ﻿using FaultTreeAnalysis.FaultTree.Transformer;
 using FaultTreeAnalysis.FaultTree.Tree;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace FaultTreeAnalysis.FaultTree
@@ -45,5 +46,29 @@ namespace FaultTreeAnalysis.FaultTree
         {
             return treeMap<FaultTreeNode>(new SimplifyTransformer());
         }
-    }
+
+		public IEnumerable<FaultTreeNode> Traverse()
+		{
+			var stack = new Stack<FaultTreeNode>();
+			HashSet<FaultTreeNode> visited = new HashSet<FaultTreeNode>();
+			stack.Push(this.Root); ;
+			while (stack.Count > 0)
+			{
+				var current = stack.Pop();
+
+				if (visited.Contains(current))
+				{
+					continue;
+				}
+				visited.Add(current);
+				yield return current;
+				if (current.GetType() == typeof(FaultTreeGateNode))
+				{
+					foreach (FaultTreeNode n  in ((FaultTreeGateNode)current).Childs)
+					stack.Push(n);
+				}
+
+			}
+		}
+	}
 }
