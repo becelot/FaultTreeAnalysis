@@ -30,8 +30,8 @@ namespace FaultTreeAnalysis.GUI.Converters
 				graph.AddVertex(n);
 				if (n is BDDVariableNode)
 				{
-					graph.AddEdge(new Edge<BDDNode>(n, n.HighNode));
-					graph.AddEdge(new Edge<BDDNode>(n, n.LowNode));
+					graph.AddEdge(new StyledEdge<BDDNode>(n, n.HighNode));
+					graph.AddEdge(new StyledEdge<BDDNode>(n, n.LowNode, 4));
 				}
 			}
 

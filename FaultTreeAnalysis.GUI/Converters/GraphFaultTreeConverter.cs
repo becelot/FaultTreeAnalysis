@@ -28,7 +28,7 @@ namespace FaultTreeAnalysis.GUI.Converters
 
 				foreach (FaultTreeNode c in n.Childs)
 				{
-					graph.AddEdge(new Edge<FaultTreeNode>(n, c));
+					graph.AddEdge(new StyledEdge<FaultTreeNode>(n, c));
 				}
 			}
 
