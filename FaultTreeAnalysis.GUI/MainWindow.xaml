@@ -156,6 +156,15 @@
                     <MenuItem Header="Example _1" />
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="_VIEW">
+                <MenuItem.Icon>
+                    <Rectangle Width="24" Height="16"  Margin="0,0,-10,0">
+                        <Rectangle.Fill>
+                            <VisualBrush Visual="{StaticResource appbar_view}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </MenuItem.Icon>
+            </MenuItem>
         </Menu>
 
         <Controls:ZoomControl Grid.Column="0" Grid.Row="1">
