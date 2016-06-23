@@ -157,26 +157,28 @@
                 <RadioButton Content="BDD View" IsChecked="False" Checked="ViewChanged" Name="BDDTreeView"/>
             </MenuItem>
         </Menu>
-
-        <Controls:ZoomControl Grid.Column="0" Grid.Row="1" Visibility="{Binding FaultTreeView, Converter={StaticResource VisibilityConverter}}" ZoomDeltaMultiplier="40">
-            <WPF:GraphLayout 
+        <Grid Grid.Column="0" Grid.Row="1" Cursor="Cross" Background="Transparent" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseLeftButtonUp="FaultTreeZoomControl_MouseLeftButtonUp" MouseMove="FaultTreeZoomControl_MouseMove">
+            <Controls:ZoomControl Name="FaultTreeZoomControl" Visibility="{Binding FaultTreeView, Converter={StaticResource VisibilityConverter}}" ZoomDeltaMultiplier="40">
+                <WPF:GraphLayout 
                 UseContentPresenterForAllElements="True"
                 LogGraphvizOutput="False"
                 Graph="{Binding FaultTree, Converter={StaticResource GraphFTConverter}}"
                 x:Name="GraphLayout">
-                <WPF:GraphLayout.Resources>
-                    <Style TargetType="ProgressBar">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ProgressBar">
-                                    <TextBlock Foreground="Black">Generating the layout...</TextBlock>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </WPF:GraphLayout.Resources>
-            </WPF:GraphLayout>
-        </Controls:ZoomControl>
+                    <WPF:GraphLayout.Resources>
+                        <Style TargetType="ProgressBar">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ProgressBar">
+                                        <TextBlock Foreground="Black">Generating the layout...</TextBlock>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </WPF:GraphLayout.Resources>
+                </WPF:GraphLayout>
+            </Controls:ZoomControl>
+        </Grid>
+        
         
         <Controls:ZoomControl Grid.Column="0" Grid.Row="1" Visibility="{Binding BDDTreeView, Converter={StaticResource VisibilityConverter}}" ZoomDeltaMultiplier="40">
             <WPF:GraphLayout 

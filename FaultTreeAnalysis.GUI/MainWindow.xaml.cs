@@ -8,7 +8,11 @@ namespace FaultTreeAnalysis.GUI
 	using System.IO;
 	using System.Windows;
 	using WinForms = System.Windows.Forms;
-
+	using System.Windows.Controls;
+	using System.Windows.Shapes;
+	using System.Windows.Media;
+	using System.Windows.Input;
+	using System.Linq;
 	public partial class MainWindow : MetroWindow
 	{
 		private MainWindowViewModel viewModel;
@@ -69,6 +73,54 @@ namespace FaultTreeAnalysis.GUI
 				// Open document 
 				string filename = dlg.FileName;
 				this.LoadFromFile(filename);
+			}
+		}
+
+		private void FaultTreeZoomControl_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			var canvas = (Grid)sender;
+
+			if (canvas.CaptureMouse())
+			{
+				var startPoint = e.GetPosition(canvas);
+				var line = new Line
+				{
+					Stroke = Brushes.Blue,
+					StrokeThickness = 3,
+					X1 = startPoint.X,
+					Y1 = startPoint.Y,
+					X2 = startPoint.X,
+					Y2 = startPoint.Y,
+				};
+
+				canvas.Children.Add(line);
+			}
+		}
+
+		private void FaultTreeZoomControl_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			((Grid)sender).ReleaseMouseCapture();
+
+			var canvas = (Grid)sender;
+
+			var line = canvas.Children.OfType<Line>().LastOrDefault();
+			canvas.Children.Remove(line);
+		}
+
+		private void FaultTreeZoomControl_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+		{
+			var canvas = (Grid)sender;
+
+			if (canvas.IsMouseCaptured && e.LeftButton == MouseButtonState.Pressed)
+			{
+				var line = canvas.Children.OfType<Line>().LastOrDefault();
+
+				if (line != null)
+				{
+					var endPoint = e.GetPosition(canvas);
+					line.X2 = endPoint.X;
+					line.Y2 = endPoint.Y;
+				}
 			}
 		}
 	}
