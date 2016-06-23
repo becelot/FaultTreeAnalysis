@@ -21,32 +21,11 @@ namespace FaultTreeAnalysis.GUI
 			this.DataContext = viewModel;
 			InitializeComponent();
 			ConsoleManager.Show();
-			//this.AddNewEdge.Click += AddNewEdgeClick;
-			//this.AddNewPerson.Click += AddNewPersonClick;
-			//this.UpdatePerson.Click += UpdatePersonClick;
-		}
-
-		void UpdatePersonClick(object sender, RoutedEventArgs e)
-		{
-			//this.viewModel.UpdatePersonName = (string) this.UpdatePersonName.SelectedItem;
-			this.viewModel.UpdatePerson();
-		}
-
-		private void AddNewPersonClick(object sender, RoutedEventArgs e)
-		{
-			this.viewModel.CreatePerson();
-		}
-
-		private void AddNewEdgeClick(object sender, RoutedEventArgs e)
-		{
-			//this.viewModel.NewEdgeStart = (string) this.NewEdgeStart.SelectedItem;
-			//this.viewModel.NewEdgeEnd = (string)this.NewEdgeEnd.SelectedItem;
-			this.viewModel.CreateEdge();
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e) => FlyoutOptions.IsOpen = true;
 
-		private void Example1Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\1341861976041_NO_SEED-ft.dot");
+		private void Example1Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341861976041_NO_SEED-ft.dot");
 
 		private void ViewChanged(object sender, RoutedEventArgs e)
 		{
