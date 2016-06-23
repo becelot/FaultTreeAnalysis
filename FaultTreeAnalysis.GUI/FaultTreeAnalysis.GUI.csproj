@@ -69,10 +69,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WPFExtensions, Version=1.0.3437.34043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -142,6 +138,10 @@
     <ProjectReference Include="..\Graphviz4Net.WPF\Graphviz4Net.WPF.csproj">
       <Project>{EE5D79D6-D196-4345-A271-DC2E79E26DDA}</Project>
       <Name>Graphviz4Net.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPFExtensions\WPFExtensions.csproj">
+      <Project>{a7915102-8326-4862-96f0-4eb80ed087b4}</Project>
+      <Name>WPFExtensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -168,7 +168,7 @@
                 <MenuItem Header="FROM _FILE" Click="LoadFromFileClick" />
                 <Separator />
                 <MenuItem Header="_EXAMPLES">
-                    <MenuItem Header="Example _1" />
+                    <MenuItem Header="Example _1" Click="Example1Open" />
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_VIEW">
@@ -188,7 +188,7 @@
             <WPF:GraphLayout 
                 UseContentPresenterForAllElements="True"
                 LogGraphvizOutput="True"
-                Graph="{Binding FaultTree, Converter={StaticResource BDDGraphConverter}}"
+                Graph="{Binding FaultTree, Converter={StaticResource GraphFTConverter}}"
                 x:Name="GraphLayout">
                 <WPF:GraphLayout.Resources>
                     <Style TargetType="ProgressBar">
@@ -203,12 +203,12 @@
                 </WPF:GraphLayout.Resources>
             </WPF:GraphLayout>
         </Controls:ZoomControl>
-        <!--
-        <Controls:ZoomControl Grid.Column="1" Grid.Row="1" Visibility="{Binding FaultTreeView, Converter={StaticResource VisibilityConverter}}">
+        
+        <Controls:ZoomControl Grid.Column="0" Grid.Row="1" Visibility="{Binding BDDTreeView, Converter={StaticResource VisibilityConverter}}">
             <WPF:GraphLayout 
                 UseContentPresenterForAllElements="True"
                 LogGraphvizOutput="True"
-                Graph="{Binding FaultTree, Converter={StaticResource GraphFTConverter}}"
+                Graph="{Binding FaultTree, Converter={StaticResource BDDGraphConverter}}"
                 x:Name="BDDLayout">
                 <WPF:GraphLayout.Resources>
                     <Style TargetType="ProgressBar">
@@ -222,6 +222,6 @@
                     </Style>
                 </WPF:GraphLayout.Resources>
             </WPF:GraphLayout>
-        </Controls:ZoomControl>  -->
+        </Controls:ZoomControl> <!-- -->
     </Grid>
 </MahApps:MetroWindow>

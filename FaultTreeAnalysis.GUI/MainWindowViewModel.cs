@@ -103,7 +103,7 @@ namespace FaultTreeAnalysis.GUI
     public class MainWindowViewModel : INotifyPropertyChanged
     {
 		private bool faultTreeView = true;
-		public bool FaultTreeView { get { return faultTreeView; } set { faultTreeView = value; this.RaisePropertyChanged("FaultTreeView"); } }
+		public bool FaultTreeView { get { return faultTreeView; } set { faultTreeView = value; this.RaisePropertyChanged("FaultTreeView"); this.RaisePropertyChanged("BDDTreeView"); } }
 
 		public bool BDDTreeView { get { return !faultTreeView; } }
 

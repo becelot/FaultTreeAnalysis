@@ -46,9 +46,16 @@ namespace FaultTreeAnalysis.GUI
 
 		private void Button_Click(object sender, RoutedEventArgs e) => FlyoutOptions.IsOpen = true;
 
+		private void Example1Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\1341861976041_NO_SEED-ft.dot");
+
 		private void ViewChanged(object sender, RoutedEventArgs e)
 		{
 			viewModel.FaultTreeView = FaultTreeView.IsChecked.Value;
+		}
+
+		private void LoadFromFile(string fileName)
+		{
+			viewModel.FaultTree = FaultTreeEncoderFactory.createFaultTreeCodec(fileName).read(fileName);
 		}
 
 		private void LoadFromFileClick(object sender, RoutedEventArgs e)
@@ -73,8 +80,7 @@ namespace FaultTreeAnalysis.GUI
 			{
 				// Open document 
 				string filename = dlg.FileName;
-				viewModel.FaultTree = FaultTreeEncoderFactory.createFaultTreeCodec(filename).read(filename);
-				Console.WriteLine("created");
+				this.LoadFromFile(filename);
 			}
 		}
 	}
