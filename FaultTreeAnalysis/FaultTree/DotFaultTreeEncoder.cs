@@ -68,7 +68,7 @@ namespace FaultTreeAnalysis.FaultTree
              select new { From = f, To = t }).ToList().ForEach(trans => trans.From.Node.Childs.Add(trans.To.Node));
             
 
-            return new FaultTree(rootNode.ElementAt(0));
+            return new FaultTree(rootNode.ElementAt(0).Childs.ElementAt(0));
         }
 
         public override void write(FaultTree ft, FileStream stream)
