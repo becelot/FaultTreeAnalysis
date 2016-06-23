@@ -26,6 +26,15 @@ namespace FaultTreeAnalysis.GUI
 		private void Button_Click(object sender, RoutedEventArgs e) => FlyoutOptions.IsOpen = true;
 
 		private void Example1Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341861976041_NO_SEED-ft.dot");
+		private void Example2Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341861997385_NO_SEED-ft.dot");
+		private void Example3Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341862261326_NO_SEED-ft.dot");
+		private void Example4Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341916530531_NO_SEED-ft.dot");
+		private void Example5Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341916671953_NO_SEED-ft.dot");
+		private void Example6Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341916816272_NO_SEED-ft.dot");
+		private void Example7Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341916861497_NO_SEED-ft.dot");
+		private void Example8Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341916948985_NO_SEED-ft.dot");
+		private void Example9Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341917031842_NO_SEED-ft.dot");
+		private void Example10Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341917224042_NO_SEED-ft.dot");
 
 		private void ViewChanged(object sender, RoutedEventArgs e)
 		{
