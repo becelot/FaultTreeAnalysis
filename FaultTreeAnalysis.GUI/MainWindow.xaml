@@ -184,7 +184,6 @@
                 <WPF:GraphLayout 
                 UseContentPresenterForAllElements="True"
                 LogGraphvizOutput="False"
-                Graph="{Binding FaultTree, Converter={StaticResource GraphFTConverter}, Mode=OneWay}"
                 x:Name="GraphLayout">
                     <WPF:GraphLayout.Resources>
                         <Style TargetType="ProgressBar">
@@ -193,6 +192,13 @@
                                     <ControlTemplate TargetType="ProgressBar">
                                         <TextBlock Foreground="Black">Generating the layout...</TextBlock>
                                     </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <Style TargetType="WPF:GraphLayout">
+                            <Setter Property="Graph">
+                                <Setter.Value>
+                                    <Binding Path="FaultTree" Converter="{StaticResource GraphFTConverter}" Mode="OneWay" />
                                 </Setter.Value>
                             </Setter>
                         </Style>

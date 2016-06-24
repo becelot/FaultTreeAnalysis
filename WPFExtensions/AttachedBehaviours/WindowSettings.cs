@@ -17,7 +17,7 @@ namespace WPFExtensions.AttachedBehaviours
 		public class WindowApplicationSettings : ApplicationSettingsBase
 		{
 			public WindowApplicationSettings( WindowSettings windowSettings )
-				: base( windowSettings.window.Name + windowSettings.window.PersistId )
+				: base( windowSettings.window.Name)
 			{
 			}
 
