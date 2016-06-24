@@ -27,24 +27,24 @@ namespace FaultTreeAnalysis.FaultTree
             return Root.Reduce(tr);
         }
 
-        public FaultTree TreeMap<T>(FaultTreeTransformer<FaultTreeNode> tr)
+        public FaultTree TreeMap(FaultTreeTransformer<FaultTreeNode> tr)
         {
             return new FaultTree( Root.Reduce(tr) );
         }
 
         public FaultTree DeepCopy()
         {
-            return TreeMap<FaultTreeNode>(new DeepCopyTransformer());
+            return TreeMap(new DeepCopyTransformer());
         }
 
         public FaultTree Replace(int label, Boolean value)
         {
-            return TreeMap<FaultTreeNode>(new ReplaceTransformer(label, value));
+            return TreeMap(new ReplaceTransformer(label, value));
         }
 
         public FaultTree Simplify()
         {
-            return TreeMap<FaultTreeNode>(new SimplifyTransformer());
+            return TreeMap(new SimplifyTransformer());
         }
 
 		public IEnumerable<FaultTreeNode> Traverse()

@@ -6,10 +6,6 @@ namespace FaultTreeAnalysis.BDD
     {
         protected static BDDFactory Instance = null;
 
-        protected BDDFactory()
-		{
-		}
-
         public static BDDFactory GetRecursiveInstance()
         {
 			return BDDFactoryRecursive.GetInstance();

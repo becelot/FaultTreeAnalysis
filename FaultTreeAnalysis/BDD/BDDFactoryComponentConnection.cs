@@ -21,7 +21,7 @@ namespace FaultTreeAnalysis.BDD
 
 		private BDDNode App(BDDNodeFactory nodeFactory, BDDOperator op, Dictionary<Tuple<BDDNode, BDDNode>, BDDNode> g, BDDNode u1, BDDNode u2)
 		{
-			BDDNode u = null;
+			BDDNode u;
 			if (g.ContainsKey(new Tuple<BDDNode, BDDNode>(u1, u2)))
 			{
 				return g[new Tuple<BDDNode, BDDNode>(u1, u2)];

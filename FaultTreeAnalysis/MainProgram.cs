@@ -11,7 +11,7 @@ namespace FaultTreeAnalysis
 {
     class MainProgram
     {
-        static void Main(string[] args)
+        static void Main()
         {
             List<String> files = new List<String>(Directory.GetFiles("examples")).Where(f => new Regex(@".*-ft.dot$").IsMatch(f)).ToList();
 
