@@ -1,0 +1,17 @@
+digraph G {
+0 [shape=point, style=filled, width=0.15, label="TOP"]; 0 -> 2 [style=filled, dir=none];3 [shape=circle, height=0.25, width=0.25, label="3"];
+4 [shape=circle, height=0.25, width=0.25, label="1"];
+5 [shape=circle, height=0.25, width=0.25, label="8"];
+1 [shape=box, style=filled, height=0.25, width=0.5, label=">=1"];1 -> 10 [style=filled, dir=none];1 -> 11 [style=filled, dir=none];
+7 [shape=circle, height=0.25, width=0.25, label="7"];
+14 [shape=box, style=filled, height=0.25, width=0.5, label="&"];14 -> 1 [style=filled, dir=none];14 -> 9 [style=filled, dir=none];14 -> 8 [style=filled, dir=none];
+9 [shape=circle, height=0.25, width=0.25, label="6"];
+10 [shape=circle, height=0.25, width=0.25, label="5"];
+11 [shape=circle, height=0.25, width=0.25, label="9"];
+12 [shape=circle, height=0.25, width=0.25, label="4"];
+6 [shape=circle, height=0.25, width=0.25, label="10"];
+13 [shape=box, style=filled, height=0.25, width=0.5, label="&"];13 -> 8 [style=filled, dir=none];13 -> 7 [style=filled, dir=none];13 -> 4 [style=filled, dir=none];
+8 [shape=circle, height=0.25, width=0.25, label="2"];
+2 [shape=box, style=filled, height=0.25, width=0.5, label=">=1"];2 -> 14 [style=filled, dir=none];2 -> 5 [style=filled, dir=none];2 -> 13 [style=filled, dir=none];2 -> 6 [style=filled, dir=none];2 -> 12 [style=filled, dir=none];2 -> 3 [style=filled, dir=none];
+
+}
