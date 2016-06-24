@@ -19,7 +19,8 @@ namespace FaultTreeAnalysis.GUI
 
         public enum VisualEditorMode
         {
-            MODE_ADD_GATE,
+            MODE_ADD_AND_GATE,
+            MODE_ADD_OR_GATE,
             MODE_ADD_CONNECTION
         }
 
@@ -27,9 +28,19 @@ namespace FaultTreeAnalysis.GUI
 
         private void EditorDownGate(Grid sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var graph = ((Graph<FaultTreeNode>)this.GraphLayout.Graph);
+            FaultTreeNode vertex;
 
-            var vertex = new FaultTreeAndGateNode();
+            switch(EditorMode)
+            {
+                case VisualEditorMode.MODE_ADD_AND_GATE:
+                    vertex = new FaultTreeAndGateNode();
+                    break;
+                case VisualEditorMode.MODE_ADD_OR_GATE:
+                    vertex = new FaultTreeOrGateNode();
+                    break;
+                default:
+                    return;
+            }
 
             ((FaultTreeNode)sender.DataContext).Childs.Add(vertex);
             this.viewModel.RaisePropertyChanged("FaultTree");
@@ -76,7 +87,8 @@ namespace FaultTreeAnalysis.GUI
                 case VisualEditorMode.MODE_ADD_CONNECTION:
                     EditorDownConnection((Grid)sender, e);
                     break;
-                case VisualEditorMode.MODE_ADD_GATE:
+                case VisualEditorMode.MODE_ADD_AND_GATE:
+                case VisualEditorMode.MODE_ADD_OR_GATE:
                     EditorDownGate((Grid)sender, e);
                     break;
                 default: break;
@@ -123,9 +135,23 @@ namespace FaultTreeAnalysis.GUI
         {
             if (this.GraphLayout.Graph.Vertices.Count() == 0)
             {
-                ((Graph<FaultTreeNode>)this.GraphLayout.Graph).AddVertex(new FaultTreeAndGateNode(0));
+                this.viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeAndGateNode(0));
             } else
             {
+                EditorMode = VisualEditorMode.MODE_ADD_AND_GATE;
+                this.validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
+            }
+        }
+
+        private void AddOrGate(object sender, RoutedEventArgs e)
+        {
+            if (this.GraphLayout.Graph.Vertices.Count() == 0)
+            {
+                this.viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeOrGateNode(0));
+            }
+            else
+            {
+                EditorMode = VisualEditorMode.MODE_ADD_OR_GATE;
                 this.validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
             }
         }
