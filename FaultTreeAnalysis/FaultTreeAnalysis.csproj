@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BDD\BDD.cs" />
+    <Compile Include="BDD\BinaryDecisionDiagram.cs" />
     <Compile Include="BDD\BDDEncoderFactory.cs" />
     <Compile Include="BDD\BDDFactory.cs" />
     <Compile Include="BDD\BDDFactoryComponentConnection.cs" />

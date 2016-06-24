@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace FaultTreeAnalysis.FaultTree
@@ -10,6 +11,7 @@ namespace FaultTreeAnalysis.FaultTree
         FAULT_TREE_XML
     }
 
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public abstract class IFaultTreeCodec
     {
 
