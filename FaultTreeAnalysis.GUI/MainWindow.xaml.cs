@@ -12,7 +12,7 @@ namespace FaultTreeAnalysis.GUI
     using Util;
     public partial class MainWindow : MetroWindow
 	{
-		private MainWindowViewModel viewModel;
+		private readonly MainWindowViewModel viewModel;
 
 		public Thickness TitleBarMargin => new Thickness(0, TitlebarHeight, 0, 0);
 

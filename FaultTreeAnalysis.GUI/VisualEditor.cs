@@ -145,7 +145,7 @@ namespace FaultTreeAnalysis.GUI
 
         private void AddAndGate(object sender, RoutedEventArgs e)
         {
-            if (GraphLayout.Graph.Vertices.Count() == 0)
+            if (!GraphLayout.Graph.Vertices.Any())
             {
                 viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeAndGateNode(0));
             } else
@@ -157,7 +157,7 @@ namespace FaultTreeAnalysis.GUI
 
         private void AddOrGate(object sender, RoutedEventArgs e)
         {
-            if (GraphLayout.Graph.Vertices.Count() == 0)
+            if (!GraphLayout.Graph.Vertices.Any())
             {
                 viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeOrGateNode(0));
             }
@@ -170,7 +170,7 @@ namespace FaultTreeAnalysis.GUI
 
         private void AddBasicEvent(object sender, RoutedEventArgs e)
         {
-            if (GraphLayout.Graph.Vertices.Count() == 0)
+            if (!GraphLayout.Graph.Vertices.Any())
             {
                 return;
             } else
