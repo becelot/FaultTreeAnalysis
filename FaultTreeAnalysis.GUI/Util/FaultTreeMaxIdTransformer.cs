@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FaultTreeAnalysis.FaultTree.Tree;
-using System.Linq;
 
 namespace FaultTreeAnalysis.GUI.Util
 {
