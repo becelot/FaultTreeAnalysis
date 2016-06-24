@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FaultTreeAnalysis.FaultTree.Tree;
+using System.Linq;
 
 namespace FaultTreeAnalysis.GUI.Util
 {
@@ -22,12 +23,13 @@ namespace FaultTreeAnalysis.GUI.Util
 
         public override int transform(FaultTreeAndGateNode gate, List<int> childs)
         {
-            return childs.Max();
-        }
+
+			return childs.DefaultIfEmpty(int.MinValue).Max();
+		}
 
         public override int transform(FaultTreeOrGateNode gate, List<int> childs)
         {
-            return childs.Max();
+			return childs.DefaultIfEmpty(int.MinValue).Max();
         }
     }
 }
