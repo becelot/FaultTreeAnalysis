@@ -6,12 +6,12 @@ namespace FaultTreeAnalysis.FaultTree.Tree
     [DataContract(Name = "FaultTreeGateNode")]
     public abstract class FaultTreeGateNode : FaultTreeNode
     {
-        public FaultTreeGateNode(int ID) : base(ID) { }
+        protected FaultTreeGateNode(int ID) : base(ID) { }
 
-        public FaultTreeGateNode()
+        protected FaultTreeGateNode()
         { }
 
-        public FaultTreeGateNode(int ID, List<FaultTreeNode> childs) : base(ID, childs) { }
+        protected FaultTreeGateNode(int ID, List<FaultTreeNode> childs) : base(ID, childs) { }
 
     }
 }
