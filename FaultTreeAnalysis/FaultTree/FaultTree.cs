@@ -64,14 +64,14 @@ namespace FaultTreeAnalysis.FaultTree
 				}
 				visited.Add(current);
 				yield return current;
-				if (current is FaultTreeGateNode)
-				{
-					foreach (FaultTreeNode n  in ((FaultTreeGateNode)current).Childs)
-					{
-						stack.Push(n);
-					}
-				}
 
+			    var node = current as FaultTreeGateNode;
+			    if (node == null) continue;
+
+			    foreach (var n  in node.Childs)
+			    {
+			        stack.Push(n);
+			    }
 			}
 		}
 	}

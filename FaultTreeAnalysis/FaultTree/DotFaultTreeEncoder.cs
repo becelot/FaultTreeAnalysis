@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -17,6 +18,7 @@ namespace FaultTreeAnalysis.FaultTree
         DOT_INVALID = 4
     }
 
+    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     class DotFaultTreeEncoder : IFaultTreeCodec
     {
         // The .dot pattern syntax
@@ -33,7 +35,7 @@ namespace FaultTreeAnalysis.FaultTree
 
             //Preprocess lines to remove .dot structures and split information into single lines 
             List<String> lines = sr.ReadToEnd().Split('\n').ToList();
-            lines = lines.GetRange(1, lines.Count() - 3).SelectMany(l => l.Split(';')).Where(l => !l.Trim().Equals("")).ToList();
+            lines = lines.GetRange(1, lines.Count - 3).SelectMany(l => l.Split(';')).Where(l => !l.Trim().Equals("")).ToList();
 
             //Create datastructures to store parsed tokens
             var symbols = from line in lines

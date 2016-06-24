@@ -8,7 +8,6 @@ namespace FaultTreeAnalysis.BDD
 
         protected BDDFactory()
 		{
-			new BDDNodeFactory();
 		}
 
         public static BDDFactory GetRecursiveInstance()

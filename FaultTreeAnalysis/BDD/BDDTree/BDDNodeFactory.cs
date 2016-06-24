@@ -9,7 +9,6 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 		private readonly BDDTerminalNode terminalOne;
 
 		private readonly Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode> h;
-		private readonly Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>> t;
 
 
 		public BDDNodeFactory()
@@ -18,7 +17,6 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 		    terminalOne = new BDDTerminalNode(true) {Variable = -1};
 
 		    h = new Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode>();
-			t = new Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>>();
 		}
 
 
@@ -39,7 +37,6 @@ namespace FaultTreeAnalysis.BDD.BDDTree
                 return h[new Tuple<int, BDDNode, BDDNode>(value, highNode, lowNode)];
             }
             BDDNode n = new BDDVariableNode(value, highNode, lowNode);
-            t.Add(n, new Tuple<int, BDDNode, BDDNode>(value, highNode, lowNode));
             h.Add(new Tuple<int, BDDNode, BDDNode>(value, highNode, lowNode), n);
             return n;
         }
