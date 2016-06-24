@@ -74,7 +74,7 @@ namespace FaultTreeAnalysis.GUI.Util
 
 		static void InvalidateOutAndError()
 		{
-			Type type = typeof(System.Console);
+			Type type = typeof(Console);
 
 			System.Reflection.FieldInfo _out = type.GetField("_out",
 				System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);

@@ -33,21 +33,21 @@ namespace FaultTreeAnalysis.GUI
             switch(EditorMode)
             {
                 case VisualEditorMode.MODE_ADD_AND_GATE:
-                    vertex = new FaultTreeAndGateNode(this.viewModel.FaultTree.NextId());
+                    vertex = new FaultTreeAndGateNode(viewModel.FaultTree.NextId());
                     break;
                 case VisualEditorMode.MODE_ADD_OR_GATE:
-                    vertex = new FaultTreeOrGateNode(this.viewModel.FaultTree.NextId());
+                    vertex = new FaultTreeOrGateNode(viewModel.FaultTree.NextId());
                     break;
                 case VisualEditorMode.MODE_ADD_BASIC_EVENT:
-                    vertex = new FaultTreeTerminalNode(this.viewModel.FaultTree.NextId(), this.viewModel.FaultTree.NextBasicEvent());
+                    vertex = new FaultTreeTerminalNode(viewModel.FaultTree.NextId(), viewModel.FaultTree.NextBasicEvent());
                     break;
                 default:
                     return;
             }
 
-            this.viewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
-            this.viewModel.NewEdgeEnd = vertex;
-            this.viewModel.CreateEdge();
+            viewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
+            viewModel.NewEdgeEnd = vertex;
+            viewModel.CreateEdge();
         }
 
         private void EditorDownConnection(Grid sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -74,7 +74,7 @@ namespace FaultTreeAnalysis.GUI
 
                 canvas.Children.Add(line);
 
-                this.viewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
+                viewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
             }
             else
             {
@@ -84,8 +84,8 @@ namespace FaultTreeAnalysis.GUI
                 }
                 canvas.Children.Remove(canvasLine);
 
-                this.viewModel.NewEdgeEnd = (FaultTreeNode)sender.DataContext;
-                this.viewModel.CreateEdge();
+                viewModel.NewEdgeEnd = (FaultTreeNode)sender.DataContext;
+                viewModel.CreateEdge();
             }
         }
 
@@ -131,52 +131,52 @@ namespace FaultTreeAnalysis.GUI
 
         private void AddGateConnection(object sender, RoutedEventArgs e)
         {
-            this.validSourceElements = new List<Type>() { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode) };
-            this.validDestinationElements = new List<Type>() { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode), typeof(FaultTreeTerminalNode) };
-            this.EditorMode = VisualEditorMode.MODE_ADD_GATE_CONNECTION;
+            validSourceElements = new List<Type>() { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode) };
+            validDestinationElements = new List<Type>() { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode), typeof(FaultTreeTerminalNode) };
+            EditorMode = VisualEditorMode.MODE_ADD_GATE_CONNECTION;
         }
 
         private void AddMarkovChain(object sender, RoutedEventArgs e)
         {
-            this.validSourceElements = new List<Type>() { typeof(FaultTreeTerminalNode) };
-            this.validDestinationElements = new List<Type>() { typeof(FaultTreeTerminalNode) };
-            this.EditorMode = VisualEditorMode.MODE_ADD_MARKOV_CHAIN;
+            validSourceElements = new List<Type>() { typeof(FaultTreeTerminalNode) };
+            validDestinationElements = new List<Type>() { typeof(FaultTreeTerminalNode) };
+            EditorMode = VisualEditorMode.MODE_ADD_MARKOV_CHAIN;
         }
 
         private void AddAndGate(object sender, RoutedEventArgs e)
         {
-            if (this.GraphLayout.Graph.Vertices.Count() == 0)
+            if (GraphLayout.Graph.Vertices.Count() == 0)
             {
-                this.viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeAndGateNode(0));
+                viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeAndGateNode(0));
             } else
             {
                 EditorMode = VisualEditorMode.MODE_ADD_AND_GATE;
-                this.validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
+                validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
             }
         }
 
         private void AddOrGate(object sender, RoutedEventArgs e)
         {
-            if (this.GraphLayout.Graph.Vertices.Count() == 0)
+            if (GraphLayout.Graph.Vertices.Count() == 0)
             {
-                this.viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeOrGateNode(0));
+                viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeOrGateNode(0));
             }
             else
             {
                 EditorMode = VisualEditorMode.MODE_ADD_OR_GATE;
-                this.validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
+                validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
             }
         }
 
         private void AddBasicEvent(object sender, RoutedEventArgs e)
         {
-            if (this.GraphLayout.Graph.Vertices.Count() == 0)
+            if (GraphLayout.Graph.Vertices.Count() == 0)
             {
                 return;
             } else
             {
                 EditorMode = VisualEditorMode.MODE_ADD_BASIC_EVENT;
-                this.validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
+                validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
             }
         }
     }

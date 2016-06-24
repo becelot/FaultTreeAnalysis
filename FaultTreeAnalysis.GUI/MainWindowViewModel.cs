@@ -20,7 +20,7 @@ namespace FaultTreeAnalysis.GUI
     public class MainWindowViewModel : INotifyPropertyChanged
     {
 		private bool faultTreeView = true;
-		public bool FaultTreeView { get { return faultTreeView; } set { faultTreeView = value; this.RaisePropertyChanged("FaultTreeView"); this.RaisePropertyChanged("BDDTreeView"); } }
+		public bool FaultTreeView { get { return faultTreeView; } set { faultTreeView = value; RaisePropertyChanged("FaultTreeView"); RaisePropertyChanged("BDDTreeView"); } }
 
 		public bool BDDTreeView { get { return !faultTreeView; } }
 
@@ -29,7 +29,7 @@ namespace FaultTreeAnalysis.GUI
 		public FaultTree.FaultTree FaultTree
 		{
 			get { return faultTree; }
-			set { faultTree = value; this.RaisePropertyChanged("FaultTree"); }
+			set { faultTree = value; RaisePropertyChanged("FaultTree"); }
 		}
 
         public MainWindowViewModel()
@@ -47,28 +47,28 @@ namespace FaultTreeAnalysis.GUI
 
         public void CreateEdge()
         {
-            if ((this.NewEdgeStart == null) ||
-                (this.NewEdgeEnd == null))
+            if ((NewEdgeStart == null) ||
+                (NewEdgeEnd == null))
             {
                 return;
             }
 
-            if (this.NewEdgeStart == this.NewEdgeEnd)
+            if (NewEdgeStart == NewEdgeEnd)
             {
                 return;
             }
 
-            this.NewEdgeStart.Childs.Add(this.NewEdgeEnd);
-            this.RaisePropertyChanged("FaultTree");
+            NewEdgeStart.Childs.Add(NewEdgeEnd);
+            RaisePropertyChanged("FaultTree");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged(string property)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(property));
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
         }
 

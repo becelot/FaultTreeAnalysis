@@ -31,8 +31,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type Local:Arrow}">
-                <Path Data="M 0,0 L 20,0 L 10,10 L 0,0" Stroke="Black" StrokeThickness="1">
-                </Path>
+                <Path Data="M 0,0 L 20,0 L 10,10 L 0,0" Stroke="Black" StrokeThickness="1" />
             </DataTemplate>
 
             <!-- Set UseContentPresenterForAllElements of GraphLayout to true -->
@@ -63,7 +62,7 @@
                 <Grid DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
                     <Border BorderBrush="Black" BorderThickness="2">
                         <Grid Width="100" Height="50" Background="LightSkyBlue">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="&amp;" FontSize="24" FontWeight="Bold"></TextBlock>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="&amp;" FontSize="24" FontWeight="Bold" />
                         </Grid>
                     </Border>
                 </Grid>
@@ -73,7 +72,7 @@
                 <Grid DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
                     <Border BorderBrush="Black" BorderThickness="2">
                         <Grid Width="100" Height="50" Background="LightSkyBlue">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text=">=0" FontSize="24" FontWeight="Bold"></TextBlock>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text=">=0" FontSize="24" FontWeight="Bold" />
                         </Grid>
                     </Border>
                 </Grid>
@@ -82,20 +81,20 @@
             <DataTemplate DataType="{x:Type FTAFaultTree:FaultTreeTerminalNode}">
                 <Grid DataContext="{Binding}" Background="Transparent" Width="40" Height="40" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
                     <Border CornerRadius="90" Width="40" Height="40" Padding="4" Background="LightGray" BorderBrush="Black" BorderThickness="1">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Label}"></TextBlock>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Label}" />
                     </Border>
                 </Grid>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type FTABDD:BDDVariableNode}">
                 <Border CornerRadius="90" Width="40" Height="40" Padding="4" Background="LightBlue" BorderBrush="Black" BorderThickness="1">
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Variable}"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Variable}" />
                 </Border>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type FTABDD:BDDTerminalNode}" >
                 <Border Width="60" Padding="4" Background="LightGray" BorderBrush="Black" BorderThickness="1">
-                    <TextBlock HorizontalAlignment="Center" Text="{Binding Value}"></TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Value}" />
                 </Border>
             </DataTemplate>
         </ResourceDictionary>
@@ -238,3 +237,66 @@
         </Controls:ZoomControl> 
     </Grid>
 </MahApps:MetroWindow>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
