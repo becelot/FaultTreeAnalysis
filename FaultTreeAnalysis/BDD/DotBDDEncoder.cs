@@ -7,7 +7,7 @@ using FaultTreeAnalysis.BDD.BDDTree;
 
 namespace FaultTreeAnalysis.BDD
 {
-	class DotBDDEncoder : IBDDCodec
+    internal class DotBDDEncoder : IBDDCodec
 	{
 		public override BinaryDecisionDiagram Read(FileStream fileName)
 		{
@@ -16,7 +16,7 @@ namespace FaultTreeAnalysis.BDD
 
 		public override void Write(BinaryDecisionDiagram bdd, FileStream stream)
 		{
-			using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8, 65536))
+			using (var sw = new StreamWriter(stream, Encoding.UTF8, 65536))
 			{
 				sw.WriteLine("digraph G {");
 				sw.WriteLine("0 [shape=box, label=\"0\", style=filled, shape=box, height=0.3, width=0.3];");
@@ -25,7 +25,7 @@ namespace FaultTreeAnalysis.BDD
 				List<BDDNode> flat = BDDNode.Traverse(bdd.Root).ToList();
 				flat = (from f in flat orderby f.Variable select f).Reverse().ToList();
 
-				Dictionary<BDDNode, int> fastAccess = new Dictionary<BDDNode, int>();
+				var fastAccess = new Dictionary<BDDNode, int>();
 				for (int i = 0; i < flat.Count; i++)
 				{
 					fastAccess.Add(flat[i], i);

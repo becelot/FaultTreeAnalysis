@@ -23,12 +23,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
                 }
             }
 
-            if (all)
-            {
-                return CreateNode(new FaultTreeLiteralNode(gate.ID, true));
-            }
-
-            return base.Transform(gate, childs);
+            return all ? CreateNode(new FaultTreeLiteralNode(gate.ID, true)) : base.Transform(gate, childs);
         }
 
         public override FaultTreeNode Transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
@@ -48,12 +43,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
                 }
             }
 
-            if (all)
-            {
-                return CreateNode(new FaultTreeLiteralNode(gate.ID, false));
-            }
-
-            return base.Transform(gate, childs);
+            return all ? CreateNode(new FaultTreeLiteralNode(gate.ID, false)) : base.Transform(gate, childs);
         }
     }
 }

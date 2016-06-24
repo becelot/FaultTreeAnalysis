@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using FaultTreeAnalysis.FaultTree.Transformer;
 
@@ -14,12 +15,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
 
         public override T Reduce<T>(FaultTreeTransformer<T> tr)
         {
-            List<T> l = new List<T>();
-
-            foreach (FaultTreeNode c in Childs)
-            {
-                l.Add(c.Reduce(tr));
-            }
+            List<T> l = Childs.Select(c => c.Reduce(tr)).ToList();
 
             return tr.Transform(this, l);
         }

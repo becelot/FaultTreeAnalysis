@@ -112,7 +112,7 @@ namespace FaultTreeAnalysis.BDD
 	        {
 	            return u2;
 	        }
-	        Dictionary<Tuple<BDDNode, BDDNode>, BDDNode> g = new Dictionary<Tuple<BDDNode, BDDNode>, BDDNode>();
+	        var g = new Dictionary<Tuple<BDDNode, BDDNode>, BDDNode>();
 	        return App(nodeFactory, op, g, u1, u2);
 	    }
 

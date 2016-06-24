@@ -23,7 +23,7 @@ namespace FaultTreeAnalysis.FaultTree
 
         public void Write(FaultTree ft, String fileName)
         {
-            using (FileStream stream = new FileStream(fileName, FileMode.Create))
+            using (var stream = new FileStream(fileName, FileMode.Create))
             {
                 Write(ft, stream);
             }
@@ -34,7 +34,7 @@ namespace FaultTreeAnalysis.FaultTree
             FaultTree res;
 
             //Create stream from file contents
-            using (FileStream stream = new FileStream(fileName, FileMode.Open))
+            using (var stream = new FileStream(fileName, FileMode.Open))
             {
                 res = Read(stream);
             }

@@ -6,7 +6,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
     public class ReplaceTransformer : TreeTransformer
     {
         private readonly int label;
-        readonly Boolean value;
+        private readonly Boolean value;
 
         public ReplaceTransformer(int label, Boolean value)
         {
@@ -16,11 +16,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 
         public override FaultTreeNode Transform(FaultTreeTerminalNode terminal)
         {
-            if (terminal.Label == label)
-            {
-                return CreateNode(new FaultTreeLiteralNode(terminal, value));
-            }
-            return CreateNode(new FaultTreeTerminalNode(terminal));
+            return terminal.Label == label ? CreateNode(new FaultTreeLiteralNode(terminal, value)) : CreateNode(new FaultTreeTerminalNode(terminal));
         }
     }
 }

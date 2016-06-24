@@ -49,7 +49,7 @@ namespace FaultTreeAnalysis.FaultTree
 
 		public IEnumerable<FaultTreeNode> Traverse()
 		{
-			var stack = new Stack<FaultTreeNode>();
+			Stack<FaultTreeNode> stack = new Stack<FaultTreeNode>();
 
 			HashSet<FaultTreeNode> visited = new HashSet<FaultTreeNode>();
 			stack.Push(Root);

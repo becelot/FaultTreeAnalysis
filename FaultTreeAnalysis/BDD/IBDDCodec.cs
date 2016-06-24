@@ -21,7 +21,7 @@ namespace FaultTreeAnalysis.BDD
 
 		public void Write(BinaryDecisionDiagram bdd, String fileName)
 		{
-			using (FileStream stream = new FileStream(fileName, FileMode.Create))
+			using (var stream = new FileStream(fileName, FileMode.Create))
 			{
 				Write(bdd, stream);
 			}
@@ -32,7 +32,7 @@ namespace FaultTreeAnalysis.BDD
 			BinaryDecisionDiagram res;
 
 			//Create stream from file contents
-			using (FileStream stream = new FileStream(fileName, FileMode.Open))
+			using (var stream = new FileStream(fileName, FileMode.Open))
 			{
 				res = Read(stream);
 			}

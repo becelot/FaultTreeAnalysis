@@ -9,17 +9,8 @@ using FaultTreeAnalysis.FaultTree.Tree;
 
 namespace FaultTreeAnalysis.FaultTree
 {
-    enum DotParseToken
-    {
-        DOT_TRANSITION = 0,
-        DOT_ROOT = 1,
-        DOT_GATE = 2,
-        DOT_IDENTIFIER = 3,
-        DOT_INVALID = 4
-    }
-
     [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
-    class DotFaultTreeEncoder : IFaultTreeCodec
+    internal class DotFaultTreeEncoder : IFaultTreeCodec
     {
         // The .dot pattern syntax
         private static readonly List<Regex> PatternMatcher = new List<Regex> {
@@ -31,7 +22,7 @@ namespace FaultTreeAnalysis.FaultTree
 
         public override FaultTree Read(FileStream stream)
         {
-            StreamReader sr = new StreamReader(stream);
+            var sr = new StreamReader(stream);
 
             //Preprocess lines to remove .dot structures and split information into single lines 
             List<String> lines = sr.ReadToEnd().Split('\n').ToList();

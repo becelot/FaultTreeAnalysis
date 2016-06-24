@@ -9,9 +9,9 @@ using FaultTreeAnalysis.FaultTree;
 
 namespace FaultTreeAnalysis
 {
-    class MainProgram
+    internal class MainProgram
     {
-        static void Main()
+        private static void Main()
         {
             List<String> files = new List<String>(Directory.GetFiles("examples")).Where(f => new Regex(@".*-ft.dot$").IsMatch(f)).ToList();
 

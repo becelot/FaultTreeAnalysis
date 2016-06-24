@@ -1,8 +1,10 @@
-﻿namespace FaultTreeAnalysis.BDD
+﻿using System;
+
+namespace FaultTreeAnalysis.BDD
 {
 	public class BDDEncoderFactory
 	{
-		public static IBDDCodec CreateFaultTreeCodec(string fileName)
+		public static IBDDCodec CreateFaultTreeCodec(String fileName)
 		{
 			if (fileName.EndsWith(".dot"))
 			{
@@ -18,12 +20,15 @@
 
 		public static IBDDCodec CreateFaultTreeCodec(BDDTreeFormat format)
 		{
-			switch (format)
-			{
-				case BDDTreeFormat.BDD_TREE_DOT: return new DotBDDEncoder();
-				case BDDTreeFormat.BDD_TREE_XML: return new XmlBDDEncoder();
-				default: return null;
-			}
+		    switch (format)
+		    {
+		        case BDDTreeFormat.BDD_TREE_DOT:
+		            return new DotBDDEncoder();
+		        case BDDTreeFormat.BDD_TREE_XML:
+		            return new XmlBDDEncoder();
+		        default:
+		            return null;
+		    }
 		}
 	}
 }

@@ -35,7 +35,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
             }
         }
 
-        public FaultTreeGateNode CreateGateNode(int id, string operation)
+        public FaultTreeGateNode CreateGateNode(int id, String operation)
         {
             return CreateGateNode(id, OperatorFromString(operation));
         }

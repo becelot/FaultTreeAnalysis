@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -30,36 +31,35 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 
 			visited.Add(this);
 
-			if (GetType() == typeof(BDDVariableNode))
-			{
-				HighNode.FlatMap(ref visited);
-				LowNode.FlatMap(ref visited);
-			}
+		    if (GetType() != typeof(BDDVariableNode)) return;
+
+		    HighNode.FlatMap(ref visited);
+		    LowNode.FlatMap(ref visited);
 		}
 
 
 
 		public List<BDDNode> FlatMap()
 		{
-		    List<BDDNode> flat = new List<BDDNode> {this};
+		    var flat = new List<BDDNode> {this};
 		    GeneratedNumber++;
-			if (GetType() == typeof(BDDVariableNode))
-			{
-				HighNode.FlatMap(ref flat);
-				LowNode.FlatMap(ref flat);
-			}
 
-			return flat;
+            if (GetType() != typeof(BDDVariableNode)) return flat;
+
+		    HighNode.FlatMap(ref flat);
+		    LowNode.FlatMap(ref flat);
+
+		    return flat;
 		}
 
 		public static IEnumerable<BDDNode> Traverse(BDDNode root)
 		{
 			var stack = new Stack<BDDNode>();
-			HashSet<BDDNode> visited = new HashSet<BDDNode>();
+			var visited = new HashSet<BDDNode>();
 			stack.Push(root);
 			while (stack.Count > 0)
 			{
-				var current = stack.Pop();
+				BDDNode current = stack.Pop();
 
 				if (visited.Contains(current))
 				{
@@ -87,7 +87,7 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 			List<BDDNode> flat = Traverse(this).ToList();
 			flat = (from f in flat orderby f.Variable select f).Reverse().ToList();
 
-			Dictionary<BDDNode, int> fastAccess = new Dictionary<BDDNode, int>();
+			var fastAccess = new Dictionary<BDDNode, int>();
 			for (int i = 0; i < flat.Count; i++)
 			{
 				fastAccess.Add(flat[i], i);

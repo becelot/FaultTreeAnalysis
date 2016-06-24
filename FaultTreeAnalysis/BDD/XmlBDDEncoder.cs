@@ -7,7 +7,7 @@ using FaultTreeAnalysis.BDD.BDDTree;
 
 namespace FaultTreeAnalysis.BDD
 {
-	class XmlBDDEncoder : IBDDCodec
+    internal class XmlBDDEncoder : IBDDCodec
 	{
 		public override BinaryDecisionDiagram Read(FileStream fileName)
 		{
@@ -32,10 +32,10 @@ namespace FaultTreeAnalysis.BDD
 							   select lType).ToArray();
 			var setting = new DataContractSerializerSettings { PreserveObjectReferences = true, KnownTypes = listOfNodes };
 
-			XmlWriterSettings xmlSettings = new XmlWriterSettings { Indent = true };
+			var xmlSettings = new XmlWriterSettings { Indent = true };
 
 			var serializer = new DataContractSerializer(typeof(BinaryDecisionDiagram), setting);
-			using (var w = XmlWriter.Create(stream, xmlSettings))
+			using (XmlWriter w = XmlWriter.Create(stream, xmlSettings))
 			{
 				serializer.WriteObject(XmlWriter.Create(w, xmlSettings), bdd);
 			}
