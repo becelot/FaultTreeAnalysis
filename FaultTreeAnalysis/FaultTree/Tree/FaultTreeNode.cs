@@ -13,11 +13,11 @@ namespace FaultTreeAnalysis.FaultTree.Tree
         [DataMember]
         public List<FaultTreeNode> Childs { get; set; }
 
-        public FaultTreeNode() { Childs = new List<FaultTreeNode>(); }
+        protected FaultTreeNode() { Childs = new List<FaultTreeNode>(); }
 
-        public FaultTreeNode(int ID) : this() { this.ID = ID; }
+        protected FaultTreeNode(int ID) : this() { this.ID = ID; }
 
-        public FaultTreeNode(int ID, List<FaultTreeNode> childs)
+        protected FaultTreeNode(int ID, List<FaultTreeNode> childs)
         {
             this.ID = ID;
             Childs = childs;
