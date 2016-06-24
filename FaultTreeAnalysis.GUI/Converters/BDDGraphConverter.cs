@@ -1,11 +1,7 @@
 ﻿using FaultTreeAnalysis.BDD.BDDTree;
 using Graphviz4Net.Graphs;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace FaultTreeAnalysis.GUI.Converters

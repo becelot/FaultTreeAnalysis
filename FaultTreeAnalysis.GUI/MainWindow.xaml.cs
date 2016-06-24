@@ -3,12 +3,8 @@ namespace FaultTreeAnalysis.GUI
 {
     using FaultTree;
     using MahApps.Metro.Controls;
-    using System;
     using System.IO;
-    using System.Linq;
     using System.Windows;
-    using System.Windows.Media;
-    using System.Windows.Shapes;
     using Util;
     public partial class MainWindow : MetroWindow
 	{

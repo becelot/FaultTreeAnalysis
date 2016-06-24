@@ -1,10 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Input;
-
-namespace FaultTreeAnalysis.GUI
+﻿namespace FaultTreeAnalysis.GUI
 {
     using FaultTree.Tree;
     using System.ComponentModel;
