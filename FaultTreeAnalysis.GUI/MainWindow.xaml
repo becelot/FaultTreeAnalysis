@@ -139,14 +139,14 @@
                 <MenuItem Header="_EXAMPLES">
                     <MenuItem Header="Example _1" Click="Example1Open" />
                     <MenuItem Header="Example _2" Click="Example2Open" />
-                    <MenuItem Header="Example _3" Click="Example2Open" />
-                    <MenuItem Header="Example _4" Click="Example2Open" />
-                    <MenuItem Header="Example _5" Click="Example2Open" />
-                    <MenuItem Header="Example _6" Click="Example2Open" />
-                    <MenuItem Header="Example _7" Click="Example2Open" />
-                    <MenuItem Header="Example _8" Click="Example2Open" />
-                    <MenuItem Header="Example _9" Click="Example2Open" />
-                    <MenuItem Header="Example _10" Click="Example2Open" />
+                    <MenuItem Header="Example _3" Click="Example3Open" />
+                    <MenuItem Header="Example _4" Click="Example4Open" />
+                    <MenuItem Header="Example _5" Click="Example5Open" />
+                    <MenuItem Header="Example _6" Click="Example6Open" />
+                    <MenuItem Header="Example _7" Click="Example7Open" />
+                    <MenuItem Header="Example _8" Click="Example8Open" />
+                    <MenuItem Header="Example _9" Click="Example9Open" />
+                    <MenuItem Header="Example _10" Click="Example10Open" />
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_VIEW">
