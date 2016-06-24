@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace FaultTreeAnalysis.FaultTree
@@ -21,7 +20,7 @@ namespace FaultTreeAnalysis.FaultTree
 
         public virtual FaultTreeFormat GetFormatToken() { return FaultTreeFormat.FAULT_TREE_UNKNOWN; }
 
-        public void Write(FaultTree ft, String fileName)
+        public void Write(FaultTree ft, string fileName)
         {
             using (var stream = new FileStream(fileName, FileMode.Create))
             {
@@ -29,7 +28,7 @@ namespace FaultTreeAnalysis.FaultTree
             }
         }
 
-        public FaultTree Read(String fileName)
+        public FaultTree Read(string fileName)
         {
             FaultTree res;
 

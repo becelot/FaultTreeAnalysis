@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace FaultTreeAnalysis.BDD
+﻿namespace FaultTreeAnalysis.BDD
 {
 	public class BDDEncoderFactory
 	{
-		public static IBDDCodec CreateFaultTreeCodec(String fileName)
+		public static IBDDCodec CreateFaultTreeCodec(string fileName)
 		{
 			if (fileName.EndsWith(".dot"))
 			{

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace FaultTreeAnalysis.BDD
 {
@@ -19,7 +18,7 @@ namespace FaultTreeAnalysis.BDD
 
 		public virtual BDDTreeFormat GetFormatToken() { return BDDTreeFormat.BDD_TREE_UNKNOWN; }
 
-		public void Write(BinaryDecisionDiagram bdd, String fileName)
+		public void Write(BinaryDecisionDiagram bdd, string fileName)
 		{
 			using (var stream = new FileStream(fileName, FileMode.Create))
 			{
@@ -27,7 +26,7 @@ namespace FaultTreeAnalysis.BDD
 			}
 		}
 
-		public BinaryDecisionDiagram Read(String fileName)
+		public BinaryDecisionDiagram Read(string fileName)
 		{
 			BinaryDecisionDiagram res;
 

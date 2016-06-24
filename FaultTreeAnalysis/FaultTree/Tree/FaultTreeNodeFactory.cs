@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FaultTreeAnalysis.FaultTree.Tree
+﻿namespace FaultTreeAnalysis.FaultTree.Tree
 {
     public class FaultTreeNodeFactory
     {
@@ -14,7 +12,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
             FAULT_TREE_OPERATOR_OR
         }
 
-        private static FaultTreeGateOperator OperatorFromString(String op)
+        private static FaultTreeGateOperator OperatorFromString(string op)
         {
             return op.Equals("&") ? FaultTreeGateOperator.FAULT_TREE_OPERATOR_AND : FaultTreeGateOperator.FAULT_TREE_OPERATOR_OR;
         }
@@ -35,7 +33,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
             }
         }
 
-        public FaultTreeGateNode CreateGateNode(int id, String operation)
+        public FaultTreeGateNode CreateGateNode(int id, string operation)
         {
             return CreateGateNode(id, OperatorFromString(operation));
         }

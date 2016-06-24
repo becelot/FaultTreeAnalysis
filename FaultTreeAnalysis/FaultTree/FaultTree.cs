@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using FaultTreeAnalysis.FaultTree.Transformer;
 using FaultTreeAnalysis.FaultTree.Tree;
@@ -37,7 +36,7 @@ namespace FaultTreeAnalysis.FaultTree
             return TreeMap(new DeepCopyTransformer());
         }
 
-        public FaultTree Replace(int label, Boolean value)
+        public FaultTree Replace(int label, bool value)
         {
             return TreeMap(new ReplaceTransformer(label, value));
         }

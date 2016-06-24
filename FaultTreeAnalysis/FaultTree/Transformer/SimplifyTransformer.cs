@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FaultTreeAnalysis.FaultTree.Tree;
 
 namespace FaultTreeAnalysis.FaultTree.Transformer
@@ -8,7 +7,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
     {
         public override FaultTreeNode Transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs)
         {
-            Boolean all = true;
+            bool all = true;
             foreach (FaultTreeNode c in childs)
             {
                 if (c.GetType() == typeof(FaultTreeLiteralNode))
@@ -28,7 +27,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 
         public override FaultTreeNode Transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
         {
-            Boolean all = true;
+            bool all = true;
             foreach (FaultTreeNode c in childs)
             {
                 if (c.GetType() == typeof(FaultTreeLiteralNode))

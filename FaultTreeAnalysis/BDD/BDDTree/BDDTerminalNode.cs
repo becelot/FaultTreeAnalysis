@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace FaultTreeAnalysis.BDD.BDDTree
 {
@@ -7,11 +6,11 @@ namespace FaultTreeAnalysis.BDD.BDDTree
     public class BDDTerminalNode : BDDNode
     {
 		[DataMember]
-		public Boolean Value { get; set; }
+		public bool Value { get; set; }
 
         public BDDTerminalNode()
         { }
-        public BDDTerminalNode(Boolean value)
+        public BDDTerminalNode(bool value)
         {
             Value = value;
         }

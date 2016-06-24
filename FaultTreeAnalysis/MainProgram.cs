@@ -13,9 +13,9 @@ namespace FaultTreeAnalysis
     {
         private static void Main()
         {
-            List<String> files = new List<String>(Directory.GetFiles("examples")).Where(f => new Regex(@".*-ft.dot$").IsMatch(f)).ToList();
+            List<string> files = new List<string>(Directory.GetFiles("examples")).Where(f => new Regex(@".*-ft.dot$").IsMatch(f)).ToList();
 
-            foreach(String s in files)
+            foreach(string s in files)
             {
 				Console.WriteLine("Converting tree " + s);
 

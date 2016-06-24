@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace FaultTreeAnalysis.FaultTree
+﻿namespace FaultTreeAnalysis.FaultTree
 {
     public class FaultTreeEncoderFactory
     {
-        public static IFaultTreeCodec CreateFaultTreeCodec(String fileName)
+        public static IFaultTreeCodec CreateFaultTreeCodec(string fileName)
         {
             if (fileName.EndsWith(".xml"))
             {

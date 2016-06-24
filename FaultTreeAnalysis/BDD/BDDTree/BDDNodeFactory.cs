@@ -41,7 +41,7 @@ namespace FaultTreeAnalysis.BDD.BDDTree
             return n;
         }
 
-        public BDDNode CreateNode(Boolean value)
+        public BDDNode CreateNode(bool value)
         {
 			return value ? terminalOne : terminalZero;
         }

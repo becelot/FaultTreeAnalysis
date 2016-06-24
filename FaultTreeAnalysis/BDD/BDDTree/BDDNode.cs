@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -67,12 +66,11 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 				}
 				visited.Add(current);
 				yield return current;
-				if (current.GetType() == typeof(BDDVariableNode))
-				{
-					stack.Push(current.HighNode);
-					stack.Push(current.LowNode);
-				}
-				
+
+			    if (current.GetType() != typeof(BDDVariableNode)) continue;
+
+			    stack.Push(current.HighNode);
+			    stack.Push(current.LowNode);
 			}
 		}
 

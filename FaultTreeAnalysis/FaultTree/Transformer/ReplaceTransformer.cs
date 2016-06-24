@@ -1,14 +1,13 @@
-﻿using System;
-using FaultTreeAnalysis.FaultTree.Tree;
+﻿using FaultTreeAnalysis.FaultTree.Tree;
 
 namespace FaultTreeAnalysis.FaultTree.Transformer
 {
     public class ReplaceTransformer : TreeTransformer
     {
         private readonly int label;
-        private readonly Boolean value;
+        private readonly bool value;
 
-        public ReplaceTransformer(int label, Boolean value)
+        public ReplaceTransformer(int label, bool value)
         {
             this.label = label;
             this.value = value;
