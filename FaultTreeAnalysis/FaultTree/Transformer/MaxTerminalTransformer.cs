@@ -18,12 +18,12 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 
         public override int transform(FaultTreeAndGateNode gate, List<int> childs)
         {
-            return childs.Max();
-        }
+            return childs.DefaultIfEmpty(int.MinValue).Max();
+		}
 
         public override int transform(FaultTreeOrGateNode gate, List<int> childs)
         {
-            return childs.Max();
-        }
+            return childs.DefaultIfEmpty(int.MinValue).Max();
+		}
     }
 }
