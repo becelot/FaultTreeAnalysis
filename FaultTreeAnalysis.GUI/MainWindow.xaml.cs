@@ -1,19 +1,16 @@
 ﻿
 namespace FaultTreeAnalysis.GUI
 {
-	using FaultTree;
-	using Util;
-	using MahApps.Metro.Controls;
-	using System;
-	using System.IO;
-	using System.Windows;
-	using WinForms = System.Windows.Forms;
-	using System.Windows.Controls;
-	using System.Windows.Shapes;
-	using System.Windows.Media;
-	using System.Windows.Input;
-	using System.Linq;
-	public partial class MainWindow : MetroWindow
+    using FaultTree;
+    using MahApps.Metro.Controls;
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Media;
+    using System.Windows.Shapes;
+    using Util;
+    public partial class MainWindow : MetroWindow
 	{
 		private MainWindowViewModel viewModel;
 
