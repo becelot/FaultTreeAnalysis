@@ -6,7 +6,8 @@ using System.Windows.Input;
 
 namespace FaultTreeAnalysis.GUI
 {
-	using System.ComponentModel;
+    using FaultTree.Tree;
+    using System.ComponentModel;
 
     public class DiamondArrow
     {
@@ -40,32 +41,32 @@ namespace FaultTreeAnalysis.GUI
             get { return this.Graph.AllVertices.Select(x => x.Name); }
         }*/
 
-        public string NewEdgeStart { get; set; }
+        public FaultTreeNode NewEdgeStart { get; set; }
 
-        public string NewEdgeEnd { get; set; }
+        public FaultTreeNode NewEdgeEnd { get; set; }
 
         public string NewEdgeLabel { get; set; }
 
         public void CreateEdge()
         {
-            if (string.IsNullOrWhiteSpace(this.NewEdgeStart) ||
-                string.IsNullOrWhiteSpace(this.NewEdgeEnd))
+            if ((this.NewEdgeStart == null) ||
+                (this.NewEdgeEnd == null))
             {
                 return;
             }
 
-            //this.Graph.AddEdge(
-            //    new Edge<FaultTreeGate>
-            //        (this.GetPerson(this.NewEdgeStart), 
-            //        this.GetPerson(this.NewEdgeEnd))
-            //        {
-            //           Label = this.NewEdgeLabel
-            //        });
+            if (this.NewEdgeStart == this.NewEdgeEnd)
+            {
+                return;
+            }
+
+            this.NewEdgeStart.Childs.Add(this.NewEdgeEnd);
+            this.RaisePropertyChanged("FaultTree");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void RaisePropertyChanged(string property)
+        private void RaisePropertyChanged(string property)
         {
             if (this.PropertyChanged != null)
             {

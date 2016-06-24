@@ -42,8 +42,9 @@ namespace FaultTreeAnalysis.GUI
                     return;
             }
 
-            ((FaultTreeNode)sender.DataContext).Childs.Add(vertex);
-            this.viewModel.RaisePropertyChanged("FaultTree");
+            this.viewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
+            this.viewModel.NewEdgeEnd = vertex;
+            this.viewModel.CreateEdge();
         }
 
         private void EditorDownConnection(Grid sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -69,6 +70,8 @@ namespace FaultTreeAnalysis.GUI
                 };
 
                 canvas.Children.Add(line);
+
+                this.viewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
             }
             else
             {
@@ -77,6 +80,9 @@ namespace FaultTreeAnalysis.GUI
                     return;
                 }
                 canvas.Children.Remove(canvasLine);
+
+                this.viewModel.NewEdgeEnd = (FaultTreeNode)sender.DataContext;
+                this.viewModel.CreateEdge();
             }
         }
 
