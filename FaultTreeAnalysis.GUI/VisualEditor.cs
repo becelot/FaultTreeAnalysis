@@ -114,19 +114,14 @@ namespace FaultTreeAnalysis.GUI
             var canvas = FaultTreeGridView;
 
             var line = canvas.Children.OfType<Line>().LastOrDefault();
-            if (line == null)
-            {
-                return;
-            }
-            if (line != null)
-            {
+            if (line == null) return;
 
-                var endPoint = e.GetPosition(canvas);
-                var directed = endPoint - new Point(line.X1, line.Y1);
-                directed.Normalize();
-                line.X2 = endPoint.X - directed.X * 2;
-                line.Y2 = endPoint.Y - directed.Y * 2;
-            }
+
+            var endPoint = e.GetPosition(canvas);
+            var directed = endPoint - new Point(line.X1, line.Y1);
+            directed.Normalize();
+            line.X2 = endPoint.X - directed.X * 2;
+            line.Y2 = endPoint.Y - directed.Y * 2;
         }
 
         private void AddGateConnection(object sender, RoutedEventArgs e)

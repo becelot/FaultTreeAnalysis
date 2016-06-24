@@ -50,18 +50,20 @@ namespace FaultTreeAnalysis.GUI
 		private void LoadFromFileClick(object sender, RoutedEventArgs e)
 		{
 			// Create OpenFileDialog 
-			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+		    Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
+		    {
+		        DefaultExt = ".dot",
+		        Filter = "Dot Files (*.dot)|*.dot|XML Files (*.xml)|*.xml",
+		        InitialDirectory = Directory.GetCurrentDirectory()
+		    };
 
 
 
-			// Set filter for file extension and default file extension 
-			dlg.DefaultExt = ".dot";
-			dlg.Filter = "Dot Files (*.dot)|*.dot|XML Files (*.xml)|*.xml";
+		    // Set filter for file extension and default file extension 
 
-			dlg.InitialDirectory = Directory.GetCurrentDirectory();
 
-			// Display OpenFileDialog by calling ShowDialog method 
-			Nullable<bool> result = dlg.ShowDialog();
+		    // Display OpenFileDialog by calling ShowDialog method 
+			bool? result = dlg.ShowDialog();
 
 
 			// Get the selected file name and display in a TextBox 

@@ -27,12 +27,9 @@ namespace FaultTreeAnalysis.GUI.Util
 		[DllImport(Kernel32_DllName)]
 		private static extern int GetConsoleOutputCP();
 
-		public static bool HasConsole
-		{
-			get { return GetConsoleWindow() != IntPtr.Zero; }
-		}
+		public static bool HasConsole => GetConsoleWindow() != IntPtr.Zero;
 
-		/// <summary>
+	    /// <summary>
 		/// Creates a new console instance if the process is not attached to a console already.
 		/// </summary>
 		public static void Show()

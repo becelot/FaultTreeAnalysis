@@ -22,10 +22,10 @@ namespace FaultTreeAnalysis.GUI
 		private bool faultTreeView = true;
 		public bool FaultTreeView { get { return faultTreeView; } set { faultTreeView = value; RaisePropertyChanged("FaultTreeView"); RaisePropertyChanged("BDDTreeView"); } }
 
-		public bool BDDTreeView { get { return !faultTreeView; } }
+		public bool BDDTreeView => !faultTreeView;
 
 
-		private FaultTree.FaultTree faultTree;
+        private FaultTree.FaultTree faultTree;
 		public FaultTree.FaultTree FaultTree
 		{
 			get { return faultTree; }
@@ -66,10 +66,7 @@ namespace FaultTreeAnalysis.GUI
 
         private void RaisePropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         //private FaultTreeGate GetPerson(string name)
