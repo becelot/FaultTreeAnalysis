@@ -45,8 +45,6 @@ namespace FaultTreeAnalysis.GUI
 
         public FaultTreeNode NewEdgeEnd { get; set; }
 
-        public string NewEdgeLabel { get; set; }
-
         public void CreateEdge()
         {
             if ((this.NewEdgeStart == null) ||

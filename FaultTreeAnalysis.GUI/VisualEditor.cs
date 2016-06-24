@@ -21,7 +21,8 @@ namespace FaultTreeAnalysis.GUI
         {
             MODE_ADD_AND_GATE,
             MODE_ADD_OR_GATE,
-            MODE_ADD_CONNECTION
+            MODE_ADD_GATE_CONNECTION,
+            MODE_ADD_MARKOV_CHAIN
         }
 
         public VisualEditorMode EditorMode { get; private set; }
@@ -90,7 +91,7 @@ namespace FaultTreeAnalysis.GUI
         {
             switch (EditorMode)
             {
-                case VisualEditorMode.MODE_ADD_CONNECTION:
+                case VisualEditorMode.MODE_ADD_GATE_CONNECTION:
                     EditorDownConnection((Grid)sender, e);
                     break;
                 case VisualEditorMode.MODE_ADD_AND_GATE:
@@ -129,12 +130,14 @@ namespace FaultTreeAnalysis.GUI
         {
             this.validSourceElements = new List<Type>() { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode) };
             this.validDestinationElements = new List<Type>() { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode), typeof(FaultTreeTerminalNode) };
+            this.EditorMode = VisualEditorMode.MODE_ADD_GATE_CONNECTION;
         }
 
         private void AddMarkovChain(object sender, RoutedEventArgs e)
         {
             this.validSourceElements = new List<Type>() { typeof(FaultTreeTerminalNode) };
             this.validDestinationElements = new List<Type>() { typeof(FaultTreeTerminalNode) };
+            this.EditorMode = VisualEditorMode.MODE_ADD_MARKOV_CHAIN;
         }
 
         private void AddAndGate(object sender, RoutedEventArgs e)
