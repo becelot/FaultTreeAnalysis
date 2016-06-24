@@ -60,11 +60,14 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type FTAFaultTree:FaultTreeAndGateNode}">
-                <Border BorderBrush="Black" BorderThickness="2">
-                    <Grid Background="LightSkyBlue" Width="100" Height="50">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="&amp;" FontSize="24" FontWeight="Bold"></TextBlock>
-                    </Grid>
-                </Border>
+                <Grid Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseLeftButtonUp="FaultTreeZoomControl_MouseLeftButtonUp" MouseMove="FaultTreeZoomControl_MouseMove">
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <Grid Width="100" Height="50">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="&amp;" FontSize="24" FontWeight="Bold"></TextBlock>
+                        </Grid>
+                    </Border>
+                </Grid>
+
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type FTAFaultTree:FaultTreeOrGateNode}">
@@ -168,7 +171,7 @@
                 <MenuItem Header="Add OR-Gate" />
             </MenuItem>
         </Menu>
-        <Grid Grid.Column="0" Grid.Row="1" Cursor="Cross" Background="Transparent" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseLeftButtonUp="FaultTreeZoomControl_MouseLeftButtonUp" MouseMove="FaultTreeZoomControl_MouseMove">
+        <Grid Name="FaultTreeGridView" Grid.Column="0" Grid.Row="1" Cursor="Cross" Background="Transparent" >
             <Controls:ZoomControl Name="FaultTreeZoomControl" Visibility="{Binding FaultTreeView, Converter={StaticResource VisibilityConverter}}" ZoomDeltaMultiplier="40">
                 <WPF:GraphLayout 
                 UseContentPresenterForAllElements="True"
