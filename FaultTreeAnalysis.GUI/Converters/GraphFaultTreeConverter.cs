@@ -18,7 +18,7 @@ namespace FaultTreeAnalysis.GUI.Converters
 			if (value == null)
 				return graph;
 
-			Console.WriteLine("Converting tree");
+			Console.WriteLine(@"Converting tree");
 
 			List<FaultTreeNode> nodes = ((FaultTree.FaultTree)value).Traverse().ToList();
 

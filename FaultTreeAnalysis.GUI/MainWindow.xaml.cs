@@ -39,7 +39,7 @@ namespace FaultTreeAnalysis.GUI
 
 		private void ViewChanged(object sender, RoutedEventArgs e)
 		{
-			viewModel.FaultTreeView = FaultTreeView.IsChecked.Value;
+			viewModel.FaultTreeView = FaultTreeView.IsChecked.GetValueOrDefault();
 		}
 
 		private void LoadFromFile(string fileName)
