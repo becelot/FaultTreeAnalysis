@@ -1,4 +1,6 @@
-﻿namespace FaultTreeAnalysis.BDD.BDDTree
+﻿using FaultTreeAnalysis.BDD.BDDTree;
+
+namespace FaultTreeAnalysis.BDD
 {
     public abstract class BDDFactory
     {
