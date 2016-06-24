@@ -79,6 +79,7 @@
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="StyledEdge.cs" />
     <Compile Include="Util\ConsoleManager.cs" />
+    <Compile Include="Util\FaultTreeMaxIdTransformer.cs" />
     <Compile Include="VisualEditor.cs" />
     <Page Include="FlyoutControls\OptionsMain.xaml">
       <SubType>Designer</SubType>

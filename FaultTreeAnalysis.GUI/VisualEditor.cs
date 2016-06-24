@@ -1,5 +1,6 @@
 ﻿using FaultTreeAnalysis.FaultTree.Transformer;
 using FaultTreeAnalysis.FaultTree.Tree;
+using FaultTreeAnalysis.GUI.Util;
 using Graphviz4Net.Graphs;
 using System;
 using System.Collections.Generic;
@@ -36,13 +37,13 @@ namespace FaultTreeAnalysis.GUI
             switch(EditorMode)
             {
                 case VisualEditorMode.MODE_ADD_AND_GATE:
-                    vertex = new FaultTreeAndGateNode();
+                    vertex = new FaultTreeAndGateNode(this.viewModel.FaultTree.NextId());
                     break;
                 case VisualEditorMode.MODE_ADD_OR_GATE:
-                    vertex = new FaultTreeOrGateNode();
+                    vertex = new FaultTreeOrGateNode(this.viewModel.FaultTree.NextId());
                     break;
                 case VisualEditorMode.MODE_ADD_BASIC_EVENT:
-                    vertex = new FaultTreeTerminalNode(0, this.viewModel.FaultTree.reduce<int>(new MaxTerminalTransformer() ) + 1);
+                    vertex = new FaultTreeTerminalNode(this.viewModel.FaultTree.NextId(), this.viewModel.FaultTree.NextBasicEvent());
                     break;
                 default:
                     return;
