@@ -1,11 +1,11 @@
-﻿using FaultTreeAnalysis.BDD;
-using FaultTreeAnalysis.BDD.BDDTree;
-using FaultTreeAnalysis.FaultTree;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FaultTreeAnalysis.BDD;
+using FaultTreeAnalysis.BDD.BDDTree;
+using FaultTreeAnalysis.FaultTree;
 
 namespace FaultTreeAnalysis
 {

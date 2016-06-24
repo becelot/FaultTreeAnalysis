@@ -7,7 +7,8 @@
             if (fileName.EndsWith(".xml"))
             {
                 return new XmlFaultTreeEncoder();
-            } else if (fileName.EndsWith(".dot"))
+            }
+            if (fileName.EndsWith(".dot"))
             {
                 return new DotFaultTreeEncoder();
             }

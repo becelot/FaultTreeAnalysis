@@ -1,15 +1,15 @@
-﻿using FaultTreeAnalysis.FaultTree.Transformer;
-using FaultTreeAnalysis.FaultTree.Tree;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using FaultTreeAnalysis.FaultTree.Transformer;
+using FaultTreeAnalysis.FaultTree.Tree;
 
 namespace FaultTreeAnalysis.FaultTree
 {
     [DataContract(Name = "FaultTree")]
     public class FaultTree
     {
-        [DataMember()]
+        [DataMember]
         public FaultTreeNode Root { get; set; }
 
         public FaultTree()
@@ -19,12 +19,12 @@ namespace FaultTreeAnalysis.FaultTree
 
         public FaultTree(FaultTreeNode root)
         {
-            this.Root = root;
+            Root = root;
         }
 
         public T reduce<T>(FaultTreeTransformer<T> tr)
         {
-            return Root.reduce<T>(tr);
+            return Root.reduce(tr);
         }
 
         public FaultTree treeMap<T>(FaultTreeTransformer<FaultTreeNode> tr)
@@ -52,7 +52,7 @@ namespace FaultTreeAnalysis.FaultTree
 			var stack = new Stack<FaultTreeNode>();
 
 			HashSet<FaultTreeNode> visited = new HashSet<FaultTreeNode>();
-			stack.Push(this.Root);
+			stack.Push(Root);
 
 			while (stack.Count > 0)
 			{

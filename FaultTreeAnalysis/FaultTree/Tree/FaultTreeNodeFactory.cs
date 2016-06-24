@@ -4,7 +4,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
 {
     public class FaultTreeNodeFactory
     {
-        private static FaultTreeNodeFactory _instance = null;
+        private static FaultTreeNodeFactory _instance;
         
         private FaultTreeNodeFactory() { }
 
@@ -41,7 +41,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
 
         public FaultTreeGateNode createGateNode(int ID, string operation)
         {
-            return this.createGateNode(ID, operatorFromString(operation));
+            return createGateNode(ID, operatorFromString(operation));
         }
     }
 }

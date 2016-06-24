@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -19,7 +18,7 @@ namespace FaultTreeAnalysis.BDD.BDDTree
             this.LowNode = LowNode;
         }
 
-		public static int GeneratedNumber = 0;
+		public static int GeneratedNumber;
 
 		private void flatMap(ref List<BDDNode> visited) 
 		{
@@ -30,7 +29,7 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 
 			visited.Add(this);
 
-			if (this.GetType() == typeof(BDDVariableNode))
+			if (GetType() == typeof(BDDVariableNode))
 			{
 				HighNode.flatMap(ref visited);
 				LowNode.flatMap(ref visited);
@@ -44,7 +43,7 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 			List<BDDNode> flat = new List<BDDNode>();
 			flat.Add(this);
 			GeneratedNumber++;
-			if (this.GetType() == typeof(BDDVariableNode))
+			if (GetType() == typeof(BDDVariableNode))
 			{
 				HighNode.flatMap(ref flat);
 				LowNode.flatMap(ref flat);

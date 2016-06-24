@@ -1,22 +1,22 @@
-﻿using FaultTreeAnalysis.FaultTree.Transformer;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using FaultTreeAnalysis.FaultTree.Transformer;
 
 namespace FaultTreeAnalysis.FaultTree.Tree
 {
     public class FaultTreeTerminalNode : FaultTreeNode
     {
-        [DataMember()]
+        [DataMember]
         public int Label { get; set; }
 
-        public FaultTreeTerminalNode() : base()
+        public FaultTreeTerminalNode()
         {
 
         }
 
         public FaultTreeTerminalNode(int id, int label)
         {
-            this.ID = id;
-            this.Label = label;
+            ID = id;
+            Label = label;
         }
 
         public FaultTreeTerminalNode(FaultTreeTerminalNode terminal) : this(terminal.ID, terminal.Label) { }

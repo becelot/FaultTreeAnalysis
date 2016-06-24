@@ -8,7 +8,7 @@ namespace FaultTreeAnalysis.FaultTree
         FAULT_TREE_UNKNOWN = 0,
         FAULT_TREE_DOT,
         FAULT_TREE_XML
-    };
+    }
 
     public abstract class IFaultTreeCodec
     {
@@ -23,7 +23,7 @@ namespace FaultTreeAnalysis.FaultTree
         {
             using (FileStream stream = new FileStream(fileName, FileMode.Create))
             {
-                this.write(ft, stream);
+                write(ft, stream);
             }
         }
 
@@ -34,7 +34,7 @@ namespace FaultTreeAnalysis.FaultTree
             //Create stream from file contents
             using (FileStream stream = new FileStream(fileName, FileMode.Open))
             {
-                res = this.read(stream);
+                res = read(stream);
             }
 
             return res;

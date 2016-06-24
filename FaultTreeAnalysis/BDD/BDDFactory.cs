@@ -1,14 +1,9 @@
-﻿using FaultTreeAnalysis.FaultTree.Transformer;
-using FaultTreeAnalysis.FaultTree.Tree;
-using System;
-using System.Collections.Generic;
-
-namespace FaultTreeAnalysis.BDD.BDDTree
+﻿namespace FaultTreeAnalysis.BDD.BDDTree
 {
     public abstract class BDDFactory
     {
         protected static BDDFactory _instance = null;
-		private static BDDNodeFactory nodeFactory = null;
+		private static BDDNodeFactory nodeFactory;
 
         protected BDDFactory()
 		{

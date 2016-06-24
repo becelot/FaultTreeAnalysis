@@ -1,16 +1,16 @@
-﻿using FaultTreeAnalysis.FaultTree.Transformer;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using FaultTreeAnalysis.FaultTree.Transformer;
 
 namespace FaultTreeAnalysis.FaultTree.Tree
 {
     [DataContract(Name="FaultTreeNode" )]
     public abstract class FaultTreeNode
     {
-        [DataMember()]
+        [DataMember]
         public int ID { get; set; }
 
-        [DataMember()]
+        [DataMember]
         public List<FaultTreeNode> Childs { get; set; }
 
         public FaultTreeNode() { Childs = new List<FaultTreeNode>(); }
@@ -20,7 +20,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
         public FaultTreeNode(int ID, List<FaultTreeNode> childs)
         {
             this.ID = ID;
-            this.Childs = childs;
+            Childs = childs;
         }
 
         public abstract T reduce<T>(FaultTreeTransformer<T> tr);

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FaultTreeAnalysis.BDD
+﻿namespace FaultTreeAnalysis.BDD
 {
 	public class BDDEncoderFactory
 	{
@@ -13,12 +7,13 @@ namespace FaultTreeAnalysis.BDD
 			if (fileName.EndsWith(".dot"))
 			{
 				return new DotBDDEncoder();
-			} else if (fileName.EndsWith(".xml"))
-			{
-				return new XmlBDDEncoder();
 			}
+		    if (fileName.EndsWith(".xml"))
+		    {
+		        return new XmlBDDEncoder();
+		    }
 
-			throw new BDDFormatException("The given file was not recognized as a valid format!");
+		    throw new BDDFormatException("The given file was not recognized as a valid format!");
 		}
 
 		public static IBDDCodec createFaultTreeCodec(BDDTreeFormat format)

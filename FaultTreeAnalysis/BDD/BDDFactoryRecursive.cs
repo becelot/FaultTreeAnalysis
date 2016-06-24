@@ -1,11 +1,6 @@
 ﻿using FaultTreeAnalysis.BDD.BDDTree;
 using FaultTreeAnalysis.FaultTree.Transformer;
 using FaultTreeAnalysis.FaultTree.Tree;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FaultTreeAnalysis.BDD
 {
@@ -22,7 +17,7 @@ namespace FaultTreeAnalysis.BDD
 
 		private BDDNode createBDD(FaultTree.FaultTree ft, BDDNodeFactory nodeFactory)
 		{
-			int nextVariable = ft.reduce<int>(new MinTerminalTransformer());
+			int nextVariable = ft.reduce(new MinTerminalTransformer());
 			if (nextVariable == int.MaxValue)
 			{
 				//ft should consist of only terminal node

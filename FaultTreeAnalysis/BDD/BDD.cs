@@ -1,13 +1,13 @@
-﻿using FaultTreeAnalysis.BDD.BDDTree;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using FaultTreeAnalysis.BDD.BDDTree;
 
 namespace FaultTreeAnalysis.BDD
 {
 	[DataContract(Name = "BDD")]
 	public class BDD
     {
-		[DataMember()]
+		[DataMember]
 		public BDDNode Root { get; set; }
 
 		public BDD()
@@ -17,7 +17,7 @@ namespace FaultTreeAnalysis.BDD
 
 		public BDD(BDDNode root)
 		{
-			this.Root = root;
+			Root = root;
 		}
 
 		public static implicit operator BDD(FaultTree.FaultTree ft)
@@ -27,7 +27,7 @@ namespace FaultTreeAnalysis.BDD
 
 		public IEnumerable<BDDNode> flatMap()
 		{
-			return BDDNode.Traverse(this.Root);
+			return BDDNode.Traverse(Root);
 		}
 	}
 }

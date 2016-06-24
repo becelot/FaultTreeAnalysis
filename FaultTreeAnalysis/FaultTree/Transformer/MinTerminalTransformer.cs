@@ -1,6 +1,6 @@
-﻿using FaultTreeAnalysis.FaultTree.Tree;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using FaultTreeAnalysis.FaultTree.Tree;
 
 namespace FaultTreeAnalysis.FaultTree.Transformer
 {

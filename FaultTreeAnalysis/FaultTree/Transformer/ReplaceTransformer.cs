@@ -1,5 +1,5 @@
-﻿using FaultTreeAnalysis.FaultTree.Tree;
-using System;
+﻿using System;
+using FaultTreeAnalysis.FaultTree.Tree;
 
 namespace FaultTreeAnalysis.FaultTree.Transformer
 {
@@ -16,13 +16,11 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 
         public override FaultTreeNode transform(FaultTreeTerminalNode terminal)
         {
-            if (terminal.Label == this.Label)
+            if (terminal.Label == Label)
             {
                 return createNode(new FaultTreeLiteralNode(terminal, value));
-            } else
-            {
-                return createNode(new FaultTreeTerminalNode(terminal));
             }
+            return createNode(new FaultTreeTerminalNode(terminal));
         }
     }
 }

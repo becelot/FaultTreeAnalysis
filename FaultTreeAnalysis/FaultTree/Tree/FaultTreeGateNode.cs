@@ -8,7 +8,8 @@ namespace FaultTreeAnalysis.FaultTree.Tree
     {
         public FaultTreeGateNode(int ID) : base(ID) { }
 
-        public FaultTreeGateNode() : base() { }
+        public FaultTreeGateNode()
+        { }
 
         public FaultTreeGateNode(int ID, List<FaultTreeNode> childs) : base(ID, childs) { }
 

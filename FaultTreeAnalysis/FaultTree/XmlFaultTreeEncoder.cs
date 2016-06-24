@@ -1,9 +1,9 @@
-﻿using FaultTreeAnalysis.FaultTree.Tree;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml;
+using FaultTreeAnalysis.FaultTree.Tree;
 
 namespace FaultTreeAnalysis.FaultTree
 {

@@ -1,10 +1,10 @@
-﻿using FaultTreeAnalysis.FaultTree.Tree;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FaultTreeAnalysis.FaultTree.Tree;
 
 namespace FaultTreeAnalysis.FaultTree
 {
@@ -59,7 +59,7 @@ namespace FaultTreeAnalysis.FaultTree
                          select FaultTreeNodeFactory.getInstance().createGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value) as FaultTreeNode).ToList();
 
             //Union on all nodes
-            var nodes = (from t in terminals select new { ID = t.ID, Node = t }).Union(from g in gates select new { ID = g.ID, Node = g }).Union(from r in rootNode select new { ID = r.ID, Node = r }).OrderBy(n => n.ID).ToList();
+            var nodes = (from t in terminals select new {t.ID, Node = t }).Union(from g in gates select new {g.ID, Node = g }).Union(from r in rootNode select new {r.ID, Node = r }).OrderBy(n => n.ID).ToList();
 
 
             (from trans in symbolGroup.ElementAt((int)DotParseToken.DOT_TRANSITION)

@@ -1,10 +1,5 @@
-﻿using FaultTreeAnalysis.BDD.BDDTree;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FaultTreeAnalysis.BDD
 {
@@ -13,7 +8,7 @@ namespace FaultTreeAnalysis.BDD
 		BDD_TREE_UNKNOWN = 0,
 		BDD_TREE_DOT,
 		BDD_TREE_XML
-	};
+	}
 
 
 	public abstract class IBDDCodec
@@ -28,7 +23,7 @@ namespace FaultTreeAnalysis.BDD
 		{
 			using (FileStream stream = new FileStream(fileName, FileMode.Create))
 			{
-				this.write(bdd, stream);
+				write(bdd, stream);
 			}
 		}
 
@@ -39,7 +34,7 @@ namespace FaultTreeAnalysis.BDD
 			//Create stream from file contents
 			using (FileStream stream = new FileStream(fileName, FileMode.Open))
 			{
-				res = this.read(stream);
+				res = read(stream);
 			}
 
 			return res;

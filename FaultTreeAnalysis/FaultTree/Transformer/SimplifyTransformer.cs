@@ -1,6 +1,6 @@
-﻿using FaultTreeAnalysis.FaultTree.Tree;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using FaultTreeAnalysis.FaultTree.Tree;
 
 namespace FaultTreeAnalysis.FaultTree.Transformer
 {
@@ -38,7 +38,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
             {
                 if (c.GetType() == typeof(FaultTreeLiteralNode))
                 {
-                    if (((FaultTreeLiteralNode)c).Value == true)
+                    if (((FaultTreeLiteralNode)c).Value)
                     {
                         return createNode(new FaultTreeLiteralNode(gate.ID, true));
                     }

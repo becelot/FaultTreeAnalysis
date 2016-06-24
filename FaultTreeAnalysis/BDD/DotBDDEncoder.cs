@@ -1,10 +1,9 @@
-﻿using FaultTreeAnalysis.BDD.BDDTree;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using FaultTreeAnalysis.BDD.BDDTree;
 
 namespace FaultTreeAnalysis.BDD
 {
@@ -17,7 +16,7 @@ namespace FaultTreeAnalysis.BDD
 
 		public override void write(BDD bdd, FileStream stream)
 		{
-			using (StreamWriter sw = new StreamWriter(stream, System.Text.Encoding.UTF8, 65536))
+			using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8, 65536))
 			{
 				sw.WriteLine("digraph G {");
 				sw.WriteLine("0 [shape=box, label=\"0\", style=filled, shape=box, height=0.3, width=0.3];");

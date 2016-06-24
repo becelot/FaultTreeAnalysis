@@ -1,5 +1,5 @@
-﻿using FaultTreeAnalysis.FaultTree.Tree;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FaultTreeAnalysis.FaultTree.Tree;
 
 namespace FaultTreeAnalysis.FaultTree.Transformer
 {
@@ -12,11 +12,9 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
             if (referenceSafety.ContainsKey(node.ID))
             {
                 return referenceSafety[node.ID];
-            } else
-            {
-                referenceSafety.Add(node.ID, node);
-                return node;
             }
+            referenceSafety.Add(node.ID, node);
+            return node;
         }
 
         public override FaultTreeNode transform(FaultTreeLiteralNode literal)

@@ -27,24 +27,23 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 
 		public BDDNode createNode(int value)
 		{
-			return this.createNode(value, terminalOne, terminalZero);
+			return createNode(value, terminalOne, terminalZero);
 		}
 
         public BDDNode createNode(int value, BDDNode HighNode, BDDNode LowNode)
         {
-			if (HighNode == LowNode)
+            if (HighNode == LowNode)
 			{
 				return LowNode;
-			} else if (H.ContainsKey(new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode)))
-			{
-				return H[new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode)];
-			} else
-			{
-				BDDNode n = new BDDVariableNode(value, HighNode, LowNode);
-				T.Add(n, new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode));
-				H.Add(new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode), n);
-				return n;
 			}
+            if (H.ContainsKey(new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode)))
+            {
+                return H[new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode)];
+            }
+            BDDNode n = new BDDVariableNode(value, HighNode, LowNode);
+            T.Add(n, new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode));
+            H.Add(new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode), n);
+            return n;
         }
 
         public BDDNode createNode(Boolean value)

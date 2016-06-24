@@ -1,6 +1,6 @@
-﻿using FaultTreeAnalysis.FaultTree.Transformer;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using FaultTreeAnalysis.FaultTree.Transformer;
 
 namespace FaultTreeAnalysis.FaultTree.Tree
 {
@@ -8,7 +8,8 @@ namespace FaultTreeAnalysis.FaultTree.Tree
     public class FaultTreeAndGateNode : FaultTreeGateNode
     {
         public FaultTreeAndGateNode(int ID) : base(ID) { }
-        public FaultTreeAndGateNode() : base() { }
+        public FaultTreeAndGateNode()
+        { }
 
         public FaultTreeAndGateNode(int ID, List<FaultTreeNode> childs) : base(ID, childs) { }
 
