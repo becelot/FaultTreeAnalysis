@@ -13,12 +13,11 @@ namespace FaultTreeAnalysis.GUI
 {
     public partial class MainWindow
     {
-        private List<Type> validSourceElements = new List<Type>() { typeof(FaultTreeAndGateNode) };
-        private List<Type> validDestinationElements = new List<Type>() { typeof(FaultTreeAndGateNode) };
+        private List<Type> validSourceElements = new List<Type>() {  };
+        private List<Type> validDestinationElements = new List<Type>() {  };
 
         private void FaultTreeZoomControl_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-
             var canvas = FaultTreeGridView;
 
             var canvasLine = canvas.Children.OfType<Line>().LastOrDefault();
@@ -31,8 +30,8 @@ namespace FaultTreeAnalysis.GUI
                 var startPoint = e.GetPosition(canvas);
                 var line = new Line
                 {
-                    Stroke = Brushes.Blue,
-                    StrokeThickness = 3,
+                    Stroke = Brushes.Red,
+                    StrokeThickness = 6,
                     X1 = startPoint.X,
                     Y1 = startPoint.Y,
                     X2 = startPoint.X,
@@ -53,7 +52,10 @@ namespace FaultTreeAnalysis.GUI
 
         private void FaultTreeZoomControl_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-
+            if (!validDestinationElements.Contains(((Grid)sender).DataContext.GetType()))
+            {
+                return;
+            }
             var canvas = FaultTreeGridView;
 
             var line = canvas.Children.OfType<Line>().LastOrDefault();
@@ -71,5 +73,18 @@ namespace FaultTreeAnalysis.GUI
                 line.Y2 = endPoint.Y - directed.Y * 2;
             }
         }
+
+        private void AddGateConnection(object sender, RoutedEventArgs e)
+        {
+            this.validSourceElements = new List<Type>() { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode) };
+            this.validDestinationElements = new List<Type>() { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode), typeof(FaultTreeTerminalNode) };
+        }
+
+        private void AddMarkovChain(object sender, RoutedEventArgs e)
+        {
+            this.validSourceElements = new List<Type>() { typeof(FaultTreeTerminalNode) };
+            this.validDestinationElements = new List<Type>() { typeof(FaultTreeTerminalNode) };
+        }
+
     }
 }

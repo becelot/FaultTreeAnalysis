@@ -172,6 +172,10 @@
                 </MenuItem.Icon>
                 <MenuItem Header="Add AND-Gate" />
                 <MenuItem Header="Add OR-Gate" />
+                <MenuItem Header="Add Edge">
+                    <MenuItem Header="Markov Chain" Click="AddMarkovChain" />
+                    <MenuItem Header="Gate Connection" Click="AddGateConnection" />
+                </MenuItem>
             </MenuItem>
         </Menu>
         <Grid Name="FaultTreeGridView" Grid.Column="0" Grid.Row="1" Cursor="Cross" Background="Transparent" >
