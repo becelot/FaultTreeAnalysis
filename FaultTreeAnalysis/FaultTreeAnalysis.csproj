@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{89E39B50-8E42-4909-9F67-00843657DBE2}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FaultTreeAnalysis</RootNamespace>
+    <AssemblyName>FaultTreeAnalysis</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BDD\BDD.cs" />
+    <Compile Include="BDD\BDDEncoderFactory.cs" />
+    <Compile Include="BDD\BDDFactory.cs" />
+    <Compile Include="BDD\BDDFactoryComponentConnection.cs" />
+    <Compile Include="BDD\BDDFactoryRecursive.cs" />
+    <Compile Include="BDD\BDDFormatException.cs" />
+    <Compile Include="BDD\BDDTree\BDDNode.cs" />
+    <Compile Include="BDD\BDDTree\BDDNodeFactory.cs" />
+    <Compile Include="BDD\BDDTree\BDDTerminalNode.cs" />
+    <Compile Include="BDD\BDDTree\BDDVariableNode.cs" />
+    <Compile Include="BDD\DotBDDEncoder.cs" />
+    <Compile Include="BDD\IBDDCodec.cs" />
+    <Compile Include="BDD\XmlBDDEncoder.cs" />
+    <Compile Include="FaultTree\DotFaultTreeEncoder.cs" />
+    <Compile Include="FaultTree\FaultTree.cs" />
+    <Compile Include="FaultTree\FaultTreeEncoderFactory.cs" />
+    <Compile Include="FaultTree\FaultTreeFormatException.cs" />
+    <Compile Include="FaultTree\IFaultTreeCodec.cs" />
+    <Compile Include="FaultTree\Transformer\AddTransformer.cs" />
+    <Compile Include="FaultTree\Transformer\DeepCopyTransformer.cs" />
+    <Compile Include="FaultTree\Transformer\MaxTerminalTransformer.cs" />
+    <Compile Include="FaultTree\Transformer\MinTerminalTransformer.cs" />
+    <Compile Include="FaultTree\Transformer\SimplifyTransformer.cs" />
+    <Compile Include="FaultTree\Transformer\FaultTreeTransformer.cs" />
+    <Compile Include="FaultTree\Transformer\TreeTransformer.cs" />
+    <Compile Include="FaultTree\Tree\FaultTreeAndGateNode.cs" />
+    <Compile Include="FaultTree\Tree\FaultTreeGateNode.cs" />
+    <Compile Include="FaultTree\Tree\FaultTreeLiteralNode.cs" />
+    <Compile Include="FaultTree\Tree\FaultTreeNode.cs" />
+    <Compile Include="FaultTree\Tree\FaultTreeNodeFactory.cs" />
+    <Compile Include="FaultTree\Tree\FaultTreeOrGateNode.cs" />
+    <Compile Include="FaultTree\Tree\FaultTreeTerminalNode.cs" />
+    <Compile Include="FaultTree\Transformer\ReplaceTransformer.cs" />
+    <Compile Include="FaultTree\XmlFaultTreeEncoder.cs" />
+    <Compile Include="MainProgram.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
