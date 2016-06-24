@@ -21,9 +21,9 @@ namespace FaultTreeAnalysis.FaultTree.Tree
 
         public FaultTreeTerminalNode(FaultTreeTerminalNode terminal) : this(terminal.ID, terminal.Label) { }
 
-        public override T reduce<T>(FaultTreeTransformer<T> tr)
+        public override T Reduce<T>(FaultTreeTransformer<T> tr)
         {
-            return tr.transform(this);
+            return tr.Transform(this);
         }
     }
 }

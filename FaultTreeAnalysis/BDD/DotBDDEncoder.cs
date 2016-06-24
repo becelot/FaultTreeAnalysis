@@ -9,12 +9,12 @@ namespace FaultTreeAnalysis.BDD
 {
 	class DotBDDEncoder : IBDDCodec
 	{
-		public override BinaryDecisionDiagram read(FileStream fileName)
+		public override BinaryDecisionDiagram Read(FileStream fileName)
 		{
 			throw new NotImplementedException();
 		}
 
-		public override void write(BinaryDecisionDiagram bdd, FileStream stream)
+		public override void Write(BinaryDecisionDiagram bdd, FileStream stream)
 		{
 			using (StreamWriter sw = new StreamWriter(stream, Encoding.UTF8, 65536))
 			{
@@ -42,7 +42,7 @@ namespace FaultTreeAnalysis.BDD
 
 		}
 
-		public override BDDTreeFormat getFormatToken()
+		public override BDDTreeFormat GetFormatToken()
 		{
 			return BDDTreeFormat.BDD_TREE_DOT;
 		}

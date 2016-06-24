@@ -5,12 +5,12 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 {
     public abstract class FaultTreeTransformer<T>
     {
-        public abstract T transform(FaultTreeLiteralNode literal);
+        public abstract T Transform(FaultTreeLiteralNode literal);
 
-        public abstract T transform(FaultTreeTerminalNode terminal);
+        public abstract T Transform(FaultTreeTerminalNode terminal);
 
-        public abstract T transform(FaultTreeOrGateNode gate, List<T> childs);
+        public abstract T Transform(FaultTreeOrGateNode gate, List<T> childs);
 
-        public abstract T transform(FaultTreeAndGateNode gate, List<T> childs);
+        public abstract T Transform(FaultTreeAndGateNode gate, List<T> childs);
     }
 }

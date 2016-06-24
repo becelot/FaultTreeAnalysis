@@ -22,10 +22,10 @@ namespace FaultTreeAnalysis.BDD
 
 		public static implicit operator BinaryDecisionDiagram(FaultTree.FaultTree ft)
 		{
-			return new BinaryDecisionDiagram(BDDFactory.getComponentConnectionInstance().createBDD(ft));
+			return new BinaryDecisionDiagram(BDDFactory.GetComponentConnectionInstance().CreateBDD(ft));
 		}
 
-		public IEnumerable<BDDNode> flatMap()
+		public IEnumerable<BDDNode> FlatMap()
 		{
 			return BDDNode.Traverse(Root);
 		}

@@ -13,28 +13,28 @@ namespace FaultTreeAnalysis.FaultTree
     public abstract class IFaultTreeCodec
     {
 
-        public abstract void write(FaultTree ft, FileStream stream);
+        public abstract void Write(FaultTree ft, FileStream stream);
 
-        public abstract FaultTree read(FileStream fileName);
+        public abstract FaultTree Read(FileStream fileName);
 
-        public virtual FaultTreeFormat getFormatToken() { return FaultTreeFormat.FAULT_TREE_UNKNOWN; }
+        public virtual FaultTreeFormat GetFormatToken() { return FaultTreeFormat.FAULT_TREE_UNKNOWN; }
 
-        public void write(FaultTree ft, String fileName)
+        public void Write(FaultTree ft, String fileName)
         {
             using (FileStream stream = new FileStream(fileName, FileMode.Create))
             {
-                write(ft, stream);
+                Write(ft, stream);
             }
         }
 
-        public FaultTree read(String fileName)
+        public FaultTree Read(String fileName)
         {
             FaultTree res;
 
             //Create stream from file contents
             using (FileStream stream = new FileStream(fileName, FileMode.Open))
             {
-                res = read(stream);
+                res = Read(stream);
             }
 
             return res;

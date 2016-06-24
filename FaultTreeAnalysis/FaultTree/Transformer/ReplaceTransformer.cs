@@ -5,22 +5,22 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 {
     public class ReplaceTransformer : TreeTransformer
     {
-        readonly int Label;
+        private readonly int label;
         readonly Boolean value;
 
-        public ReplaceTransformer(int Label, Boolean value)
+        public ReplaceTransformer(int label, Boolean value)
         {
-            this.Label = Label;
+            this.label = label;
             this.value = value;
         }
 
-        public override FaultTreeNode transform(FaultTreeTerminalNode terminal)
+        public override FaultTreeNode Transform(FaultTreeTerminalNode terminal)
         {
-            if (terminal.Label == Label)
+            if (terminal.Label == label)
             {
-                return createNode(new FaultTreeLiteralNode(terminal, value));
+                return CreateNode(new FaultTreeLiteralNode(terminal, value));
             }
-            return createNode(new FaultTreeTerminalNode(terminal));
+            return CreateNode(new FaultTreeTerminalNode(terminal));
         }
     }
 }

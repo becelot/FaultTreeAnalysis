@@ -9,14 +9,14 @@ namespace FaultTreeAnalysis.FaultTree.Tree
 
         public FaultTreeLiteralNode()
         { }
-        public FaultTreeLiteralNode(int ID) : base(ID) { }
-        public FaultTreeLiteralNode(int ID, Boolean value) : base(ID) { Value = value; }
+        public FaultTreeLiteralNode(int id) : base(id) { }
+        public FaultTreeLiteralNode(int id, Boolean value) : base(id) { Value = value; }
         public FaultTreeLiteralNode(FaultTreeTerminalNode terminal, Boolean value) : this(terminal.ID, value) { }
         public FaultTreeLiteralNode(FaultTreeLiteralNode literal) : this(literal.ID, literal.Value) { }
 
-        public override T reduce<T>(FaultTreeTransformer<T> tr)
+        public override T Reduce<T>(FaultTreeTransformer<T> tr)
         {
-            return tr.transform(this);
+            return tr.Transform(this);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 {
     public class SimplifyTransformer : TreeTransformer
     {
-        public override FaultTreeNode transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs)
+        public override FaultTreeNode Transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs)
         {
             Boolean all = true;
             foreach (FaultTreeNode c in childs)
@@ -15,7 +15,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
                 {
                     if ( ((FaultTreeLiteralNode)c).Value == false)
                     {
-                        return createNode(new FaultTreeLiteralNode(gate.ID, false));
+                        return CreateNode(new FaultTreeLiteralNode(gate.ID, false));
                     }
                 } else
                 {
@@ -25,13 +25,13 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 
             if (all)
             {
-                return createNode(new FaultTreeLiteralNode(gate.ID, true));
+                return CreateNode(new FaultTreeLiteralNode(gate.ID, true));
             }
 
-            return base.transform(gate, childs);
+            return base.Transform(gate, childs);
         }
 
-        public override FaultTreeNode transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
+        public override FaultTreeNode Transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
         {
             Boolean all = true;
             foreach (FaultTreeNode c in childs)
@@ -40,7 +40,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
                 {
                     if (((FaultTreeLiteralNode)c).Value)
                     {
-                        return createNode(new FaultTreeLiteralNode(gate.ID, true));
+                        return CreateNode(new FaultTreeLiteralNode(gate.ID, true));
                     }
                 } else
                 {
@@ -50,10 +50,10 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 
             if (all)
             {
-                return createNode(new FaultTreeLiteralNode(gate.ID, false));
+                return CreateNode(new FaultTreeLiteralNode(gate.ID, false));
             }
 
-            return base.transform(gate, childs);
+            return base.Transform(gate, childs);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FaultTreeAnalysis.BDD
 {
 	class XmlBDDEncoder : IBDDCodec
 	{
-		public override BinaryDecisionDiagram read(FileStream fileName)
+		public override BinaryDecisionDiagram Read(FileStream fileName)
 		{
 			var listOfNodes = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
 							   from lType in lAssembly.GetTypes()
@@ -22,7 +22,7 @@ namespace FaultTreeAnalysis.BDD
 			return (BinaryDecisionDiagram)serializer.ReadObject(fileName);
 		}
 
-		public override void write(BinaryDecisionDiagram bdd, FileStream stream)
+		public override void Write(BinaryDecisionDiagram bdd, FileStream stream)
 		{
 			var listOfNodes = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
 							   from lType in lAssembly.GetTypes()
@@ -39,7 +39,7 @@ namespace FaultTreeAnalysis.BDD
 			}
 		}
 
-		public override BDDTreeFormat getFormatToken()
+		public override BDDTreeFormat GetFormatToken()
 		{
 			return BDDTreeFormat.BDD_TREE_XML;
 		}

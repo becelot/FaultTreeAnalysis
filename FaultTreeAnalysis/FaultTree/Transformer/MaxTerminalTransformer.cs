@@ -6,22 +6,22 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 {
     public class MaxTerminalTransformer : FaultTreeTransformer<int>
     {
-        public override int transform(FaultTreeTerminalNode terminal)
+        public override int Transform(FaultTreeTerminalNode terminal)
         {
             return terminal.Label;
         }
 
-        public override int transform(FaultTreeLiteralNode literal)
+        public override int Transform(FaultTreeLiteralNode literal)
         {
             return int.MinValue;
         }
 
-        public override int transform(FaultTreeAndGateNode gate, List<int> childs)
+        public override int Transform(FaultTreeAndGateNode gate, List<int> childs)
         {
             return childs.DefaultIfEmpty(int.MinValue).Max();
 		}
 
-        public override int transform(FaultTreeOrGateNode gate, List<int> childs)
+        public override int Transform(FaultTreeOrGateNode gate, List<int> childs)
         {
             return childs.DefaultIfEmpty(int.MinValue).Max();
 		}

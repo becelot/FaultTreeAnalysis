@@ -13,15 +13,15 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 
         protected BDDNode() { }
 
-        protected BDDNode(BDDNode HighNode, BDDNode LowNode)
+        protected BDDNode(BDDNode highNode, BDDNode lowNode)
         {
-            this.HighNode = HighNode;
-            this.LowNode = LowNode;
+            this.HighNode = highNode;
+            this.LowNode = lowNode;
         }
 
 		public static int GeneratedNumber;
 
-		private void flatMap(ref List<BDDNode> visited) 
+		private void FlatMap(ref List<BDDNode> visited) 
 		{
 			if (visited.Contains(this))
 			{
@@ -32,22 +32,22 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 
 			if (GetType() == typeof(BDDVariableNode))
 			{
-				HighNode.flatMap(ref visited);
-				LowNode.flatMap(ref visited);
+				HighNode.FlatMap(ref visited);
+				LowNode.FlatMap(ref visited);
 			}
 		}
 
 
 
-		public List<BDDNode> flatMap()
+		public List<BDDNode> FlatMap()
 		{
 			List<BDDNode> flat = new List<BDDNode>();
 			flat.Add(this);
 			GeneratedNumber++;
 			if (GetType() == typeof(BDDVariableNode))
 			{
-				HighNode.flatMap(ref flat);
-				LowNode.flatMap(ref flat);
+				HighNode.FlatMap(ref flat);
+				LowNode.FlatMap(ref flat);
 			}
 
 			return flat;

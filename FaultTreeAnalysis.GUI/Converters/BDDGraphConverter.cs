@@ -33,7 +33,7 @@ namespace FaultTreeAnalysis.GUI.Converters
 
 			BDD.BinaryDecisionDiagram bdd = (FaultTree.FaultTree)value[0];
 
-			var nodes = bdd.flatMap();
+			var nodes = bdd.FlatMap();
 
 			foreach (BDDNode n in nodes)
 			{

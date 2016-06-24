@@ -2,25 +2,24 @@
 {
     public abstract class BDDFactory
     {
-        protected static BDDFactory _instance = null;
-		private static BDDNodeFactory nodeFactory;
+        protected static BDDFactory Instance = null;
 
         protected BDDFactory()
 		{
-			nodeFactory = new BDDNodeFactory();
+			new BDDNodeFactory();
 		}
 
-        public static BDDFactory getRecursiveInstance()
+        public static BDDFactory GetRecursiveInstance()
         {
-			return BDDFactoryRecursive.getInstance();
+			return BDDFactoryRecursive.GetInstance();
         }
 
-		public static BDDFactory getComponentConnectionInstance()
+		public static BDDFactory GetComponentConnectionInstance()
 		{
-			return BDDFactoryComponentConnection.getInstance();
+			return BDDFactoryComponentConnection.GetInstance();
 		}
 
-		public abstract BDDNode createBDD(FaultTree.FaultTree ft);
+		public abstract BDDNode CreateBDD(FaultTree.FaultTree ft);
 
 
     }

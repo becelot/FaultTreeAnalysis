@@ -44,7 +44,7 @@ namespace FaultTreeAnalysis.GUI
 
 		private void LoadFromFile(string fileName)
 		{
-			viewModel.FaultTree = FaultTreeEncoderFactory.createFaultTreeCodec(fileName).read(fileName);
+			viewModel.FaultTree = FaultTreeEncoderFactory.CreateFaultTreeCodec(fileName).Read(fileName);
 		}
 
 		private void LoadFromFileClick(object sender, RoutedEventArgs e)

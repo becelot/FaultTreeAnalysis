@@ -14,12 +14,12 @@ namespace FaultTreeAnalysis.FaultTree.Tree
             FAULT_TREE_OPERATOR_OR
         }
 
-        private static FaultTreeGateOperator operatorFromString(String op)
+        private static FaultTreeGateOperator OperatorFromString(String op)
         {
             return op.Equals("&") ? FaultTreeGateOperator.FAULT_TREE_OPERATOR_AND : FaultTreeGateOperator.FAULT_TREE_OPERATOR_OR;
         }
 
-        public static FaultTreeNodeFactory getInstance()
+        public static FaultTreeNodeFactory GetInstance()
         {
             if (_instance == null)
             {
@@ -28,20 +28,20 @@ namespace FaultTreeAnalysis.FaultTree.Tree
             return _instance;
         }
 
-        public FaultTreeGateNode createGateNode(int ID, FaultTreeGateOperator op)
+        public FaultTreeGateNode CreateGateNode(int id, FaultTreeGateOperator op)
         {
             switch (op)
             {
                 case FaultTreeGateOperator.FAULT_TREE_OPERATOR_AND:
-                    return new FaultTreeAndGateNode(ID);
+                    return new FaultTreeAndGateNode(id);
                 default:
-                    return new FaultTreeOrGateNode(ID);
+                    return new FaultTreeOrGateNode(id);
             }
         }
 
-        public FaultTreeGateNode createGateNode(int ID, string operation)
+        public FaultTreeGateNode CreateGateNode(int id, string operation)
         {
-            return createGateNode(ID, operatorFromString(operation));
+            return CreateGateNode(id, OperatorFromString(operation));
         }
     }
 }

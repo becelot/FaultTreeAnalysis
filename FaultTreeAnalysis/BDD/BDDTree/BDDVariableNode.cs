@@ -7,9 +7,9 @@ namespace FaultTreeAnalysis.BDD.BDDTree
     {
         public BDDVariableNode()
         { }
-        public BDDVariableNode(int Variable, BDDNode HighNode, BDDNode LowNode) : base(HighNode, LowNode)
+        public BDDVariableNode(int variable, BDDNode highNode, BDDNode lowNode) : base(highNode, lowNode)
         {
-            this.Variable = Variable;
+            this.Variable = variable;
         }
     }
 }

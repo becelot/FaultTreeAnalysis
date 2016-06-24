@@ -6,34 +6,34 @@ namespace FaultTreeAnalysis.BDD
 {
 	public class BDDFactoryRecursive : BDDFactory
 	{
-		public static BDDFactory getInstance()
+		public static BDDFactory GetInstance()
 		{
-			if (_instance == null)
+			if (Instance == null)
 			{
-				_instance = new BDDFactoryRecursive();
+				Instance = new BDDFactoryRecursive();
 			}
-			return _instance;
+			return Instance;
 		}
 
 		private BDDNode createBDD(FaultTree.FaultTree ft, BDDNodeFactory nodeFactory)
 		{
-			int nextVariable = ft.reduce(new MinTerminalTransformer());
+			int nextVariable = ft.Reduce(new MinTerminalTransformer());
 			if (nextVariable == int.MaxValue)
 			{
 				//ft should consist of only terminal node
-				return nodeFactory.createNode(((FaultTreeLiteralNode)ft.Root).Value);
+				return nodeFactory.CreateNode(((FaultTreeLiteralNode)ft.Root).Value);
 			}
 
-			FaultTree.FaultTree high = ft.deepCopy().replace(nextVariable, true).simplify();
-			FaultTree.FaultTree low = ft.deepCopy().replace(nextVariable, false).simplify();
+			FaultTree.FaultTree high = ft.DeepCopy().Replace(nextVariable, true).Simplify();
+			FaultTree.FaultTree low = ft.DeepCopy().Replace(nextVariable, false).Simplify();
 
 			BDDNode highNode = createBDD(high, nodeFactory);
 			BDDNode lowNode = createBDD(low, nodeFactory);
 
-			return nodeFactory.createNode(nextVariable, highNode, lowNode);
+			return nodeFactory.CreateNode(nextVariable, highNode, lowNode);
 		}
 
-		public override BDDNode createBDD(FaultTree.FaultTree ft)
+		public override BDDNode CreateBDD(FaultTree.FaultTree ft)
 		{
 			//ft = new FaultTree.FaultTree(ft.reduce<FaultTreeNode>(new AddTransformer(1)));
 			BDDNodeFactory nodeFactory = new BDDNodeFactory();

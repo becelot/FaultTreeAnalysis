@@ -2,7 +2,7 @@
 {
 	public class BDDEncoderFactory
 	{
-		public static IBDDCodec createFaultTreeCodec(string fileName)
+		public static IBDDCodec CreateFaultTreeCodec(string fileName)
 		{
 			if (fileName.EndsWith(".dot"))
 			{
@@ -16,7 +16,7 @@
 		    throw new BDDFormatException("The given file was not recognized as a valid format!");
 		}
 
-		public static IBDDCodec createFaultTreeCodec(BDDTreeFormat format)
+		public static IBDDCodec CreateFaultTreeCodec(BDDTreeFormat format)
 		{
 			switch (format)
 			{

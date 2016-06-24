@@ -7,7 +7,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
     {
         private readonly Dictionary<int, FaultTreeNode> referenceSafety = new Dictionary<int, FaultTreeNode>();
 
-        protected FaultTreeNode createNode(FaultTreeNode node)
+        protected FaultTreeNode CreateNode(FaultTreeNode node)
         {
             if (referenceSafety.ContainsKey(node.ID))
             {
@@ -17,24 +17,24 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
             return node;
         }
 
-        public override FaultTreeNode transform(FaultTreeLiteralNode literal)
+        public override FaultTreeNode Transform(FaultTreeLiteralNode literal)
         {
-            return createNode(new FaultTreeLiteralNode(literal));
+            return CreateNode(new FaultTreeLiteralNode(literal));
         }
 
-        public override FaultTreeNode transform(FaultTreeTerminalNode terminal)
+        public override FaultTreeNode Transform(FaultTreeTerminalNode terminal)
         {
-            return createNode(new FaultTreeTerminalNode(terminal));
+            return CreateNode(new FaultTreeTerminalNode(terminal));
         }
 
-        public override FaultTreeNode transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
+        public override FaultTreeNode Transform(FaultTreeOrGateNode gate, List<FaultTreeNode> childs)
         {
-            return createNode(new FaultTreeOrGateNode(gate.ID, childs));
+            return CreateNode(new FaultTreeOrGateNode(gate.ID, childs));
         }
 
-        public override FaultTreeNode transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs)
+        public override FaultTreeNode Transform(FaultTreeAndGateNode gate, List<FaultTreeNode> childs)
         {
-            return createNode(new FaultTreeAndGateNode(gate.ID, childs));
+            return CreateNode(new FaultTreeAndGateNode(gate.ID, childs));
         }
     }
 }

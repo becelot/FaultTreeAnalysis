@@ -4,16 +4,16 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 {
 	public class AddTransformer : TreeTransformer
 	{
-		private readonly int Factor;
+		private readonly int factor;
 
 		public AddTransformer(int factor)
 		{
-			Factor = factor;
+			this.factor = factor;
 		}
 
-		public override FaultTreeNode transform(FaultTreeTerminalNode terminal)
+		public override FaultTreeNode Transform(FaultTreeTerminalNode terminal)
 		{
-			return createNode(new FaultTreeTerminalNode(terminal.ID, terminal.Label + Factor));
+			return CreateNode(new FaultTreeTerminalNode(terminal.ID, terminal.Label + factor));
 		}
 	}
 }

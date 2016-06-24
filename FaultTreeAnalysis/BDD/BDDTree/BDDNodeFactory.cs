@@ -8,8 +8,8 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 		private readonly BDDTerminalNode terminalZero;
 		private readonly BDDTerminalNode terminalOne;
 
-		private readonly Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode> H;
-		private readonly Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>> T;
+		private readonly Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode> h;
+		private readonly Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>> t;
 
 
 		public BDDNodeFactory()
@@ -19,39 +19,39 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 			terminalOne = new BDDTerminalNode(true);
 			terminalOne.Variable = -1;
 
-			H = new Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode>();
-			T = new Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>>();
+			h = new Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode>();
+			t = new Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>>();
 		}
 
 
 
-		public BDDNode createNode(int value)
+		public BDDNode CreateNode(int value)
 		{
-			return createNode(value, terminalOne, terminalZero);
+			return CreateNode(value, terminalOne, terminalZero);
 		}
 
-        public BDDNode createNode(int value, BDDNode HighNode, BDDNode LowNode)
+        public BDDNode CreateNode(int value, BDDNode highNode, BDDNode lowNode)
         {
-            if (HighNode == LowNode)
+            if (highNode == lowNode)
 			{
-				return LowNode;
+				return lowNode;
 			}
-            if (H.ContainsKey(new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode)))
+            if (h.ContainsKey(new Tuple<int, BDDNode, BDDNode>(value, highNode, lowNode)))
             {
-                return H[new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode)];
+                return h[new Tuple<int, BDDNode, BDDNode>(value, highNode, lowNode)];
             }
-            BDDNode n = new BDDVariableNode(value, HighNode, LowNode);
-            T.Add(n, new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode));
-            H.Add(new Tuple<int, BDDNode, BDDNode>(value, HighNode, LowNode), n);
+            BDDNode n = new BDDVariableNode(value, highNode, lowNode);
+            t.Add(n, new Tuple<int, BDDNode, BDDNode>(value, highNode, lowNode));
+            h.Add(new Tuple<int, BDDNode, BDDNode>(value, highNode, lowNode), n);
             return n;
         }
 
-        public BDDNode createNode(Boolean value)
+        public BDDNode CreateNode(Boolean value)
         {
 			return value ? terminalOne : terminalZero;
         }
 
-		internal void setBasicEventCount(int maxBasicEventNumber)
+		internal void SetBasicEventCount(int maxBasicEventNumber)
 		{
 			terminalOne.Variable = maxBasicEventNumber + 1;
 			terminalZero.Variable = maxBasicEventNumber + 2;

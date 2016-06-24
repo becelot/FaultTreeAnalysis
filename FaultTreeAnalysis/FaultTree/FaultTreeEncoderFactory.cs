@@ -2,7 +2,7 @@
 {
     public class FaultTreeEncoderFactory
     {
-        public static IFaultTreeCodec createFaultTreeCodec(string fileName)
+        public static IFaultTreeCodec CreateFaultTreeCodec(string fileName)
         {
             if (fileName.EndsWith(".xml"))
             {
@@ -16,7 +16,7 @@
             throw new FaultTreeFormatException("The given file was not recognized as a valid format!"); 
         }
 
-        public static IFaultTreeCodec createFaultTreeCodec(FaultTreeFormat format)
+        public static IFaultTreeCodec CreateFaultTreeCodec(FaultTreeFormat format)
         {
             switch (format)
             {

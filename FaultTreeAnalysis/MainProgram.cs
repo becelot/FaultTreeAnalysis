@@ -19,19 +19,19 @@ namespace FaultTreeAnalysis
             {
 				Console.WriteLine("Converting tree " + s);
 
-                IFaultTreeCodec codec = FaultTreeEncoderFactory.createFaultTreeCodec(s);
-                FaultTree.FaultTree ft = codec.read(s);
+                IFaultTreeCodec codec = FaultTreeEncoderFactory.CreateFaultTreeCodec(s);
+                FaultTree.FaultTree ft = codec.Read(s);
 
                 //ft = ft.deepCopy().replace(1, false).simplify();
 
                 //IFaultTreeCodec xmlCodec = FaultTreeEncoderFactory.createFaultTreeCodec(FaultTreeFormat.FAULT_TREE_XML);
                 //xmlCodec.write(ft, s + ".xml");
 
-                BDDNode test = BDDFactory.getComponentConnectionInstance().createBDD(ft);
+                BDDNode test = BDDFactory.GetComponentConnectionInstance().CreateBDD(ft);
                 Console.WriteLine("Successfully converted tree");
 
-				IBDDCodec bCodec = BDDEncoderFactory.createFaultTreeCodec(s + ".dot");
-				bCodec.write(new BDD.BinaryDecisionDiagram(test), s + ".dot");
+				IBDDCodec bCodec = BDDEncoderFactory.CreateFaultTreeCodec(s + ".dot");
+				bCodec.Write(new BDD.BinaryDecisionDiagram(test), s + ".dot");
             }
             Console.WriteLine("Finished construction");
             Console.ReadKey();

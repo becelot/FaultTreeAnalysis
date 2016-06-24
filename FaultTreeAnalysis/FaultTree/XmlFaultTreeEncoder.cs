@@ -10,7 +10,7 @@ namespace FaultTreeAnalysis.FaultTree
     class XmlFaultTreeEncoder : IFaultTreeCodec
     {
 
-        public override FaultTree read(FileStream stream)
+        public override FaultTree Read(FileStream stream)
         {
             var listOfNodes = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
                                from lType in lAssembly.GetTypes()
@@ -23,7 +23,7 @@ namespace FaultTreeAnalysis.FaultTree
             return (FaultTree)serializer.ReadObject(stream);
         }
 
-        public override void write(FaultTree ft, FileStream stream)
+        public override void Write(FaultTree ft, FileStream stream)
         {
             var listOfNodes = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
                                from lType in lAssembly.GetTypes()
@@ -41,7 +41,7 @@ namespace FaultTreeAnalysis.FaultTree
             
         }
 
-        public override FaultTreeFormat getFormatToken()
+        public override FaultTreeFormat GetFormatToken()
         {
             return FaultTreeFormat.FAULT_TREE_XML;
         }

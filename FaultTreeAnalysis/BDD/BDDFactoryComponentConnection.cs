@@ -8,13 +8,13 @@ namespace FaultTreeAnalysis.BDD
 {
 	public class BDDFactoryComponentConnection : BDDFactory
 	{
-		public static BDDFactory getInstance()
+		public static BDDFactory GetInstance()
 		{
-			if (_instance == null)
+			if (Instance == null)
 			{
-				_instance = new BDDFactoryComponentConnection();
+				Instance = new BDDFactoryComponentConnection();
 			}
-			return _instance;
+			return Instance;
 		}
 
 		private enum BDDOperator
@@ -23,22 +23,22 @@ namespace FaultTreeAnalysis.BDD
 			BDD_OPERATOR_OR
 		}
 
-		private BDDNode app(BDDNodeFactory nodeFactory, BDDOperator op, Dictionary<Tuple<BDDNode, BDDNode>, BDDNode> G, BDDNode u1, BDDNode u2)
+		private BDDNode App(BDDNodeFactory nodeFactory, BDDOperator op, Dictionary<Tuple<BDDNode, BDDNode>, BDDNode> g, BDDNode u1, BDDNode u2)
 		{
 			BDDNode u = null;
-			if (G.ContainsKey(new Tuple<BDDNode, BDDNode>(u1, u2)))
+			if (g.ContainsKey(new Tuple<BDDNode, BDDNode>(u1, u2)))
 			{
-				return G[new Tuple<BDDNode, BDDNode>(u1, u2)];
+				return g[new Tuple<BDDNode, BDDNode>(u1, u2)];
 			}
 		    if (u1.GetType() == typeof(BDDTerminalNode) && u2.GetType() == typeof(BDDTerminalNode))
 		    {
 		        if (op == BDDOperator.BDD_OPERATOR_AND)
 		        {
-		            u = nodeFactory.createNode(((BDDTerminalNode)u1).Value && ((BDDTerminalNode)u2).Value);
+		            u = nodeFactory.CreateNode(((BDDTerminalNode)u1).Value && ((BDDTerminalNode)u2).Value);
 		        }
 		        else
 		        {
-		            u = nodeFactory.createNode(((BDDTerminalNode)u1).Value || ((BDDTerminalNode)u2).Value);
+		            u = nodeFactory.CreateNode(((BDDTerminalNode)u1).Value || ((BDDTerminalNode)u2).Value);
 		        }
 		    } /*
 			else if (u1.GetType() == typeof(BDDTerminalNode))
@@ -93,35 +93,35 @@ namespace FaultTreeAnalysis.BDD
 			} */
 		    else if (u1.Variable == u2.Variable)
 		    {
-		        u = nodeFactory.createNode(u1.Variable, app(nodeFactory, op, G, u1.HighNode, u2.HighNode), app(nodeFactory, op, G, u1.LowNode, u2.LowNode));
+		        u = nodeFactory.CreateNode(u1.Variable, App(nodeFactory, op, g, u1.HighNode, u2.HighNode), App(nodeFactory, op, g, u1.LowNode, u2.LowNode));
 		    }
 		    else if (u1.Variable < u2.Variable)
 		    {
-		        u = nodeFactory.createNode(u1.Variable, app(nodeFactory, op, G, u1.HighNode, u2), app(nodeFactory, op, G, u1.LowNode, u2));
+		        u = nodeFactory.CreateNode(u1.Variable, App(nodeFactory, op, g, u1.HighNode, u2), App(nodeFactory, op, g, u1.LowNode, u2));
 		    }
 		    else
 		    {
-		        u = nodeFactory.createNode(u2.Variable, app(nodeFactory, op, G, u1, u2.HighNode), app(nodeFactory, op, G, u1, u2.LowNode));
+		        u = nodeFactory.CreateNode(u2.Variable, App(nodeFactory, op, g, u1, u2.HighNode), App(nodeFactory, op, g, u1, u2.LowNode));
 		    }
-		    G.Add(new Tuple<BDDNode, BDDNode>(u1, u2), u);
+		    g.Add(new Tuple<BDDNode, BDDNode>(u1, u2), u);
 			return u;
 		}
 
-		private BDDNode apply(BDDNodeFactory nodeFactory, BDDOperator op, BDDNode u1, BDDNode u2)
+		private BDDNode Apply(BDDNodeFactory nodeFactory, BDDOperator op, BDDNode u1, BDDNode u2)
 		{
 			if (u1 == null)
 			{
 				return u2;
 			}
-			Dictionary<Tuple<BDDNode, BDDNode>, BDDNode> G = new Dictionary<Tuple<BDDNode, BDDNode>, BDDNode>();
-			return app(nodeFactory, op, G, u1, u2);
+			Dictionary<Tuple<BDDNode, BDDNode>, BDDNode> g = new Dictionary<Tuple<BDDNode, BDDNode>, BDDNode>();
+			return App(nodeFactory, op, g, u1, u2);
 		}
 
-		private BDDNode createBDD(FaultTreeNode node, BDDNodeFactory nodeFactory)
+		private BDDNode CreateBDD(FaultTreeNode node, BDDNodeFactory nodeFactory)
 		{
 			if (node.GetType() == typeof(FaultTreeTerminalNode))
 			{
-				return nodeFactory.createNode(((FaultTreeTerminalNode)node).Label);
+				return nodeFactory.CreateNode(((FaultTreeTerminalNode)node).Label);
 			}
 
 			BDDOperator op = BDDOperator.BDD_OPERATOR_AND;
@@ -133,19 +133,19 @@ namespace FaultTreeAnalysis.BDD
 			BDDNode current = null;
 			foreach (FaultTreeNode tn in node.Childs)
 			{
-				BDDNode n = createBDD(tn, nodeFactory);
-				current = apply(nodeFactory, op, current, n);
+				BDDNode n = CreateBDD(tn, nodeFactory);
+				current = Apply(nodeFactory, op, current, n);
 			}
 
 			return current;
 		}
 
-		public override BDDNode createBDD(FaultTree.FaultTree ft)
+		public override BDDNode CreateBDD(FaultTree.FaultTree ft)
 		{
-			int maxBasicEventNumber = ft.reduce(new MaxTerminalTransformer());
+			int maxBasicEventNumber = ft.Reduce(new MaxTerminalTransformer());
 			BDDNodeFactory nodeFactory = new BDDNodeFactory();
-			nodeFactory.setBasicEventCount(maxBasicEventNumber);
-			return createBDD(ft.Root, nodeFactory);
+			nodeFactory.SetBasicEventCount(maxBasicEventNumber);
+			return CreateBDD(ft.Root, nodeFactory);
 		}
 	}
 }

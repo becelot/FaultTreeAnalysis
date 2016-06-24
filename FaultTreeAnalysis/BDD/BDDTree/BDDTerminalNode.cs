@@ -11,9 +11,9 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 
         public BDDTerminalNode()
         { }
-        public BDDTerminalNode(Boolean Value)
+        public BDDTerminalNode(Boolean value)
         {
-            this.Value = Value;
+            this.Value = value;
         }
 	}
 }

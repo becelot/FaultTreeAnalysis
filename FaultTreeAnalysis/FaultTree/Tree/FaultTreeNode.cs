@@ -15,14 +15,14 @@ namespace FaultTreeAnalysis.FaultTree.Tree
 
         protected FaultTreeNode() { Childs = new List<FaultTreeNode>(); }
 
-        protected FaultTreeNode(int ID) : this() { this.ID = ID; }
+        protected FaultTreeNode(int id) : this() { this.ID = id; }
 
-        protected FaultTreeNode(int ID, List<FaultTreeNode> childs)
+        protected FaultTreeNode(int id, List<FaultTreeNode> childs)
         {
-            this.ID = ID;
+            this.ID = id;
             Childs = childs;
         }
 
-        public abstract T reduce<T>(FaultTreeTransformer<T> tr);
+        public abstract T Reduce<T>(FaultTreeTransformer<T> tr);
     }
 }
