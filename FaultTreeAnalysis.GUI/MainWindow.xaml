@@ -4,7 +4,7 @@
         xmlns:i="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:MahApps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:Controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions" 
-        xmlns:Example="clr-namespace:FaultTreeAnalysis.GUI" 
+        xmlns:Local="clr-namespace:FaultTreeAnalysis.GUI" 
         xmlns:FTAFaultTree="clr-namespace:FaultTreeAnalysis.FaultTree.Tree;assembly=FaultTreeAnalysis"
         xmlns:FTABDD="clr-namespace:FaultTreeAnalysis.BDD.BDDTree;assembly=FaultTreeAnalysis"
         xmlns:Converter="clr-namespace:FaultTreeAnalysis.GUI.Converters" 
@@ -24,13 +24,13 @@
             <Converter:VisibilityConverter x:Key="VisibilityConverter" />
             <Converter:BDDGraphConverter x:Key="BDDGraphConverter" />
 
-            <DataTemplate DataType="{x:Type Example:DiamondArrow}">
+            <DataTemplate DataType="{x:Type Local:DiamondArrow}">
                 <Canvas Width="6" Height="11">
                     <Polygon Points="3,0 6,5 3,10 0,5" Stroke="Black" StrokeThickness="1" Fill="Black"/>
                 </Canvas>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type Example:Arrow}">
+            <DataTemplate DataType="{x:Type Local:Arrow}">
                 <Path Data="M 0,0 L 20,0 L 10,10 L 0,0" Stroke="Black" StrokeThickness="1">
                 </Path>
             </DataTemplate>
@@ -116,7 +116,7 @@
         </MahApps:WindowCommands>
     </MahApps:MetroWindow.RightWindowCommands>
     <MahApps:MetroWindow.Flyouts>
-        <MahApps:FlyoutsControl Margin="{Binding TitleBarMargin, RelativeSource={RelativeSource AncestorType=Example:MainWindow}}">
+        <MahApps:FlyoutsControl Margin="{Binding TitleBarMargin, RelativeSource={RelativeSource AncestorType=Local:MainWindow}}">
             <MahApps:Flyout x:Name="FlyoutOptions" Position="Left" Panel.ZIndex="102" Header="Options" Width="515">
                 <flyoutControls:OptionsMain x:Name="Options" />
             </MahApps:Flyout>
