@@ -170,7 +170,7 @@
                         </Rectangle.Fill>
                     </Rectangle>
                 </MenuItem.Icon>
-                <MenuItem Header="Add AND-Gate" />
+                <MenuItem Header="Add AND-Gate" Click="AddAndGate" />
                 <MenuItem Header="Add OR-Gate" />
                 <MenuItem Header="Add Edge">
                     <MenuItem Header="Markov Chain" Click="AddMarkovChain" />
@@ -183,7 +183,7 @@
                 <WPF:GraphLayout 
                 UseContentPresenterForAllElements="True"
                 LogGraphvizOutput="False"
-                Graph="{Binding FaultTree, Converter={StaticResource GraphFTConverter}}"
+                Graph="{Binding FaultTree, Converter={StaticResource GraphFTConverter}, Mode=OneWay}"
                 x:Name="GraphLayout">
                     <WPF:GraphLayout.Resources>
                         <Style TargetType="ProgressBar">
@@ -205,7 +205,6 @@
             <WPF:GraphLayout 
                 UseContentPresenterForAllElements="True"
                 LogGraphvizOutput="False"
-                Graph="{Binding FaultTree, Converter={StaticResource BDDGraphConverter}}"
                 x:Name="BDDLayout">
                 <WPF:GraphLayout.Resources>
                     <Style TargetType="ProgressBar">
@@ -214,6 +213,16 @@
                                 <ControlTemplate TargetType="ProgressBar">
                                     <TextBlock Foreground="Black">Generating the layout...</TextBlock>
                                 </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <Style TargetType="WPF:GraphLayout">
+                        <Setter Property="Graph">
+                            <Setter.Value>
+                                <MultiBinding Converter="{StaticResource BDDGraphConverter}">
+                                    <Binding Path="FaultTree" />
+                                    <Binding Path="BDDTreeView" />
+                                </MultiBinding>
                             </Setter.Value>
                         </Setter>
                     </Style>

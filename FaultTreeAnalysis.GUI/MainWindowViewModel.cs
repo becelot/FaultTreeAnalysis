@@ -65,7 +65,7 @@ namespace FaultTreeAnalysis.GUI
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void RaisePropertyChanged(string property)
+        public void RaisePropertyChanged(string property)
         {
             if (this.PropertyChanged != null)
             {

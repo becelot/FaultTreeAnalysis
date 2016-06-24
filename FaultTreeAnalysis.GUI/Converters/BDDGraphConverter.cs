@@ -10,18 +10,28 @@ using System.Windows.Data;
 
 namespace FaultTreeAnalysis.GUI.Converters
 {
-	public class BDDGraphConverter : IValueConverter
+	public class BDDGraphConverter : IMultiValueConverter
 	{
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
 		{
 			var graph = new Graph<BDDNode>();
+
+            if (!(value[0] is FaultTree.FaultTree) && !(value[1] is bool) )
+            {
+                return graph;
+            }
+
+            if (!(bool)value[1])
+            {
+                return graph;
+            }
 			
-			if (!(value is FaultTree.FaultTree))
+			if (!(value[0] is FaultTree.FaultTree))
 			{
 				return graph;
 			}
 
-			BDD.BDD bdd = (FaultTree.FaultTree)value;
+			BDD.BDD bdd = (FaultTree.FaultTree)value[0];
 
 			var nodes = bdd.flatMap();
 
@@ -38,7 +48,7 @@ namespace FaultTreeAnalysis.GUI.Converters
 			return graph;
 		}
 
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
 		{
 			throw new NotImplementedException();
 		}

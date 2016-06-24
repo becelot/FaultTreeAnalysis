@@ -1,4 +1,5 @@
 ﻿using FaultTreeAnalysis.FaultTree.Tree;
+using Graphviz4Net.Graphs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,32 @@ namespace FaultTreeAnalysis.GUI
         private List<Type> validSourceElements = new List<Type>() {  };
         private List<Type> validDestinationElements = new List<Type>() {  };
 
-        private void FaultTreeZoomControl_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        public enum VisualEditorMode
+        {
+            MODE_ADD_GATE,
+            MODE_ADD_CONNECTION
+        }
+
+        public VisualEditorMode EditorMode { get; private set; }
+
+        private void EditorDownGate(Grid sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var graph = ((Graph<FaultTreeNode>)this.GraphLayout.Graph);
+
+            var vertex = new FaultTreeAndGateNode();
+
+            ((FaultTreeNode)sender.DataContext).Childs.Add(vertex);
+            this.viewModel.RaisePropertyChanged("FaultTree");
+        }
+
+        private void EditorDownConnection(Grid sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var canvas = FaultTreeGridView;
 
             var canvasLine = canvas.Children.OfType<Line>().LastOrDefault();
             if (canvasLine == null)
             {
-                if (!validSourceElements.Contains(((Grid)sender).DataContext.GetType()))
+                if (!validSourceElements.Contains(sender.DataContext.GetType()))
                 {
                     return;
                 }
@@ -42,11 +61,25 @@ namespace FaultTreeAnalysis.GUI
             }
             else
             {
-                if (!validDestinationElements.Contains(((Grid)sender).DataContext.GetType()))
+                if (!validDestinationElements.Contains(sender.DataContext.GetType()))
                 {
                     return;
                 }
                 canvas.Children.Remove(canvasLine);
+            }
+        }
+
+        private void FaultTreeZoomControl_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            switch (EditorMode)
+            {
+                case VisualEditorMode.MODE_ADD_CONNECTION:
+                    EditorDownConnection((Grid)sender, e);
+                    break;
+                case VisualEditorMode.MODE_ADD_GATE:
+                    EditorDownGate((Grid)sender, e);
+                    break;
+                default: break;
             }
         }
 
@@ -86,5 +119,15 @@ namespace FaultTreeAnalysis.GUI
             this.validDestinationElements = new List<Type>() { typeof(FaultTreeTerminalNode) };
         }
 
+        private void AddAndGate(object sender, RoutedEventArgs e)
+        {
+            if (this.GraphLayout.Graph.Vertices.Count() == 0)
+            {
+                ((Graph<FaultTreeNode>)this.GraphLayout.Graph).AddVertex(new FaultTreeAndGateNode(0));
+            } else
+            {
+                this.validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
+            }
+        }
     }
 }
