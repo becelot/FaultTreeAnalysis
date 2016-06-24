@@ -2,12 +2,11 @@
 namespace FaultTreeAnalysis.GUI
 {
     using FaultTree;
-    using MahApps.Metro.Controls;
     using System.IO;
     using System.Windows;
     using Util;
-    public partial class MainWindow : MetroWindow
-	{
+    public partial class MainWindow
+    {
 		private readonly MainWindowViewModel viewModel;
 
 		public Thickness TitleBarMargin => new Thickness(0, TitlebarHeight, 0, 0);

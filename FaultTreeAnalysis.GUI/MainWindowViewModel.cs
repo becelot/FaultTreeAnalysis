@@ -26,10 +26,6 @@
 			set { faultTree = value; RaisePropertyChanged("FaultTree"); }
 		}
 
-        public MainWindowViewModel()
-        {
-        }
-
         /*public IEnumerable<string> PersonNames
         {
             get { return this.Graph.AllVertices.Select(x => x.Name); }

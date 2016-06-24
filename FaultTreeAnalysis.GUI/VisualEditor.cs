@@ -12,8 +12,8 @@ namespace FaultTreeAnalysis.GUI
 {
     public partial class MainWindow
     {
-        private List<Type> validSourceElements = new List<Type>() {  };
-        private List<Type> validDestinationElements = new List<Type>() {  };
+        private List<Type> validSourceElements = new List<Type>();
+        private List<Type> validDestinationElements = new List<Type>();
 
         public enum VisualEditorMode
         {
@@ -26,7 +26,7 @@ namespace FaultTreeAnalysis.GUI
 
         public VisualEditorMode EditorMode { get; private set; }
 
-        private void EditorDownGate(Grid sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void EditorDownGate(FrameworkElement sender)
         {
             FaultTreeNode vertex;
 
@@ -50,7 +50,7 @@ namespace FaultTreeAnalysis.GUI
             viewModel.CreateEdge();
         }
 
-        private void EditorDownConnection(Grid sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void EditorDownConnection(FrameworkElement sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var canvas = FaultTreeGridView;
 
@@ -99,9 +99,8 @@ namespace FaultTreeAnalysis.GUI
                 case VisualEditorMode.MODE_ADD_AND_GATE:
                 case VisualEditorMode.MODE_ADD_OR_GATE:
                 case VisualEditorMode.MODE_ADD_BASIC_EVENT:
-                    EditorDownGate((Grid)sender, e);
+                    EditorDownGate((Grid)sender);
                     break;
-                default: break;
             }
         }
 
@@ -165,14 +164,10 @@ namespace FaultTreeAnalysis.GUI
 
         private void AddBasicEvent(object sender, RoutedEventArgs e)
         {
-            if (!GraphLayout.Graph.Vertices.Any())
-            {
-                return;
-            } else
-            {
-                EditorMode = VisualEditorMode.MODE_ADD_BASIC_EVENT;
-                validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
-            }
+            if (!GraphLayout.Graph.Vertices.Any()) return;
+
+            EditorMode = VisualEditorMode.MODE_ADD_BASIC_EVENT;
+            validSourceElements = new List<Type>() {typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode)};
         }
     }
 }
