@@ -79,21 +79,21 @@ namespace FaultTreeAnalysis.GUI.Util
 			System.Reflection.FieldInfo _out = type.GetField("_out",
 				System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
 
-			System.Reflection.FieldInfo _error = type.GetField("_error",
+			System.Reflection.FieldInfo error = type.GetField("_error",
 				System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
 
-			System.Reflection.MethodInfo _InitializeStdOutError = type.GetMethod("InitializeStdOutError",
+			System.Reflection.MethodInfo initializeStdOutError = type.GetMethod("InitializeStdOutError",
 				System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
 
 			Debug.Assert(_out != null);
-			Debug.Assert(_error != null);
+			Debug.Assert(error != null);
 
-			Debug.Assert(_InitializeStdOutError != null);
+			Debug.Assert(initializeStdOutError != null);
 
 			_out.SetValue(null, null);
-			_error.SetValue(null, null);
+			error.SetValue(null, null);
 
-			_InitializeStdOutError.Invoke(null, new object[] { true });
+			initializeStdOutError.Invoke(null, new object[] { true });
 		}
 
 		static void SetOutAndErrorNull()
