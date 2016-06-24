@@ -156,6 +156,17 @@
                 <RadioButton Content="Fault Tree View" IsChecked="True" Checked="ViewChanged" Name="FaultTreeView" />
                 <RadioButton Content="BDD View" IsChecked="False" Checked="ViewChanged" Name="BDDTreeView"/>
             </MenuItem>
+            <MenuItem Header="_ADD">
+                <MenuItem.Icon>
+                    <Rectangle Width="24" Height="16"  Margin="0,0,-10,0">
+                        <Rectangle.Fill>
+                            <VisualBrush Visual="{StaticResource app_addicon}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </MenuItem.Icon>
+                <MenuItem Header="Add AND-Gate" />
+                <MenuItem Header="Add OR-Gate" />
+            </MenuItem>
         </Menu>
         <Grid Grid.Column="0" Grid.Row="1" Cursor="Cross" Background="Transparent" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseLeftButtonUp="FaultTreeZoomControl_MouseLeftButtonUp" MouseMove="FaultTreeZoomControl_MouseMove">
             <Controls:ZoomControl Name="FaultTreeZoomControl" Visibility="{Binding FaultTreeView, Converter={StaticResource VisibilityConverter}}" ZoomDeltaMultiplier="40">
