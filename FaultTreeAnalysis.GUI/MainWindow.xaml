@@ -172,6 +172,7 @@
                 </MenuItem.Icon>
                 <MenuItem Header="Add AND-Gate" Click="AddAndGate" />
                 <MenuItem Header="Add OR-Gate" Click="AddOrGate" />
+                <MenuItem Header="Add Basic Event" Click="AddBasicEvent" />
                 <MenuItem Header="Add Edge">
                     <MenuItem Header="Markov Chain" Click="AddMarkovChain" />
                     <MenuItem Header="Gate Connection" Click="AddGateConnection" />

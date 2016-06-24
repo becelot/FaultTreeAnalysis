@@ -1,4 +1,5 @@
-﻿using FaultTreeAnalysis.FaultTree.Tree;
+﻿using FaultTreeAnalysis.FaultTree.Transformer;
+using FaultTreeAnalysis.FaultTree.Tree;
 using Graphviz4Net.Graphs;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace FaultTreeAnalysis.GUI
         {
             MODE_ADD_AND_GATE,
             MODE_ADD_OR_GATE,
+            MODE_ADD_BASIC_EVENT,
             MODE_ADD_GATE_CONNECTION,
             MODE_ADD_MARKOV_CHAIN
         }
@@ -38,6 +40,9 @@ namespace FaultTreeAnalysis.GUI
                     break;
                 case VisualEditorMode.MODE_ADD_OR_GATE:
                     vertex = new FaultTreeOrGateNode();
+                    break;
+                case VisualEditorMode.MODE_ADD_BASIC_EVENT:
+                    vertex = new FaultTreeTerminalNode(0, this.viewModel.FaultTree.reduce<int>(new MaxTerminalTransformer() ) + 1);
                     break;
                 default:
                     return;
@@ -96,6 +101,7 @@ namespace FaultTreeAnalysis.GUI
                     break;
                 case VisualEditorMode.MODE_ADD_AND_GATE:
                 case VisualEditorMode.MODE_ADD_OR_GATE:
+                case VisualEditorMode.MODE_ADD_BASIC_EVENT:
                     EditorDownGate((Grid)sender, e);
                     break;
                 default: break;
@@ -161,6 +167,18 @@ namespace FaultTreeAnalysis.GUI
             else
             {
                 EditorMode = VisualEditorMode.MODE_ADD_OR_GATE;
+                this.validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
+            }
+        }
+
+        private void AddBasicEvent(object sender, RoutedEventArgs e)
+        {
+            if (this.GraphLayout.Graph.Vertices.Count() == 0)
+            {
+                return;
+            } else
+            {
+                EditorMode = VisualEditorMode.MODE_ADD_BASIC_EVENT;
                 this.validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
             }
         }
