@@ -4,7 +4,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 {
 	public class AddTransformer : TreeTransformer
 	{
-		private int Factor;
+		private readonly int Factor;
 
 		public AddTransformer(int factor)
 		{

@@ -13,13 +13,13 @@ namespace FaultTreeAnalysis.BDD
 
 	public abstract class IBDDCodec
 	{
-		public abstract void write(BDD bdd, FileStream stream);
+		public abstract void write(BinaryDecisionDiagram bdd, FileStream stream);
 
-		public abstract BDD read(FileStream fileName);
+		public abstract BinaryDecisionDiagram read(FileStream fileName);
 
 		public virtual BDDTreeFormat getFormatToken() { return BDDTreeFormat.BDD_TREE_UNKNOWN; }
 
-		public void write(BDD bdd, String fileName)
+		public void write(BinaryDecisionDiagram bdd, String fileName)
 		{
 			using (FileStream stream = new FileStream(fileName, FileMode.Create))
 			{
@@ -27,9 +27,9 @@ namespace FaultTreeAnalysis.BDD
 			}
 		}
 
-		public BDD read(String fileName)
+		public BinaryDecisionDiagram read(String fileName)
 		{
-			BDD res;
+			BinaryDecisionDiagram res;
 
 			//Create stream from file contents
 			using (FileStream stream = new FileStream(fileName, FileMode.Open))

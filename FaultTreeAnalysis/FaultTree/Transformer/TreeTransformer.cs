@@ -5,7 +5,7 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 {
     public class TreeTransformer : FaultTreeTransformer<FaultTreeNode>
     {
-        private Dictionary<int, FaultTreeNode> referenceSafety = new Dictionary<int, FaultTreeNode>();
+        private readonly Dictionary<int, FaultTreeNode> referenceSafety = new Dictionary<int, FaultTreeNode>();
 
         protected FaultTreeNode createNode(FaultTreeNode node)
         {

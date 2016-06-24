@@ -31,7 +31,7 @@ namespace FaultTreeAnalysis
                 Console.WriteLine("Successfully converted tree");
 
 				IBDDCodec bCodec = BDDEncoderFactory.createFaultTreeCodec(s + ".dot");
-				bCodec.write(new BDD.BDD(test), s + ".dot");
+				bCodec.write(new BDD.BinaryDecisionDiagram(test), s + ".dot");
             }
             Console.WriteLine("Finished construction");
             Console.ReadKey();

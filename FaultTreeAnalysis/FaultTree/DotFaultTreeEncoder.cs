@@ -20,7 +20,7 @@ namespace FaultTreeAnalysis.FaultTree
     class DotFaultTreeEncoder : IFaultTreeCodec
     {
         // The .dot pattern syntax
-        private static List<Regex> patternMatcher = new List<Regex> {
+        private static readonly List<Regex> patternMatcher = new List<Regex> {
             new Regex(@"(?<from>\d*)[^-]*-\>[^\d]*(?<to>\d*).*"),
             new Regex(@"(?<id>\d*)[^\[]*\[shape=point.*"),
             new Regex("(?<id>\\d*)[^\\[]*\\[shape=box.*label=\"(?<operator>.*)\".*"),

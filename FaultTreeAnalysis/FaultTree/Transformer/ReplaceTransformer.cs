@@ -5,8 +5,8 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
 {
     public class ReplaceTransformer : TreeTransformer
     {
-        int Label;
-        Boolean value;
+        readonly int Label;
+        readonly Boolean value;
 
         public ReplaceTransformer(int Label, Boolean value)
         {

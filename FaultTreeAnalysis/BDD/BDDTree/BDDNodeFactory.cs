@@ -5,11 +5,11 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 {
     public class BDDNodeFactory
     {
-		private BDDTerminalNode terminalZero;
-		private BDDTerminalNode terminalOne;
+		private readonly BDDTerminalNode terminalZero;
+		private readonly BDDTerminalNode terminalOne;
 
-		private Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode> H;
-		private Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>> T;
+		private readonly Dictionary<Tuple<int, BDDNode, BDDNode>, BDDNode> H;
+		private readonly Dictionary<BDDNode, Tuple<int, BDDNode, BDDNode>> T;
 
 
 		public BDDNodeFactory()

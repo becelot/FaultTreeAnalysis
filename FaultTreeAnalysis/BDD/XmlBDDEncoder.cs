@@ -9,7 +9,7 @@ namespace FaultTreeAnalysis.BDD
 {
 	class XmlBDDEncoder : IBDDCodec
 	{
-		public override BDD read(FileStream fileName)
+		public override BinaryDecisionDiagram read(FileStream fileName)
 		{
 			var listOfNodes = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
 							   from lType in lAssembly.GetTypes()
@@ -18,11 +18,11 @@ namespace FaultTreeAnalysis.BDD
 			var setting = new DataContractSerializerSettings();
 			setting.PreserveObjectReferences = true;
 			setting.KnownTypes = listOfNodes;
-			var serializer = new DataContractSerializer(typeof(BDD), setting);
-			return (BDD)serializer.ReadObject(fileName);
+			var serializer = new DataContractSerializer(typeof(BinaryDecisionDiagram), setting);
+			return (BinaryDecisionDiagram)serializer.ReadObject(fileName);
 		}
 
-		public override void write(BDD bdd, FileStream stream)
+		public override void write(BinaryDecisionDiagram bdd, FileStream stream)
 		{
 			var listOfNodes = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
 							   from lType in lAssembly.GetTypes()
@@ -32,7 +32,7 @@ namespace FaultTreeAnalysis.BDD
 
 			XmlWriterSettings xmlSettings = new XmlWriterSettings { Indent = true };
 
-			var serializer = new DataContractSerializer(typeof(BDD), setting);
+			var serializer = new DataContractSerializer(typeof(BinaryDecisionDiagram), setting);
 			using (var w = XmlWriter.Create(stream, xmlSettings))
 			{
 				serializer.WriteObject(XmlWriter.Create(w, xmlSettings), bdd);
