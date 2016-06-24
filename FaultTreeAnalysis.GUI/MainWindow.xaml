@@ -60,28 +60,31 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type FTAFaultTree:FaultTreeAndGateNode}">
-                <Grid Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseLeftButtonUp="FaultTreeZoomControl_MouseLeftButtonUp" MouseMove="FaultTreeZoomControl_MouseMove">
+                <Grid DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
                     <Border BorderBrush="Black" BorderThickness="2">
-                        <Grid Width="100" Height="50">
+                        <Grid Width="100" Height="50" Background="LightSkyBlue">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="&amp;" FontSize="24" FontWeight="Bold"></TextBlock>
                         </Grid>
                     </Border>
                 </Grid>
-
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type FTAFaultTree:FaultTreeOrGateNode}">
-                <Border BorderBrush="Black" BorderThickness="2">
-                    <Grid Background="LightSkyBlue" Width="100" Height="50">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text=">=0" FontSize="24" FontWeight="Bold"></TextBlock>
-                    </Grid>
-                </Border>
+                <Grid DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                    <Border BorderBrush="Black" BorderThickness="2">
+                        <Grid Width="100" Height="50" Background="LightSkyBlue">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text=">=0" FontSize="24" FontWeight="Bold"></TextBlock>
+                        </Grid>
+                    </Border>
+                </Grid>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type FTAFaultTree:FaultTreeTerminalNode}">
-                <Border CornerRadius="90" Width="40" Height="40" Padding="4" Background="LightGray" BorderBrush="Black" BorderThickness="1">
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Label}"></TextBlock>
-                </Border>
+                <Grid DataContext="{Binding}" Background="Transparent" Width="40" Height="40" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                    <Border CornerRadius="90" Width="40" Height="40" Padding="4" Background="LightGray" BorderBrush="Black" BorderThickness="1">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Label}"></TextBlock>
+                    </Border>
+                </Grid>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type FTABDD:BDDVariableNode}">

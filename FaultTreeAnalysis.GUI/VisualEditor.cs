@@ -1,9 +1,11 @@
-﻿using System;
+﻿using FaultTreeAnalysis.FaultTree.Tree;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -11,13 +13,21 @@ namespace FaultTreeAnalysis.GUI
 {
     public partial class MainWindow
     {
+        private List<Type> validSourceElements = new List<Type>() { typeof(FaultTreeAndGateNode) };
+        private List<Type> validDestinationElements = new List<Type>() { typeof(FaultTreeAndGateNode) };
+
         private void FaultTreeZoomControl_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+
             var canvas = FaultTreeGridView;
 
             var canvasLine = canvas.Children.OfType<Line>().LastOrDefault();
             if (canvasLine == null)
             {
+                if (!validSourceElements.Contains(((Grid)sender).DataContext.GetType()))
+                {
+                    return;
+                }
                 var startPoint = e.GetPosition(canvas);
                 var line = new Line
                 {
@@ -33,12 +43,12 @@ namespace FaultTreeAnalysis.GUI
             }
             else
             {
+                if (!validDestinationElements.Contains(((Grid)sender).DataContext.GetType()))
+                {
+                    return;
+                }
                 canvas.Children.Remove(canvasLine);
             }
-        }
-
-        private void FaultTreeZoomControl_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
         }
 
         private void FaultTreeZoomControl_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
