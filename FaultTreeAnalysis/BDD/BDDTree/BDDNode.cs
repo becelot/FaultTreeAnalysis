@@ -15,8 +15,8 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 
         protected BDDNode(BDDNode highNode, BDDNode lowNode)
         {
-            this.HighNode = highNode;
-            this.LowNode = lowNode;
+            HighNode = highNode;
+            LowNode = lowNode;
         }
 
 		public static int GeneratedNumber;

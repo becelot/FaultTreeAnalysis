@@ -15,11 +15,11 @@ namespace FaultTreeAnalysis.FaultTree.Tree
 
         protected FaultTreeNode() { Childs = new List<FaultTreeNode>(); }
 
-        protected FaultTreeNode(int id) : this() { this.ID = id; }
+        protected FaultTreeNode(int id) : this() { ID = id; }
 
         protected FaultTreeNode(int id, List<FaultTreeNode> childs)
         {
-            this.ID = id;
+            ID = id;
             Childs = childs;
         }
 

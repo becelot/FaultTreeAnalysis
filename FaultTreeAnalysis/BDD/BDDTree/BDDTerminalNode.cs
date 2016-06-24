@@ -13,7 +13,7 @@ namespace FaultTreeAnalysis.BDD.BDDTree
         { }
         public BDDTerminalNode(Boolean value)
         {
-            this.Value = value;
+            Value = value;
         }
 	}
 }
