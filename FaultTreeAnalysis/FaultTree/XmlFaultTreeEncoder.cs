@@ -16,9 +16,11 @@ namespace FaultTreeAnalysis.FaultTree
                                from lType in lAssembly.GetTypes()
                                where typeof(FaultTreeNode).IsAssignableFrom(lType)
                                select lType).ToArray();
-            var setting = new DataContractSerializerSettings();
-            setting.PreserveObjectReferences = true;
-            setting.KnownTypes = listOfNodes;
+            var setting = new DataContractSerializerSettings
+            {
+                PreserveObjectReferences = true,
+                KnownTypes = listOfNodes
+            };
             var serializer = new DataContractSerializer(typeof(FaultTree), setting);
             return (FaultTree)serializer.ReadObject(stream);
         }

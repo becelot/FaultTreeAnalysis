@@ -21,11 +21,7 @@ namespace FaultTreeAnalysis.FaultTree.Tree
 
         public static FaultTreeNodeFactory GetInstance()
         {
-            if (_instance == null)
-            {
-                _instance = new FaultTreeNodeFactory();
-            }
-            return _instance;
+            return _instance ?? (_instance = new FaultTreeNodeFactory());
         }
 
         public FaultTreeGateNode CreateGateNode(int id, FaultTreeGateOperator op)

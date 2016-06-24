@@ -15,10 +15,12 @@ namespace FaultTreeAnalysis.BDD
 							   from lType in lAssembly.GetTypes()
 							   where typeof(BDDNode).IsAssignableFrom(lType)
 							   select lType).ToArray();
-			var setting = new DataContractSerializerSettings();
-			setting.PreserveObjectReferences = true;
-			setting.KnownTypes = listOfNodes;
-			var serializer = new DataContractSerializer(typeof(BinaryDecisionDiagram), setting);
+		    var setting = new DataContractSerializerSettings
+		    {
+		        PreserveObjectReferences = true,
+		        KnownTypes = listOfNodes
+		    };
+		    var serializer = new DataContractSerializer(typeof(BinaryDecisionDiagram), setting);
 			return (BinaryDecisionDiagram)serializer.ReadObject(fileName);
 		}
 

@@ -41,9 +41,8 @@ namespace FaultTreeAnalysis.BDD.BDDTree
 
 		public List<BDDNode> FlatMap()
 		{
-			List<BDDNode> flat = new List<BDDNode>();
-			flat.Add(this);
-			GeneratedNumber++;
+		    List<BDDNode> flat = new List<BDDNode> {this};
+		    GeneratedNumber++;
 			if (GetType() == typeof(BDDVariableNode))
 			{
 				HighNode.FlatMap(ref flat);

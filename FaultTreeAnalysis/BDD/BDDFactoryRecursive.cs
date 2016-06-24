@@ -8,14 +8,10 @@ namespace FaultTreeAnalysis.BDD
 	{
 		public static BDDFactory GetInstance()
 		{
-			if (Instance == null)
-			{
-				Instance = new BDDFactoryRecursive();
-			}
-			return Instance;
+		    return Instance ?? (Instance = new BDDFactoryRecursive());
 		}
 
-		private BDDNode createBDD(FaultTree.FaultTree ft, BDDNodeFactory nodeFactory)
+	    private BDDNode createBDD(FaultTree.FaultTree ft, BDDNodeFactory nodeFactory)
 		{
 			int nextVariable = ft.Reduce(new MinTerminalTransformer());
 			if (nextVariable == int.MaxValue)
