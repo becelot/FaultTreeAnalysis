@@ -34,19 +34,17 @@ namespace FaultTreeAnalysis.GUI.Converters
 
 			var faultTreeTerminalNodes = graph.GetAllVertices().OfType<FaultTreeTerminalNode>().OrderBy(n => n.Label).ToList();
 			int count = faultTreeTerminalNodes.Count();
-			for (int i = 0; i < count; i++)
-			{
-				for (int j = 0; j < count; j++)
-				{
-					if (faultTree.GeneratorMatrix[i, j] == 0) continue;
 
-					var edge = new Edge<FaultTreeNode>(faultTreeTerminalNodes[i - 1], faultTreeTerminalNodes[j - 1], new Arrow())
-					{
-						Label = ((FaultTree.FaultTree) value).GeneratorMatrix[i, j].ToString(CultureInfo.InvariantCulture)
-					};
-					graph.AddEdge(edge);
-				}
-			}
+		    var markovEdges = faultTree.MarkovChain.GetAllEdges();
+
+		    foreach (var mEdge in markovEdges)
+		    {
+                var edge = new Edge<FaultTreeNode>(mEdge.Item1, mEdge.Item3, new Arrow())
+                {
+                    Label = faultTree.MarkovChain[mEdge.Item1, mEdge.Item3].ToString(CultureInfo.InvariantCulture)
+                };
+                graph.AddEdge(edge);
+            }
 
 			return graph;
 		}
