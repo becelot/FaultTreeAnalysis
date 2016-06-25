@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using FaultTreeAnalysis.FaultTree.Tree;
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Complex;
 
 namespace FaultTreeAnalysis.FaultTree
 {
@@ -14,8 +16,9 @@ namespace FaultTreeAnalysis.FaultTree
     {
         // The .dot pattern syntax
         private static readonly List<Regex> PatternMatcher = new List<Regex> {
-            new Regex(@"(?<from>\d*)[^-]*-\>[^\d]*(?<to>\d*).*"),
-            new Regex(@"(?<id>\d*)[^\[]*\[shape=point.*"),
+            new Regex(@"(?<from>\d*)[^-]*-\>[^\d]*(?<to>\d*).*dir=none.*"),
+			new Regex("(?<from>\\d*)[^-]*-\\>[^\\d]*(?<to>\\d*).*dir=forward.*label=\"(?<rate>.*)\".*"),
+			new Regex(@"(?<id>\d*)[^\[]*\[shape=point.*"),
             new Regex("(?<id>\\d*)[^\\[]*\\[shape=box.*label=\"(?<operator>.*)\".*"),
             new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<label>.*)\".*")
         };
@@ -39,29 +42,41 @@ namespace FaultTreeAnalysis.FaultTree
                               orderby symbol.Token
                               group symbol by symbol.Token;
 
-            Debug.Assert(symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT).Count() == 1);
+            Debug.Assert(symbolGroup.Count(g => g.Key == (int)DotParseToken.DOT_ROOT) == 1);
 
             //Extract different node types
-            var rootNode = (from r in symbolGroup.ElementAt((int)DotParseToken.DOT_ROOT)
+            var rootNode = (from r in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_ROOT)
                             select FaultTreeNodeFactory.GetInstance().CreateGateNode(int.Parse(r.Information.Groups["id"].Value), FaultTreeNodeFactory.FaultTreeGateOperator.FAULT_TREE_OPERATOR_AND) as FaultTreeNode).ToList();
 
-            var terminals = (from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_IDENTIFIER)
-                            select new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value)) as FaultTreeNode).ToList();
+            var terminals = (from symbol in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_IDENTIFIER)
+							 select new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value)) as FaultTreeNode).ToList();
 
-            var gates = (from symbol in symbolGroup.ElementAt((int)DotParseToken.DOT_GATE)
-                         select FaultTreeNodeFactory.GetInstance().CreateGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value) as FaultTreeNode).ToList();
+            var gates = (from symbol in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_GATE)
+						 select FaultTreeNodeFactory.GetInstance().CreateGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value) as FaultTreeNode).ToList();
 
             //Union on all nodes
             var nodes = (from t in terminals select new {t.ID, Node = t }).Union(from g in gates select new {g.ID, Node = g }).Union(from r in rootNode select new {r.ID, Node = r }).OrderBy(n => n.ID).ToList();
 
 
-            (from trans in symbolGroup.ElementAt((int)DotParseToken.DOT_TRANSITION)
-             let f = nodes[int.Parse(trans.Information.Groups["from"].Value)]
+            (from trans in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_TRANSITION)
+			 let f = nodes[int.Parse(trans.Information.Groups["from"].Value)]
              let t = nodes[int.Parse(trans.Information.Groups["to"].Value)]
              select new { From = f, To = t }).ToList().ForEach(trans => trans.From.Node.Childs.Add(trans.To.Node));
-            
 
-            return new FaultTree(rootNode.ElementAt(0).Childs.ElementAt(0));
+	        Matrix<double> chains = Matrix<double>.Build.Dense(terminals.Count, terminals.Count);
+
+	        if (symbolGroup.FirstOrDefault(g => g.Key == (int) DotParseToken.DOT_MARKOV_TRANSITION)?.Any() ?? false)
+	        {
+		        var tt = symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_MARKOV_TRANSITION);
+		        foreach (var s in tt)
+		        {
+			        chains[
+				        (nodes[int.Parse(s.Information.Groups["from"].Value)].Node as FaultTreeTerminalNode).Label,
+				        (nodes[int.Parse(s.Information.Groups["to"].Value)].Node as FaultTreeTerminalNode).Label] = double.Parse(s.Information.Groups["rate"].Value);
+		        }
+	        }
+			Console.WriteLine(chains);
+	        return new FaultTree(rootNode.ElementAt(0).Childs.ElementAt(0), chains);
         }
 
         public override void Write(FaultTree ft, FileStream stream)
