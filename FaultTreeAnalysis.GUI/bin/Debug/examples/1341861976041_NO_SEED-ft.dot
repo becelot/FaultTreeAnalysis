@@ -7,5 +7,6 @@ digraph G {
 6 [shape=box, style=filled, height=0.25, width=0.5, label="&"];6 -> 5 [style=filled, dir=none];6 -> 4 [style=filled, dir=none];6 -> 1 [style=filled, dir=none];
 7 [shape=box, style=filled, height=0.25, width=0.5, label="&"];7 -> 3 [style=filled, dir=none];7 -> 2 [style=filled, dir=none];
 5 [shape=circle, height=0.25, width=0.25, label="2"];
+2 -> 3 [style=filled, dir=forward, label="0.2"];
 
 }
