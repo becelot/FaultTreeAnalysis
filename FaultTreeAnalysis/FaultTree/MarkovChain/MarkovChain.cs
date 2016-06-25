@@ -105,5 +105,33 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
                 }
             }
         }
+
+        public IEnumerable<IEnumerable<TVertex>> GetComponents(IEnumerable<TVertex> vertices)
+        {
+            HashSet<TVertex> visited = new HashSet<TVertex>();
+
+            foreach (var vertex in vertices)
+            {
+                if (visited.Contains(vertex)) continue;
+
+                HashSet<TVertex> component = new HashSet<TVertex>();
+                Stack<TVertex> toVisit = new Stack<TVertex>();
+                toVisit.Push(vertex);
+
+                while (toVisit.Any())
+                {
+                    var current = toVisit.Pop();
+                    if (visited.Contains(current)) continue;
+
+                    component.Add(current);
+                    visited.Add(current);
+
+                    GetOutgoingVertices(current).ToList().ForEach(v => toVisit.Push(v));
+                    GetIncomingVertices(current).ToList().ForEach(v => toVisit.Push(v));
+                }
+
+                yield return component;
+            }
+        }
     }
 }
