@@ -18,7 +18,8 @@ namespace FaultTreeAnalysis.GUI.Converters
 
 			Console.WriteLine(@"Converting tree");
 
-			List<FaultTreeNode> nodes = ((FaultTree.FaultTree)value).Traverse().ToList();
+			FaultTree.FaultTree faultTree = ((FaultTree.FaultTree)value);
+			List<FaultTreeNode> nodes = faultTree.Traverse().ToList();
 
 			foreach (FaultTreeNode n in nodes)
 			{
@@ -30,16 +31,22 @@ namespace FaultTreeAnalysis.GUI.Converters
 				}
 			}
 
-			/*
-			var a = new FaultTreeAndGate() { Name = "Jonh" };
-			var b = new FaultTreeOrGate() { Name = "Jonh" };
-			var c = new FaultTreeAndGate() { Name = "Jonh" };
 
-			graph.AddVertex(a);
-			graph.AddVertex(b);
-			graph.AddVertex(c);
+			var faultTreeTerminalNodes = graph.GetAllVertices().OfType<FaultTreeTerminalNode>().OrderBy(n => n.Label).ToList();
+			int count = faultTreeTerminalNodes.Count();
+			for (int i = 0; i < count; i++)
+			{
+				for (int j = 0; j < count; j++)
+				{
+					if (faultTree.GeneratorMatrix[i, j] == 0) continue;
 
-			graph.AddEdge(new Edge<FaultTreeGate>(a, b));*/
+					var edge = new Edge<FaultTreeNode>(faultTreeTerminalNodes[i - 1], faultTreeTerminalNodes[j - 1], new Arrow())
+					{
+						Label = ((FaultTree.FaultTree) value).GeneratorMatrix[i, j].ToString(CultureInfo.InvariantCulture)
+					};
+					graph.AddEdge(edge);
+				}
+			}
 
 			return graph;
 		}
