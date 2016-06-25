@@ -23,7 +23,7 @@ namespace FaultTreeAnalysis.FaultTree
             new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<label>.*)\".*")
         };
 
-        public override FaultTree Read(FileStream stream)
+		public override FaultTree Read(FileStream stream)
         {
             var sr = new StreamReader(stream);
 
@@ -65,17 +65,15 @@ namespace FaultTreeAnalysis.FaultTree
 
 	        Matrix<double> chains = Matrix<double>.Build.Dense(terminals.Count, terminals.Count);
 
-	        if (symbolGroup.FirstOrDefault(g => g.Key == (int) DotParseToken.DOT_MARKOV_TRANSITION)?.Any() ?? false)
-	        {
-		        var tt = symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_MARKOV_TRANSITION);
-		        foreach (var s in tt)
-		        {
-			        chains[
-				        (nodes[int.Parse(s.Information.Groups["from"].Value)].Node as FaultTreeTerminalNode).Label,
-				        (nodes[int.Parse(s.Information.Groups["to"].Value)].Node as FaultTreeTerminalNode).Label] = double.Parse(s.Information.Groups["rate"].Value);
-		        }
-	        }
-			Console.WriteLine(chains);
+			if (symbolGroup.FirstOrDefault(g => g.Key == (int) DotParseToken.DOT_MARKOV_TRANSITION)?.Any() ?? false)
+			{
+				(from trans in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_MARKOV_TRANSITION)
+				 let f = nodes[int.Parse(trans.Information.Groups["from"].Value)].Node as FaultTreeTerminalNode
+				 let t = nodes[int.Parse(trans.Information.Groups["to"].Value)].Node as FaultTreeTerminalNode
+				 let r = trans.Information.Groups["rate"].Value
+				 select new { From = f, To = t, Rate = r }).ToList().ForEach(trans => chains[trans.From.Label, trans.To.Label] = double.Parse(trans.Rate));
+			}
+
 	        return new FaultTree(rootNode.ElementAt(0).Childs.ElementAt(0), chains);
         }
 
