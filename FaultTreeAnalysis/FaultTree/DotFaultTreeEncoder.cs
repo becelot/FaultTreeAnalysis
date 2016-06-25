@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FaultTreeAnalysis.FaultTree.MarkovChain;
 using FaultTreeAnalysis.FaultTree.Tree;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Complex;
@@ -63,7 +64,7 @@ namespace FaultTreeAnalysis.FaultTree
              let t = nodes[int.Parse(trans.Information.Groups["to"].Value)]
              select new { From = f, To = t }).ToList().ForEach(trans => trans.From.Node.Childs.Add(trans.To.Node));
 
-	        Matrix<double> chains = Matrix<double>.Build.Dense(terminals.Count, terminals.Count);
+		    MarkovChain<FaultTreeTerminalNode> markovChain = new MarkovChain<FaultTreeTerminalNode>(terminals.Count);
 
 			if (symbolGroup.FirstOrDefault(g => g.Key == (int) DotParseToken.DOT_MARKOV_TRANSITION)?.Any() ?? false)
 			{
@@ -71,10 +72,10 @@ namespace FaultTreeAnalysis.FaultTree
 				 let f = nodes[int.Parse(trans.Information.Groups["from"].Value)].Node as FaultTreeTerminalNode
 				 let t = nodes[int.Parse(trans.Information.Groups["to"].Value)].Node as FaultTreeTerminalNode
 				 let r = trans.Information.Groups["rate"].Value
-				 select new { From = f, To = t, Rate = r }).ToList().ForEach(trans => chains[trans.From.Label, trans.To.Label] = double.Parse(trans.Rate));
+				 select new { From = f, To = t, Rate = r }).ToList().ForEach(trans => markovChain[trans.From, trans.To] = double.Parse(trans.Rate));
 			}
 
-	        return new FaultTree(rootNode.ElementAt(0).Childs.ElementAt(0), chains);
+	        return new FaultTree(rootNode.ElementAt(0).Childs.ElementAt(0), markovChain);
         }
 
         public override void Write(FaultTree ft, FileStream stream)
