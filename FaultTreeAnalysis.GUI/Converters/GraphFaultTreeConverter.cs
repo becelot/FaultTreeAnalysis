@@ -37,9 +37,13 @@ namespace FaultTreeAnalysis.GUI.Converters
 		    var components = faultTree.MarkovChain.GetComponents(terminalNodes);
 
 		    var componentList = components as IList<IEnumerable<FaultTreeTerminalNode>> ?? components.ToList();
-		    componentList.Where(c => c.Count() == 1).ToList().ForEach(vertex => graph.AddVertex(vertex.ToList()[0]));
-		    var subGraphs = componentList.Where(c => c.Count() > 1);
-		    foreach (var sub in subGraphs)
+
+		    foreach (var component in componentList.Where(c => c.Count() == 1))
+		    {
+		        graph.AddVertex(component.ToList()[0]);
+		    }
+
+		    foreach (var sub in componentList.Where(c => c.Count() > 1))
 		    {
 		        SubGraph<FaultTreeNode> subGraph = new SubGraph<FaultTreeNode>();
 		        sub.ToList().ForEach(vertex => subGraph.AddVertex(vertex));
