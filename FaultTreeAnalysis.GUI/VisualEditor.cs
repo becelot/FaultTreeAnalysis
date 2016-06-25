@@ -17,6 +17,7 @@ namespace FaultTreeAnalysis.GUI
 
         public enum VisualEditorMode
         {
+			MODE_VIEW_ONLY,
             MODE_ADD_AND_GATE,
             MODE_ADD_OR_GATE,
             MODE_ADD_BASIC_EVENT,
@@ -24,7 +25,7 @@ namespace FaultTreeAnalysis.GUI
             MODE_ADD_MARKOV_CHAIN
         }
 
-        public VisualEditorMode EditorMode { get; private set; }
+        public VisualEditorMode EditorMode { get; private set; } = VisualEditorMode.MODE_VIEW_ONLY;
 
         private void EditorDownGate(FrameworkElement sender)
         {
@@ -48,6 +49,7 @@ namespace FaultTreeAnalysis.GUI
             viewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
             viewModel.NewEdgeEnd = vertex;
             viewModel.CreateEdge();
+			EditorMode = VisualEditorMode.MODE_VIEW_ONLY;
         }
 
         private void EditorDownConnection(FrameworkElement sender, System.Windows.Input.MouseButtonEventArgs e)
