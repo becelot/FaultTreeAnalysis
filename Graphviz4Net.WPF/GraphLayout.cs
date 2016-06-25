@@ -3,7 +3,6 @@ namespace Graphviz4Net.WPF
 {
     using System;
     using System.ComponentModel;
-    using System.Threading;
     using System.Windows;
     using System.Windows.Controls;
     using Graphs;

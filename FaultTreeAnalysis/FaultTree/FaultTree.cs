@@ -3,8 +3,6 @@ using System.Runtime.Serialization;
 using FaultTreeAnalysis.FaultTree.MarkovChain;
 using FaultTreeAnalysis.FaultTree.Transformer;
 using FaultTreeAnalysis.FaultTree.Tree;
-using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Complex;
 
 namespace FaultTreeAnalysis.FaultTree
 {
@@ -30,8 +28,8 @@ namespace FaultTreeAnalysis.FaultTree
 
 	    public FaultTree(FaultTreeNode root, MarkovChain<FaultTreeTerminalNode> markovChain)
 	    {
-		    this.MarkovChain = markovChain;
-		    this.Root = root;
+		    MarkovChain = markovChain;
+		    Root = root;
 	    }
 
         public T Reduce<T>(FaultTreeTransformer<T> tr)

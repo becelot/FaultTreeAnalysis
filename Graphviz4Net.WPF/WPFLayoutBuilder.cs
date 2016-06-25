@@ -1,8 +1,6 @@
 ﻿
 namespace Graphviz4Net.WPF
 {
-    using System.Globalization;
-    using System.Windows.Data;
     using System;
     using System.Collections.Generic;
     using System.Linq;

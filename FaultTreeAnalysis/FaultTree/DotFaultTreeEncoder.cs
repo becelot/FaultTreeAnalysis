@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using FaultTreeAnalysis.FaultTree.MarkovChain;
 using FaultTreeAnalysis.FaultTree.Tree;
-using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Complex;
 
 namespace FaultTreeAnalysis.FaultTree
 {
