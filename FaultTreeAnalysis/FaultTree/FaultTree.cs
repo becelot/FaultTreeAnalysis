@@ -2,6 +2,8 @@
 using System.Runtime.Serialization;
 using FaultTreeAnalysis.FaultTree.Transformer;
 using FaultTreeAnalysis.FaultTree.Tree;
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Complex;
 
 namespace FaultTreeAnalysis.FaultTree
 {
@@ -11,6 +13,9 @@ namespace FaultTreeAnalysis.FaultTree
         [DataMember]
         public FaultTreeNode Root { get; set; }
 
+		[DataMember]
+		public Matrix<double> GeneratorMatrix { get; set; }
+
         public FaultTree()
         {
 
@@ -19,7 +24,14 @@ namespace FaultTreeAnalysis.FaultTree
         public FaultTree(FaultTreeNode root)
         {
             Root = root;
+			GeneratorMatrix = Matrix<double>.Build.Dense(1, 1);
         }
+
+	    public FaultTree(FaultTreeNode root, Matrix<double> generatorMatrix)
+	    {
+		    this.GeneratorMatrix = generatorMatrix;
+		    this.Root = root;
+	    }
 
         public T Reduce<T>(FaultTreeTransformer<T> tr)
         {
