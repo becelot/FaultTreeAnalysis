@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using FaultTreeAnalysis.FaultTree.MarkovChain;
 using FaultTreeAnalysis.FaultTree.Transformer;
 using FaultTreeAnalysis.FaultTree.Tree;
 using MathNet.Numerics.LinearAlgebra;
@@ -14,7 +15,7 @@ namespace FaultTreeAnalysis.FaultTree
         public FaultTreeNode Root { get; set; }
 
 		[DataMember]
-		public Matrix<double> GeneratorMatrix { get; set; }
+		public MarkovChain<FaultTreeTerminalNode> MarkovChain { get; set; }
 
         public FaultTree()
         {
@@ -24,12 +25,12 @@ namespace FaultTreeAnalysis.FaultTree
         public FaultTree(FaultTreeNode root)
         {
             Root = root;
-			GeneratorMatrix = Matrix<double>.Build.Dense(1, 1);
+			MarkovChain = new MarkovChain<FaultTreeTerminalNode>(1);
         }
 
-	    public FaultTree(FaultTreeNode root, Matrix<double> generatorMatrix)
+	    public FaultTree(FaultTreeNode root, MarkovChain<FaultTreeTerminalNode> markovChain)
 	    {
-		    this.GeneratorMatrix = generatorMatrix;
+		    this.MarkovChain = markovChain;
 		    this.Root = root;
 	    }
 
