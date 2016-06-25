@@ -23,6 +23,7 @@ namespace FaultTreeAnalysis.GUI.Converters
 
 			foreach (FaultTreeNode n in nodes)
 			{
+			    if (n is FaultTreeTerminalNode) continue;
 				graph.AddVertex(n);
 
 				foreach (FaultTreeNode c in n.Childs)
@@ -31,12 +32,22 @@ namespace FaultTreeAnalysis.GUI.Converters
 				}
 			}
 
+		    var terminalNodes = nodes.OfType<FaultTreeTerminalNode>();
 
-			var faultTreeTerminalNodes = graph.GetAllVertices().OfType<FaultTreeTerminalNode>().OrderBy(n => n.Label).ToList();
-			int count = faultTreeTerminalNodes.Count();
+		    var components = faultTree.MarkovChain.GetComponents(terminalNodes);
 
+		    var componentList = components as IList<IEnumerable<FaultTreeTerminalNode>> ?? components.ToList();
+		    componentList.Where(c => c.Count() == 1).ToList().ForEach(vertex => graph.AddVertex(vertex.ToList()[0]));
+		    var subGraphs = componentList.Where(c => c.Count() > 1);
+		    foreach (var sub in subGraphs)
+		    {
+		        SubGraph<FaultTreeNode> subGraph = new SubGraph<FaultTreeNode>();
+		        sub.ToList().ForEach(vertex => subGraph.AddVertex(vertex));
+                graph.AddSubGraph(subGraph);
+		    }
+
+            
 		    var markovEdges = faultTree.MarkovChain.GetAllEdges();
-
 		    foreach (var mEdge in markovEdges)
 		    {
                 var edge = new Edge<FaultTreeNode>(mEdge.Item1, mEdge.Item3, new Arrow())
