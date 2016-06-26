@@ -58,12 +58,16 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
 
         public void AddEdge(TVertex sourceVertex, TVertex destinationVertex, double rate)
         {
-            RateMatrix[GetIndexOfVertex(sourceVertex), GetIndexOfVertex(destinationVertex)] = rate;
+	        int rowIndex = GetIndexOfVertex(sourceVertex);
+	        int colIndex = GetIndexOfVertex(destinationVertex);
+	        RateMatrix[rowIndex, colIndex] = rate;
         }
 
-        public double GetRate(TVertex sourceVertex, TVertex destinationVertex)
+	    public double GetRate(TVertex sourceVertex, TVertex destinationVertex)
         {
-            return RateMatrix[GetIndexOfVertex(sourceVertex), GetIndexOfVertex(destinationVertex)];
+			int rowIndex = GetIndexOfVertex(sourceVertex);
+			int colIndex = GetIndexOfVertex(destinationVertex);
+			return RateMatrix[rowIndex, colIndex];
         }
 
         public IEnumerable<TVertex> GetOutgoingVertices(TVertex vertex)
