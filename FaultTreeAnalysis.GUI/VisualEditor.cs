@@ -96,6 +96,7 @@ namespace FaultTreeAnalysis.GUI
             switch (EditorMode)
             {
                 case VisualEditorMode.MODE_ADD_GATE_CONNECTION:
+				case VisualEditorMode.MODE_ADD_MARKOV_CHAIN:
                     EditorDownConnection((Grid)sender, e);
                     break;
                 case VisualEditorMode.MODE_ADD_AND_GATE:
