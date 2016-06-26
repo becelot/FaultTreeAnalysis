@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaultTreeAnalysis", "FaultTreeAnalysis\FaultTreeAnalysis.csproj", "{89E39B50-8E42-4909-9F67-00843657DBE2}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaultTreeAnalysis.GUI", "FaultTreeAnalysis.GUI\FaultTreeAnalysis.GUI.csproj", "{F820EB5A-BBFD-46AD-9EEB-3DFE8D1D7BE7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFExtensions", "WPFExtensions\WPFExtensions.csproj", "{A7915102-8326-4862-96F0-4EB80ED087B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaultTreeAnalysis.Tests", "FaultTreeAnalysis.Tests\FaultTreeAnalysis.Tests.csproj", "{2A350A1C-A20B-4023-971A-625CF9F4CC59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{A7915102-8326-4862-96F0-4EB80ED087B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A7915102-8326-4862-96F0-4EB80ED087B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{A7915102-8326-4862-96F0-4EB80ED087B4}.Release|x86.Build.0 = Release|Any CPU
+		{2A350A1C-A20B-4023-971A-625CF9F4CC59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A350A1C-A20B-4023-971A-625CF9F4CC59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A350A1C-A20B-4023-971A-625CF9F4CC59}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2A350A1C-A20B-4023-971A-625CF9F4CC59}.Debug|x86.Build.0 = Debug|Any CPU
+		{2A350A1C-A20B-4023-971A-625CF9F4CC59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A350A1C-A20B-4023-971A-625CF9F4CC59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A350A1C-A20B-4023-971A-625CF9F4CC59}.Release|x86.ActiveCfg = Release|Any CPU
+		{2A350A1C-A20B-4023-971A-625CF9F4CC59}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
