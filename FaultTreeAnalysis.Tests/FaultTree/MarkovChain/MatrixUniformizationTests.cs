@@ -16,16 +16,32 @@ namespace FaultTreeAnalysis.Tests.FaultTree.MarkovChain
     {
         public static IEnumerable TestCases
         {
-            get
-            {
-                yield return new TestCaseData(Matrix<double>.Build.DenseOfArray(new double[,] { {-0.5, 0.6}, {0.5, 0.6} })).Returns(0);
-            }
+	        get
+	        {
+		        yield return TestCaseBuilder(0.5, 0.6, 0.2, 1e-16);
+				yield return TestCaseBuilder(0.5, 0.6, 0.1, 1e-16);
+				yield return TestCaseBuilder(0.5, 0.6, 0.3, 1e-16);
+				yield return TestCaseBuilder(0.5, 0.6, 2.0, 1e-16);
+				yield return TestCaseBuilder(0.5, 0.6, 20.0, 1e-16);
+			}
         }
 
-        [Test, TestCaseSource(typeof(MatrixUniformizationTests), "TestCases")]
-        public double UniformizationTest(Matrix<double> matrix)
+	    private static TestCaseData TestCaseBuilder(double lambda, double mu, double time, double tolerance)
+	    {
+			return new TestCaseData(Matrix<double>.Build.DenseOfArray(new double[,] { { -lambda, lambda }, { mu, -mu } }), time, tolerance).Returns(true);
+		}
+
+		[Test, TestCaseSource(typeof(MatrixUniformizationTests), "TestCases")]
+        public bool UniformizationTest(Matrix<double> matrix, double time, double tolerance)
         {
-            return 0;
+	        var goal = matrix.Uniformization(Vector<double>.Build.DenseOfArray(new double[] { 1.0d, 0.0d}), time, tolerance);
+
+	        var lambda = matrix[1,0];
+	        var mu = matrix[1,0];
+
+	        var test = mu/(lambda + mu) + (lambda/(lambda + mu)*Math.Exp(-(lambda + mu)*time));
+
+			return test - goal[0] < tolerance*10;
         }
     }
 
