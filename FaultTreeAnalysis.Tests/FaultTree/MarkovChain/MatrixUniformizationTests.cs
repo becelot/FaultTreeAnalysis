@@ -2,12 +2,7 @@
 using FaultTreeAnalysis.FaultTree.MarkovChain;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Single;
 
 namespace FaultTreeAnalysis.Tests.FaultTree.MarkovChain
 {
@@ -28,13 +23,13 @@ namespace FaultTreeAnalysis.Tests.FaultTree.MarkovChain
 
 	    private static TestCaseData TestCaseBuilder(double lambda, double mu, double time, double tolerance)
 	    {
-			return new TestCaseData(Matrix<double>.Build.DenseOfArray(new double[,] { { -lambda, lambda }, { mu, -mu } }), time, tolerance).Returns(true);
+			return new TestCaseData(Matrix<double>.Build.DenseOfArray(new[,] { { -lambda, lambda }, { mu, -mu } }), time, tolerance).Returns(true);
 		}
 
-		[Test, TestCaseSource(typeof(MatrixUniformizationTests), "TestCases")]
+		[Test, TestCaseSource(typeof(MatrixUniformizationTests), nameof(TestCases))]
         public bool UniformizationTest(Matrix<double> matrix, double time, double tolerance)
         {
-	        var goal = matrix.Uniformization(Vector<double>.Build.DenseOfArray(new double[] { 1.0d, 0.0d}), time, tolerance);
+	        var goal = matrix.Uniformization(Vector<double>.Build.DenseOfArray(new[] { 1.0d, 0.0d}), time, tolerance);
 
 	        var lambda = matrix[1,0];
 	        var mu = matrix[1,0];
