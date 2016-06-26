@@ -38,28 +38,22 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
 	        int k;
 	        if (l > 0)
 	        {
-		        sum = 1;
-		        for (k = 1;; k++)
-		        {
-			        sum += Math.Pow(q*time, k)/Factorial(k);
-			        if ((1 - Math.Exp(-q*time)*sum) > errorTolerance/2)
-			        {
-				        continue;
-			        }
-			        break;
-		        }
-	        }
+				sum = 1;
+				k = 0;
+				while ((1 - Math.Exp(-q * time) * sum) > errorTolerance / 2)
+				{
+					k++;
+					sum += Math.Pow(q * time, k) / Factorial(k);
+				}
+			}
 	        else
 	        {
 				sum = 1;
-				for (k = 1;; k++)
-				{
+		        k = 0;
+		        while ((1 - Math.Exp(-q*time)*sum) > errorTolerance)
+		        {
+			        k++;
 					sum += Math.Pow(q * time, k) / Factorial(k);
-					if ((1 - Math.Exp(-q * time) * sum) > errorTolerance)
-					{
-						continue;
-					}
-					break;
 				}
 			}
 
