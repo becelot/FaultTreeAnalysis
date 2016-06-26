@@ -48,7 +48,15 @@
                 return;
             }
 
-            NewEdgeStart.Childs.Add(NewEdgeEnd);
+	        if (NewEdgeEnd is FaultTreeTerminalNode && NewEdgeStart is FaultTreeTerminalNode)
+	        {
+		        FaultTree.MarkovChain[NewEdgeStart as FaultTreeTerminalNode, NewEdgeEnd as FaultTreeTerminalNode] = 0.2d;
+	        }
+	        else
+	        {
+				NewEdgeStart.Childs.Add(NewEdgeEnd);
+			}
+            
             RaisePropertyChanged("FaultTree");
         }
 
