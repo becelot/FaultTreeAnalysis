@@ -33,9 +33,9 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
 
             int max = entryMap.Values.DefaultIfEmpty(-1).Max();
 
-            if (max + 1 > RateMatrix.ColumnCount)
+            if (max + 2 > RateMatrix.ColumnCount)
             {
-                RateMatrix = Matrix<double>.Build.Dense(max + 1, max + 1, (i, j) => i == max+1 || j == max+1 ? 0 : RateMatrix[i,j]);
+                RateMatrix = Matrix<double>.Build.Dense(max + 2, max + 2, (i, j) => i == max+1 || j == max+1 ? 0 : RateMatrix[i,j]);
             } 
 
             entryMap.Add(vertex, max+1);
@@ -110,6 +110,7 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
 
             foreach (var vertex in vertices)
             {
+	            GetIndexOfVertex(vertex);
                 if (visited.Contains(vertex)) continue;
 
                 HashSet<TVertex> component = new HashSet<TVertex>();
