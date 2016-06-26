@@ -44,9 +44,4 @@ namespace FaultTreeAnalysis.Tests.FaultTree.MarkovChain
 			return test - goal[0] < tolerance*10;
         }
     }
-
-    public class UniformizationTestCases
-    {
-        
-    }
 }
