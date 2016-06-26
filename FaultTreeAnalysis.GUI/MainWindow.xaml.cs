@@ -69,5 +69,36 @@ namespace FaultTreeAnalysis.GUI
 				LoadFromFile(filename);
 			}
 		}
+
+	    private void SaveToFile(string fileName)
+	    {
+		    FaultTreeEncoderFactory.CreateFaultTreeCodec(FaultTreeFormat.FAULT_TREE_XML).Write(viewModel.FaultTree, fileName);
+	    }
+
+		private void SaveProjectClick(object sender, RoutedEventArgs e)
+		{
+			// Create OpenFileDialog 
+			Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog()
+			{
+				DefaultExt = ".xml",
+				Filter = "XML Files (*.xml)|*.xml",
+				InitialDirectory = Directory.GetCurrentDirectory()
+			};
+
+			// Set filter for file extension and default file extension 
+
+
+			// Display OpenFileDialog by calling ShowDialog method 
+			bool? result = dlg.ShowDialog();
+
+
+			// Get the selected file name and display in a TextBox 
+			if (result == true)
+			{
+				// Open document 
+				string filename = dlg.FileName;
+				SaveToFile(filename);
+			}
+		}
 	}
 }
