@@ -148,6 +148,8 @@
                     <MenuItem Header="Example _9" Click="Example9Open" />
                     <MenuItem Header="Example _10" Click="Example10Open" />
                 </MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="_SAVE PROJECT" Click="SaveProjectClick"></MenuItem>
             </MenuItem>
             <MenuItem Header="_VIEW">
                 <MenuItem.Icon>
@@ -171,6 +173,7 @@
                 <MenuItem Header="Add AND-Gate" Click="AddAndGate" />
                 <MenuItem Header="Add OR-Gate" Click="AddOrGate" />
                 <MenuItem Header="Add Basic Event" Click="AddBasicEvent" />
+                <Separator></Separator>
                 <MenuItem Header="Add Edge">
                     <MenuItem Header="Markov Chain" Click="AddMarkovChain" />
                     <MenuItem Header="Gate Connection" Click="AddGateConnection" />
