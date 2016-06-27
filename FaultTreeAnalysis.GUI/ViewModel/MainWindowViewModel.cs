@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using FaultTreeAnalysis.FaultTree.Tree;
+using FaultTreeAnalysis.GUI.Windows;
 
 namespace FaultTreeAnalysis.GUI.ViewModel
 {
@@ -35,7 +36,7 @@ namespace FaultTreeAnalysis.GUI.ViewModel
 
         public FaultTreeNode NewEdgeEnd { get; set; }
 
-        public void CreateEdge()
+        public async void CreateEdge()
         {
             if ((NewEdgeStart == null) ||
                 (NewEdgeEnd == null))
@@ -50,7 +51,13 @@ namespace FaultTreeAnalysis.GUI.ViewModel
 
 	        if (NewEdgeEnd is FaultTreeTerminalNode && NewEdgeStart is FaultTreeTerminalNode)
 	        {
-		        FaultTree.MarkovChain[NewEdgeStart as FaultTreeTerminalNode, NewEdgeEnd as FaultTreeTerminalNode] = 0.2d;
+		        string rateString = await MessageDialogs.ShowRateDialogAsync();
+		        double rate;
+				if (double.TryParse(rateString, out rate))
+		        {
+					FaultTree.MarkovChain[(FaultTreeTerminalNode) NewEdgeStart, (FaultTreeTerminalNode) NewEdgeEnd] = rate;
+				}
+		        
 	        }
 	        else
 	        {
