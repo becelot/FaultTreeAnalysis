@@ -1,9 +1,9 @@
-﻿namespace FaultTreeAnalysis.GUI
-{
-    using FaultTree.Tree;
-    using System.ComponentModel;
+﻿using System.ComponentModel;
+using FaultTreeAnalysis.FaultTree.Tree;
 
-    public class DiamondArrow
+namespace FaultTreeAnalysis.GUI.ViewModel
+{
+	public class DiamondArrow
     {
     }
 

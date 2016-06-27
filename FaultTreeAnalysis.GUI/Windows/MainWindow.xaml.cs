@@ -1,11 +1,13 @@
 ﻿
-namespace FaultTreeAnalysis.GUI
+using System.IO;
+using System.Windows;
+using FaultTreeAnalysis.FaultTree;
+using FaultTreeAnalysis.GUI.Util;
+using FaultTreeAnalysis.GUI.ViewModel;
+
+namespace FaultTreeAnalysis.GUI.Windows
 {
-    using FaultTree;
-    using System.IO;
-    using System.Windows;
-    using Util;
-    public partial class MainWindow
+	public partial class MainWindow
     {
 		private readonly MainWindowViewModel viewModel;
 

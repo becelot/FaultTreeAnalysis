@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
+using FaultTreeAnalysis.GUI.ViewModel;
 
 namespace FaultTreeAnalysis.GUI.Converters
 {

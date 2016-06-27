@@ -1,14 +1,14 @@
-﻿using FaultTreeAnalysis.FaultTree.Tree;
-using FaultTreeAnalysis.GUI.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using FaultTreeAnalysis.FaultTree.Tree;
+using FaultTreeAnalysis.GUI.Util;
 
-namespace FaultTreeAnalysis.GUI
+namespace FaultTreeAnalysis.GUI.Windows
 {
     public partial class MainWindow
     {
