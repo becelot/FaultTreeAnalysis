@@ -55,7 +55,37 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type edgeViewModels:EdgeViewModel}">
-                <Path Data="{Binding Data}" Stroke="Black" StrokeDashArray="{Binding Edge.DashArray}" StrokeThickness="1" ToolTip="{Binding Edge.Label}"/>
+                <Path Data="{Binding Data}" Stroke="Black" StrokeDashArray="{Binding Edge.DashArray}" ToolTip="{Binding Edge.Label}">
+                    <Path.Style>
+                        <Style TargetType="Path">
+                            <Style.Triggers>
+                                <Trigger Property="Path.IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation From="0" To="2" Duration="00:00:00.2" 
+                                                        Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation From="2" To="0" Duration="00:00:00.2" 
+                                                        Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                    <Setter Property="StrokeThickness" Value="5"></Setter>
+                                </Trigger>
+                                
+                            </Style.Triggers>
+                        </Style>
+                    </Path.Style>
+                    <Path.Effect>
+                        <BlurEffect Radius="0" KernelType="Gaussian"></BlurEffect>
+                    </Path.Effect>
+                </Path>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeAndGateNode}">
