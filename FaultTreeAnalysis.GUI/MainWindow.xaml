@@ -59,9 +59,63 @@
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeAndGateNode}">
                 <Grid DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect ShadowDepth="10" BlurRadius="10" Color="DarkGray"  Opacity="0.5"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
                     <Border BorderBrush="Black" BorderThickness="2">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation From="0" To="2" Duration="00:00:00.2" 
+                                                        Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation From="2" To="0" Duration="00:00:00.2" 
+                                                        Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                        <Setter Property="BorderThickness" Value="3"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Border.Effect>
+                            <BlurEffect Radius="0" KernelType="Gaussian" />
+                        </Border.Effect>
                         <Grid Width="100" Height="50" Background="LightSkyBlue">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="&amp;" FontSize="24" FontWeight="Bold" />
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="&amp;" FontWeight="Bold" >
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="True">
+                                                <Setter Property="FontSize" Value="27"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="False">
+                                                <Setter Property="FontSize" Value="24"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </Grid>
                     </Border>
                 </Grid>
@@ -69,9 +123,63 @@
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeOrGateNode}">
                 <Grid DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect ShadowDepth="10" BlurRadius="10" Color="DarkGray"  Opacity="0.5"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
                     <Border BorderBrush="Black" BorderThickness="2">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation From="0" To="2" Duration="00:00:00.2" 
+                                                        Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation From="2" To="0" Duration="00:00:00.2" 
+                                                        Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                        <Setter Property="BorderThickness" Value="3"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Border.Effect>
+                            <BlurEffect Radius="0" KernelType="Gaussian" />
+                        </Border.Effect>
                         <Grid Width="100" Height="50" Background="LightSkyBlue">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text=">=0" FontSize="24" FontWeight="Bold" />
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text=">=0" FontWeight="Bold" >
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="True">
+                                                <Setter Property="FontSize" Value="27"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="False">
+                                                <Setter Property="FontSize" Value="24"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </Grid>
                     </Border>
                 </Grid>
@@ -79,8 +187,62 @@
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeTerminalNode}">
                 <Grid DataContext="{Binding}" Background="Transparent" Width="40" Height="40" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect ShadowDepth="10" BlurRadius="10" Color="DarkGray"  Opacity="0.5"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
                     <Border CornerRadius="90" Width="40" Height="40" Padding="4" Background="LightGray" BorderBrush="Black" BorderThickness="1">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Label}" />
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation From="0" To="2" Duration="00:00:00.2" 
+                                                        Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation From="2" To="0" Duration="00:00:00.2" 
+                                                        Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                        <Setter Property="BorderThickness" Value="3"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Border.Effect>
+                            <BlurEffect Radius="0" KernelType="Gaussian" />
+                        </Border.Effect>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Label}" >
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="False">
+                                            <Setter Property="FontWeight" Value="Normal"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </Border>
                 </Grid>
             </DataTemplate>
