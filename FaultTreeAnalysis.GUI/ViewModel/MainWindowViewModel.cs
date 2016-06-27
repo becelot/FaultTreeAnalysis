@@ -27,11 +27,6 @@ namespace FaultTreeAnalysis.GUI.ViewModel
 			set { faultTree = value; RaisePropertyChanged("FaultTree"); }
 		}
 
-        /*public IEnumerable<string> PersonNames
-        {
-            get { return this.Graph.AllVertices.Select(x => x.Name); }
-        }*/
-
         public FaultTreeNode NewEdgeStart { get; set; }
 
         public FaultTreeNode NewEdgeEnd { get; set; }
@@ -73,10 +68,5 @@ namespace FaultTreeAnalysis.GUI.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
-
-        //private FaultTreeGate GetPerson(string name)
-        //{
-        //    return this.Graph.AllVertices.First(x => string.CompareOrdinal(x.Name, name) == 0);
-        //}
     }
 }
