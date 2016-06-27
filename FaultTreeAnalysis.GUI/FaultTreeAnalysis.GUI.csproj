@@ -78,6 +78,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BDDGraphConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
+    <Compile Include="Core.cs" />
     <Compile Include="ViewModel\StyledEdge.cs" />
     <Compile Include="Util\ConsoleManager.cs" />
     <Compile Include="Util\FaultTreeExtensions.cs" />
