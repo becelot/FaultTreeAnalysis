@@ -1,8 +1,8 @@
-﻿using Graphviz4Net.Graphs;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Media;
+using Graphviz4Net.Graphs;
 
-namespace FaultTreeAnalysis.GUI
+namespace FaultTreeAnalysis.GUI.ViewModel
 {
 	public class StyledEdge<TVertex> : Edge<TVertex>
 	{

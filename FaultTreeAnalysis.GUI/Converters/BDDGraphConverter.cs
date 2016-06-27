@@ -3,6 +3,7 @@ using Graphviz4Net.Graphs;
 using System;
 using System.Globalization;
 using System.Windows.Data;
+using FaultTreeAnalysis.GUI.ViewModel;
 
 namespace FaultTreeAnalysis.GUI.Converters
 {

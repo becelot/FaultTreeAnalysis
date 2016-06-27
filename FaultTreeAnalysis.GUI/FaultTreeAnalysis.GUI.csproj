@@ -78,14 +78,14 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BDDGraphConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
-    <Compile Include="StyledEdge.cs" />
+    <Compile Include="ViewModel\StyledEdge.cs" />
     <Compile Include="Util\ConsoleManager.cs" />
     <Compile Include="Util\FaultTreeExtensions.cs" />
     <Compile Include="Util\FaultTreeMaxIdTransformer.cs" />
-    <Compile Include="Windows\MainWindow.VisualEditor.cs" >
-	  <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Windows\MainWindow.VisualEditor.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
-	</Compile>
+    </Compile>
     <Page Include="FlyoutControls\OptionsMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
