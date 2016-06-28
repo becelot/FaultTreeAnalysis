@@ -1,5 +1,16 @@
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DotParseToken.cs" company="RWTH-Aachen">
+//   Benedict Becker, Nico Jansen
+// </copyright>
+// <summary>
+//   
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace FaultTreeAnalysis.FaultTree
 {
+    /// <summary>
+    /// The dot parse token.
+    /// </summary>
     internal enum DotParseToken
     {
         DOT_TRANSITION = 0,

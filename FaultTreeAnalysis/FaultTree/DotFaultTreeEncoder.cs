@@ -1,4 +1,12 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DotFaultTreeEncoder.cs" company="RWTH-Aachen">
+//   Benedict Becker, Nico Jansen
+// </copyright>
+// <summary>
+//   
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -49,7 +57,7 @@ namespace FaultTreeAnalysis.FaultTree
                             select FaultTreeNodeFactory.GetInstance().CreateGateNode(int.Parse(r.Information.Groups["id"].Value), FaultTreeNodeFactory.FaultTreeGateOperator.FAULT_TREE_OPERATOR_AND) as FaultTreeNode).ToList();
 
             var terminals = (from symbol in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_IDENTIFIER)
-							 select new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value)) as FaultTreeTerminalNode).ToList();
+							 select new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value))).ToList();
 
             var gates = (from symbol in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_GATE)
 						 select FaultTreeNodeFactory.GetInstance().CreateGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value) as FaultTreeNode).ToList();
@@ -79,14 +87,16 @@ namespace FaultTreeAnalysis.FaultTree
 		        int newLabel = terminals.Max(n => n.Label) + 1;
 		        int newID = nodes.Max(n => n.ID) + 1;
 
-		        foreach (var implicitChain in symbolGroup.FirstOrDefault(g => g.Key == (int) DotParseToken.DOT_IMPLICIT_CHAIN))
-		        {
-		            var newNode = new FaultTreeTerminalNode(newID, newLabel);
-		            var existingNode = terminals.First(t => t.ID == int.Parse(implicitChain.Information.Groups["id"].Value));
+		        var markovChainGroup = symbolGroup.FirstOrDefault(g => g.Key == (int) DotParseToken.DOT_IMPLICIT_CHAIN);
+		        if (markovChainGroup != null)
+		            foreach (var implicitChain in markovChainGroup)
+		            {
+		                var newNode = new FaultTreeTerminalNode(newID, newLabel);
+		                var existingNode = terminals.First(t => t.ID == int.Parse(implicitChain.Information.Groups["id"].Value));
 
-		            markovChain[newNode, existingNode] = double.Parse(implicitChain.Information.Groups["lambda"].Value);
-                    markovChain[existingNode, newNode] = double.Parse(implicitChain.Information.Groups["mu"].Value);
-                }
+		                markovChain[newNode, existingNode] = double.Parse(implicitChain.Information.Groups["lambda"].Value);
+		                markovChain[existingNode, newNode] = double.Parse(implicitChain.Information.Groups["mu"].Value);
+		            }
 		    }
 
 

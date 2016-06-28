@@ -1,33 +1,74 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
-using FaultTreeAnalysis.BDD.BDDTree;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="BinaryDecisionDiagram.cs" company="RWTH-Aachen">
+//   Benedict Becker, Nico Jansen
+// </copyright>
+// <summary>
+//   
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace FaultTreeAnalysis.BDD
 {
-	[DataContract(Name = "BinaryDecisionDiagram")]
+    using System.Collections.Generic;
+    using System.Runtime.Serialization;
+
+    using FaultTreeAnalysis.BDD.BDDTree;
+
+    /// <summary>
+    /// The binary decision diagram.
+    /// </summary>
+    [DataContract(Name = "BinaryDecisionDiagram")]
 	public class BinaryDecisionDiagram
     {
-		[DataMember]
+        /// <summary>
+        /// Gets or sets the root.
+        /// </summary>
+        [DataMember]
 		public BDDNode Root { get; set; }
 
-		public BinaryDecisionDiagram()
-		{
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryDecisionDiagram"/> class.
+        /// </summary>
+        public BinaryDecisionDiagram()
+        {
+        }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BinaryDecisionDiagram"/> class.
+        /// </summary>
+        /// <param name="root">
+        /// The root.
+        /// </param>
+        public BinaryDecisionDiagram(BDDNode root)
+		{
+            this.Root = root;
 		}
 
-		public BinaryDecisionDiagram(BDDNode root)
-		{
-			Root = root;
-		}
-
-		public static implicit operator BinaryDecisionDiagram(FaultTree.FaultTree ft)
+        /// <summary>
+        /// Implicit conversion from <see cref="FaultTreeAnalysis.FaultTree"/>
+        /// </summary>
+        /// <param name="ft">
+        /// The ft.
+        /// </param>
+        /// <returns>
+        /// </returns>
+        public static implicit operator BinaryDecisionDiagram(FaultTree.FaultTree ft)
 		{
 			return new BinaryDecisionDiagram(BDDFactory.GetComponentConnectionInstance().CreateBDD(ft));
 		}
 
-		public IEnumerable<BDDNode> FlatMap()
+        /// <summary>
+        /// Flattens the structure to list.
+        /// </summary>
+        /// <returns>
+        /// The <see>
+        ///         <cref>IEnumerable</cref>
+        ///     </see>
+        ///     .
+        /// </returns>
+        public IEnumerable<BDDNode> FlatMap()
 		{
-			return BDDNode.Traverse(Root);
+			return BDDNode.Traverse(this.Root);
 		}
 	}
 }

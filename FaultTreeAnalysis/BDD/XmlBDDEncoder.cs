@@ -1,15 +1,37 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Xml;
-using FaultTreeAnalysis.BDD.BDDTree;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="XmlBDDEncoder.cs" company="RWTH-Aachen">
+//   Benedict Becker, Nico Jansen
+// </copyright>
+// <summary>
+//   
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace FaultTreeAnalysis.BDD
 {
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Xml;
+
+    using FaultTreeAnalysis.BDD.BDDTree;
+
+    /// <summary>
+    /// The xml bdd encoder.
+    /// </summary>
     internal class XmlBDDEncoder : IBDDCodec
 	{
-		public override BinaryDecisionDiagram Read(FileStream fileName)
+        /// <summary>
+        /// Reads a Binary Decision Diagram from a stream.
+        /// </summary>
+        /// <param name="fileName">
+        /// The file sttream.
+        /// </param>
+        /// <returns>
+        /// The <see cref="BinaryDecisionDiagram"/>.
+        /// </returns>
+        public override BinaryDecisionDiagram Read(FileStream fileName)
 		{
 			var listOfNodes = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
 							   from lType in lAssembly.GetTypes()
@@ -24,7 +46,16 @@ namespace FaultTreeAnalysis.BDD
 			return (BinaryDecisionDiagram)serializer.ReadObject(fileName);
 		}
 
-		public override void Write(BinaryDecisionDiagram bdd, FileStream stream)
+        /// <summary>
+        /// Writes a given BDD to a stream.
+        /// </summary>
+        /// <param name="bdd">
+        /// The bdd.
+        /// </param>
+        /// <param name="stream">
+        /// The stream.
+        /// </param>
+        public override void Write(BinaryDecisionDiagram bdd, FileStream stream)
 		{
 			var listOfNodes = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
 							   from lType in lAssembly.GetTypes()
@@ -41,7 +72,13 @@ namespace FaultTreeAnalysis.BDD
 			}
 		}
 
-		public override BDDTreeFormat GetFormatToken()
+        /// <summary>
+        /// The format token.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="BDDTreeFormat"/>.
+        /// </returns>
+        public override BDDTreeFormat GetFormatToken()
 		{
 			return BDDTreeFormat.BDD_TREE_XML;
 		}

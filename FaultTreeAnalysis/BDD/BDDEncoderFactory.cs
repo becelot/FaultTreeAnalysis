@@ -1,13 +1,37 @@
-﻿namespace FaultTreeAnalysis.BDD
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="BDDEncoderFactory.cs" company="RWTH-Aachen">
+//   Benedict Becker, Nico Jansen
+// </copyright>
+// <summary>
+//   
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace FaultTreeAnalysis.BDD
 {
-	public class BDDEncoderFactory
+    /// <summary>
+    /// The bdd encoder factory.
+    /// </summary>
+    public class BDDEncoderFactory
 	{
-		public static IBDDCodec CreateFaultTreeCodec(string fileName)
+        /// <summary>
+        /// Creates a BDD codec from file extension.
+        /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IBDDCodec"/>.
+        /// </returns>
+        /// <exception cref="BDDFormatException">
+        /// Thrown if file does not contain a valid BDD.
+        /// </exception>
+        public static IBDDCodec CreateFaultTreeCodec(string fileName)
 		{
 			if (fileName.EndsWith(".dot"))
 			{
 				return new DotBDDEncoder();
 			}
+
 		    if (fileName.EndsWith(".xml"))
 		    {
 		        return new XmlBDDEncoder();
@@ -16,7 +40,16 @@
 		    throw new BDDFormatException("The given file was not recognized as a valid format!");
 		}
 
-		public static IBDDCodec CreateFaultTreeCodec(BDDTreeFormat format)
+        /// <summary>
+        /// Creates Codec from format token.
+        /// </summary>
+        /// <param name="format">
+        /// The format.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IBDDCodec"/>.
+        /// </returns>
+        public static IBDDCodec CreateFaultTreeCodec(BDDTreeFormat format)
 		{
 		    switch (format)
 		    {
