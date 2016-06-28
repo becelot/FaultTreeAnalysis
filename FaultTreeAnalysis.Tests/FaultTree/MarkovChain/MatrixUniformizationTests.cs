@@ -46,7 +46,19 @@ namespace FaultTreeAnalysis.Tests.FaultTree.MarkovChain
 			{
 				Assert.That(goal[0], Is.EqualTo(test).Within(tolerance * 100));
 			}
-			
         }
+
+	    [Test]
+	    public void TripleChainTest()
+	    {
+		    Matrix<double> matrix = Matrix<double>.Build.DenseOfArray(new double[,]
+		    {
+			    { -0.2, 0.1, 0},
+			    { 0.2, -0.2, 0.05},
+			    { 0, 0.1, -0.05}
+		    }).Transpose();
+
+		    Vector<double> initialDistribution = Vector<double>.Build.DenseOfArray(new double[] {0.9, 0.1, 0});
+	    }
     }
 }
