@@ -168,6 +168,12 @@ namespace FaultTreeAnalysis.GUI.Windows
 	    private void PathMouseDown(object sender, System.Windows.Input.MouseEventArgs e)
 	    {
 			var edge = (Edge<FaultTreeNode>)((EdgeViewModel)((FrameworkElement)sender).DataContext).Edge;
+
+		    if (edge.Source is FaultTreeTerminalNode)
+		    {
+			    return;
+		    }
+
 		    FaultTreeNode node;
 		    switch (EditorMode)
 		    {
