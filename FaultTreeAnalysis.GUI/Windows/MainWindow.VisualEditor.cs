@@ -10,6 +10,7 @@ using FaultTreeAnalysis.FaultTree.Tree;
 using FaultTreeAnalysis.GUI.Util;
 using Graphviz4Net.Graphs;
 using Graphviz4Net.WPF.ViewModels;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace FaultTreeAnalysis.GUI.Windows
 {
@@ -25,7 +26,8 @@ namespace FaultTreeAnalysis.GUI.Windows
             MODE_ADD_OR_GATE,
             MODE_ADD_BASIC_EVENT,
             MODE_ADD_GATE_CONNECTION,
-            MODE_ADD_MARKOV_CHAIN
+            MODE_ADD_MARKOV_CHAIN,
+			MODE_REMOVE_CONTENT
         }
 
         public VisualEditorMode EditorMode { get; private set; } = VisualEditorMode.MODE_VIEW_ONLY;
@@ -94,6 +96,21 @@ namespace FaultTreeAnalysis.GUI.Windows
             }
         }
 
+	    private async void EditorDownRemove(Grid sender)
+	    {
+		    FaultTreeNode node = (FaultTreeNode) sender.DataContext;
+
+		    var t = await MessageDialogs.ShowWarningAsync("Are you sure you want to remove this node?");
+		    if (t != MessageDialogResult.Affirmative) return;
+		    var parents = viewModel.FaultTree.Traverse()?.Where(n => n.Childs.Contains(node)).ToList();
+
+			parents?.ForEach(parent => parent.Childs.Remove(node));
+			parents?.ForEach(parent => parent.Childs.AddRange(node.Childs));
+			parents?.ForEach(parent => parent.Childs = parent.Childs.Distinct().ToList());
+
+			viewModel.RaisePropertyChanged("FaultTree");
+	    }
+
         private void FaultTreeZoomControl_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             switch (EditorMode)
@@ -107,6 +124,9 @@ namespace FaultTreeAnalysis.GUI.Windows
                 case VisualEditorMode.MODE_ADD_BASIC_EVENT:
                     EditorDownGate((Grid)sender);
                     break;
+				case VisualEditorMode.MODE_REMOVE_CONTENT:
+					EditorDownRemove((Grid)sender);
+					break;
             }
         }
 
@@ -142,6 +162,12 @@ namespace FaultTreeAnalysis.GUI.Windows
             validDestinationElements = new List<Type>() { typeof(FaultTreeTerminalNode) };
             EditorMode = VisualEditorMode.MODE_ADD_MARKOV_CHAIN;
         }
+
+	    private void RemoveComponent(object sender, RoutedEventArgs e)
+	    {
+		    validSourceElements = new List<Type>() { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode), typeof(FaultTreeTerminalNode) };
+			EditorMode = VisualEditorMode.MODE_REMOVE_CONTENT;;
+		}
 
         private void AddAndGate(object sender, RoutedEventArgs e)
         {
