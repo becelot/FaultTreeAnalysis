@@ -292,6 +292,14 @@
         </ResourceDictionary>
 
     </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.AddAndGateCommand}" Executed="AddAndGate"/>
+        <CommandBinding Command="{x:Static local:MainWindow.AddOrGateCommand}" Executed="AddOrGate"/>
+        <CommandBinding Command="{x:Static local:MainWindow.AddBasicEventCommand}" Executed="AddBasicEvent"/>
+        <CommandBinding Command="{x:Static local:MainWindow.AddMarkovChainCommand}" Executed="AddMarkovChain"/>
+        <CommandBinding Command="{x:Static local:MainWindow.AddConnectionCommand}" Executed="AddGateConnection"/>
+        <CommandBinding Command="{x:Static local:MainWindow.RemoveComponentCommand}" Executed="RemoveComponent"/>
+    </Window.CommandBindings>
     <mahApps:MetroWindow.RightWindowCommands>
         <mahApps:WindowCommands>
             <Button Click="Button_Click">
