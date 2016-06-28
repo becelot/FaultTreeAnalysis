@@ -7,6 +7,7 @@ namespace FaultTreeAnalysis.FaultTree
         DOT_ROOT = 2,
         DOT_GATE = 3,
         DOT_IDENTIFIER = 4,
-        DOT_INVALID = 5
+        DOT_IMPLICIT_CHAIN = 5,
+        DOT_INVALID = 6
     }
 }
