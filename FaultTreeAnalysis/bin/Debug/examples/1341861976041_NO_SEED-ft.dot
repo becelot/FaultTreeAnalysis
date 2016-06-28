@@ -1,6 +1,6 @@
 digraph G {
 0 [shape=point, style=filled, width=0.15, label="TOP"]; 0 -> 8 [style=filled, dir=none];8 [shape=box, style=filled, height=0.25, width=0.5, label=">=1"];8 -> 7 [style=filled, dir=none];8 -> 6 [style=filled, dir=none];8 -> 1 [style=filled, dir=none];
-1 [shape=circle, height=0.25, width=0.25, label="5"];
+1 [shape=circle, height=0.25, width=0.25, label="5", comment="lambda=0.5,mu=0.9"];
 2 [shape=circle, height=0.25, width=0.25, label="4"];
 3 [shape=circle, height=0.25, width=0.25, label="1"];
 4 [shape=circle, height=0.25, width=0.25, label="3"];
