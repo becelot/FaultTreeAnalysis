@@ -328,7 +328,6 @@
                     </Rectangle>
                 </MenuItem.Icon>
                 <MenuItem Header="FROM _FILE" Click="LoadFromFileClick" />
-                <Separator />
                 <MenuItem Header="_EXAMPLES">
                     <MenuItem Header="Example _1" Click="Example1Open" />
                     <MenuItem Header="Example _2" Click="Example2Open" />
@@ -366,6 +365,9 @@
                 <MenuItem Header="Add AND-Gate" Click="AddAndGate" />
                 <MenuItem Header="Add OR-Gate" Click="AddOrGate" />
                 <MenuItem Header="Add Basic Event" Click="AddBasicEvent" />
+                <Separator></Separator>
+                <MenuItem Header="Insert AND-Gate"></MenuItem>
+                <MenuItem Header="Insert OR-Gate"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Add Edge">
                     <MenuItem Header="Markov Chain" Click="AddMarkovChain" />
