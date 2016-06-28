@@ -27,9 +27,7 @@ namespace FaultTreeAnalysis.GUI.Windows
             MODE_ADD_BASIC_EVENT,
             MODE_ADD_GATE_CONNECTION,
             MODE_ADD_MARKOV_CHAIN,
-			MODE_REMOVE_CONTENT,
-			MODE_INSERT_AND_GATE,
-			MODE_INSERT_OR_GATE
+			MODE_REMOVE_CONTENT
         }
 
         public VisualEditorMode EditorMode { get; private set; } = VisualEditorMode.MODE_VIEW_ONLY;
@@ -177,10 +175,10 @@ namespace FaultTreeAnalysis.GUI.Windows
 		    FaultTreeNode node;
 		    switch (EditorMode)
 		    {
-			    case VisualEditorMode.MODE_INSERT_AND_GATE:
+			    case VisualEditorMode.MODE_ADD_AND_GATE:
 					node = new FaultTreeAndGateNode(viewModel.FaultTree.NextId());
 					break;
-			    case VisualEditorMode.MODE_INSERT_OR_GATE:
+			    case VisualEditorMode.MODE_ADD_OR_GATE:
 					node = new FaultTreeOrGateNode(viewModel.FaultTree.NextId());
 					break;
 			    default:
@@ -193,17 +191,6 @@ namespace FaultTreeAnalysis.GUI.Windows
 
 		    viewModel.RaisePropertyChanged("FaultTree");
 		    EditorMode = VisualEditorMode.MODE_VIEW_ONLY;
-	    }
-
-
-	    private void InsertOrGate(object sneder, RoutedEventArgs e)
-	    {
-			EditorMode = VisualEditorMode.MODE_INSERT_OR_GATE;
-		}
-
-	    private void InsertAndGate(object sender, RoutedEventArgs e)
-	    {
-		    EditorMode = VisualEditorMode.MODE_INSERT_AND_GATE;
 	    }
 
 	    private void RemoveComponent(object sender, RoutedEventArgs e)
