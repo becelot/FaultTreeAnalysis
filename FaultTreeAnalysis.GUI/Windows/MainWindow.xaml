@@ -356,7 +356,7 @@
                 <RadioButton Content="Fault Tree View" IsChecked="True" Checked="ViewChanged" Name="FaultTreeView" />
                 <RadioButton Content="BinaryDecisionDiagram View" IsChecked="False" Checked="ViewChanged" Name="BDDTreeView"/>
             </MenuItem>
-            <MenuItem Header="_ADD">
+            <MenuItem Header="_EDIT">
                 <MenuItem.Icon>
                     <Rectangle Width="24" Height="16"  Margin="0,0,-10,0">
                         <Rectangle.Fill>
@@ -367,20 +367,20 @@
                 <MenuItem Header="Add AND-Gate" Click="AddAndGate" />
                 <MenuItem Header="Add OR-Gate" Click="AddOrGate" />
                 <MenuItem Header="Add Basic Event" Click="AddBasicEvent" />
-                <Separator></Separator>
                 <MenuItem Header="Add Edge">
                     <MenuItem Header="Markov Chain" Click="AddMarkovChain" />
                     <MenuItem Header="Gate Connection" Click="AddGateConnection" />
                 </MenuItem>
-            </MenuItem>
-            <MenuItem Header="_REMOVE" Click="RemoveComponent">
-                <MenuItem.Icon>
-                    <Rectangle Width="16" Height="16"  Margin="0,0,-10,0">
-                        <Rectangle.Fill>
-                            <VisualBrush Visual="{StaticResource App_removeComponent}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </MenuItem.Icon>
+                <Separator></Separator>
+                <MenuItem Header="_Remove Component" Click="RemoveComponent">
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16"  Margin="0,0,-10,0">
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{StaticResource App_removeComponent}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_ANALYZE">
                 <MenuItem.Icon>
