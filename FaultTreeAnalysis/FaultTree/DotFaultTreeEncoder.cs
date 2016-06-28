@@ -19,7 +19,8 @@ namespace FaultTreeAnalysis.FaultTree
 			new Regex("(?<from>\\d*)[^-]*-\\>[^\\d]*(?<to>\\d*).*dir=forward.*label=\"(?<rate>.*)\".*"),
 			new Regex(@"(?<id>\d*)[^\[]*\[shape=point.*"),
             new Regex("(?<id>\\d*)[^\\[]*\\[shape=box.*label=\"(?<operator>.*)\".*"),
-            new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<label>.*)\".*")
+            new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<label>[^\"]*)\".*"),
+            new Regex("(?<id>\\d*)[^\\[]*\\[shape=circle.*label=\"(?<label>.*)\".*comment=\"lambda=(?<lambda>.*).*,.*mu=(?<mu>.*)\".*")
         };
 
 		public override FaultTree Read(FileStream stream)
@@ -48,13 +49,13 @@ namespace FaultTreeAnalysis.FaultTree
                             select FaultTreeNodeFactory.GetInstance().CreateGateNode(int.Parse(r.Information.Groups["id"].Value), FaultTreeNodeFactory.FaultTreeGateOperator.FAULT_TREE_OPERATOR_AND) as FaultTreeNode).ToList();
 
             var terminals = (from symbol in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_IDENTIFIER)
-							 select new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value)) as FaultTreeNode).ToList();
+							 select new FaultTreeTerminalNode(int.Parse(symbol.Information.Groups["id"].Value), int.Parse(symbol.Information.Groups["label"].Value)) as FaultTreeTerminalNode).ToList();
 
             var gates = (from symbol in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_GATE)
 						 select FaultTreeNodeFactory.GetInstance().CreateGateNode(int.Parse(symbol.Information.Groups["id"].Value), symbol.Information.Groups["operator"].Value) as FaultTreeNode).ToList();
 
             //Union on all nodes
-            var nodes = (from t in terminals select new {t.ID, Node = t }).Union(from g in gates select new {g.ID, Node = g }).Union(from r in rootNode select new {r.ID, Node = r }).OrderBy(n => n.ID).ToList();
+            var nodes = (from t in terminals select new {t.ID, Node = (FaultTreeNode)t }).Union(from g in gates select new {g.ID, Node = g }).Union(from r in rootNode select new {r.ID, Node = r }).OrderBy(n => n.ID).ToList();
 
 
             (from trans in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_TRANSITION)
@@ -73,7 +74,23 @@ namespace FaultTreeAnalysis.FaultTree
 				 select new { From = f, To = t, Rate = r }).ToList().ForEach(trans => markovChain[trans.From, trans.To] = double.Parse(trans.Rate));
 			}
 
-	        return new FaultTree(rootNode.ElementAt(0).Childs.ElementAt(0), markovChain);
+		    if (symbolGroup.FirstOrDefault(g => g.Key == (int) DotParseToken.DOT_IMPLICIT_CHAIN)?.Any() ?? false)
+		    {
+		        int newLabel = terminals.Max(n => n.Label) + 1;
+		        int newID = nodes.Max(n => n.ID) + 1;
+
+		        foreach (var implicitChain in symbolGroup.FirstOrDefault(g => g.Key == (int) DotParseToken.DOT_IMPLICIT_CHAIN))
+		        {
+		            var newNode = new FaultTreeTerminalNode(newID, newLabel);
+		            var existingNode = terminals.First(t => t.ID == int.Parse(implicitChain.Information.Groups["id"].Value));
+
+		            markovChain[newNode, existingNode] = double.Parse(implicitChain.Information.Groups["lambda"].Value);
+                    markovChain[existingNode, newNode] = double.Parse(implicitChain.Information.Groups["mu"].Value);
+                }
+		    }
+
+
+		    return new FaultTree(rootNode.ElementAt(0).Childs.ElementAt(0), markovChain);
         }
 
         public override void Write(FaultTree ft, FileStream stream)
