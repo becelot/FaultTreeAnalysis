@@ -33,6 +33,7 @@ namespace FaultTreeAnalysis.GUI.Windows
 		private void Example8Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341916948985_NO_SEED-ft.dot");
 		private void Example9Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341917031842_NO_SEED-ft.dot");
 		private void Example10Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341917224042_NO_SEED-ft.dot");
+	    private void TestCaseOpen(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\TestCase.xml");
 
 		private void ViewChanged(object sender, RoutedEventArgs e)
 		{
