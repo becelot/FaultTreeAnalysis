@@ -94,6 +94,14 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
             }
         }
 
+        public IEnumerable<TVertex> GetAllVertices()
+        {
+            foreach (var vertex in entryMap.Keys)
+            {
+                yield return vertex;
+            }
+        }
+
         public IEnumerable<Tuple<TVertex, double, TVertex>> GetAllEdges()
         {
             for (int i = 0; i < RateMatrix.ColumnCount; i++)
