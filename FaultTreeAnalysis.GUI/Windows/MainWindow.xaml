@@ -372,6 +372,15 @@
                     <MenuItem Header="Gate Connection" Click="AddGateConnection" />
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="_ANALYZE">
+                <MenuItem.Icon>
+                    <Rectangle Width="24" Height="16"  Margin="0,0,-10,0">
+                        <Rectangle.Fill>
+                            <VisualBrush Visual="{StaticResource App_analyze}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </MenuItem.Icon>
+            </MenuItem>
         </Menu>
         <Grid Name="FaultTreeGridView" Grid.Column="0" Grid.Row="1" Cursor="Cross" Background="Transparent" >
             <controls:ZoomControl Name="FaultTreeZoomControl" Visibility="{Binding FaultTreeView, Converter={StaticResource VisibilityConverter}}" ZoomDeltaMultiplier="40">
