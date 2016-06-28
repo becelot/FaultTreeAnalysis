@@ -101,6 +101,14 @@ namespace FaultTreeAnalysis.FaultTree
 			        stack.Push(n);
 			    }
 			}
+
+		    foreach (var node in MarkovChain.GetAllVertices())
+		    {
+		        if (!visited.Contains(node))
+		        {
+		            yield return node;
+		        }
+		    }
 		}
 	}
 }
