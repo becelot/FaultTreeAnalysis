@@ -329,6 +329,8 @@
                 </MenuItem.Icon>
                 <MenuItem Header="FROM _FILE" Click="LoadFromFileClick" />
                 <MenuItem Header="_EXAMPLES">
+                    <MenuItem Header="TestCase Example" Click="TestCaseOpen" />
+                    <Separator></Separator>
                     <MenuItem Header="Example _1" Click="Example1Open" />
                     <MenuItem Header="Example _2" Click="Example2Open" />
                     <MenuItem Header="Example _3" Click="Example3Open" />
