@@ -40,6 +40,18 @@ namespace FaultTreeAnalysis.Tests.FaultTree.MarkovChain
 			Assert.That(0.7, Is.EqualTo(chains[7,10]));
 		}
 
+		[Test]
+		public void GetAllVerticesTest()
+		{
+			MarkovChain<int> chains = new MarkovChain<int>(4);
+
+			chains.AddEdge(0, 4, 0.2);
+			chains.AddEdge(5, 6, 0.7);
+			chains.AddEdge(7, 9, 0.1);
+
+			CollectionAssert.AreEquivalent(new List<int> { 0, 4, 5, 6, 7, 9}, chains.GetAllVertices());
+		}
+
 		[Test()]
 		public void AddOverflowEdgeTest()
 		{
