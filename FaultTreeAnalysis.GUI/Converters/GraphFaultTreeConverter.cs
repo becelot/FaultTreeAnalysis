@@ -49,6 +49,7 @@ namespace FaultTreeAnalysis.GUI.Converters
 		        SubGraph<FaultTreeNode> subGraph = new SubGraph<FaultTreeNode>();
 		        sub.ToList().ForEach(vertex => subGraph.AddVertex(vertex));
                 graph.AddSubGraph(subGraph);
+                //sub.ToList().ForEach(vertex => graph.AddVertex(vertex));
 		    }
 
             
