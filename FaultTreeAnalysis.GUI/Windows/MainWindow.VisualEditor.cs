@@ -27,7 +27,9 @@ namespace FaultTreeAnalysis.GUI.Windows
             MODE_ADD_BASIC_EVENT,
             MODE_ADD_GATE_CONNECTION,
             MODE_ADD_MARKOV_CHAIN,
-			MODE_REMOVE_CONTENT
+			MODE_REMOVE_CONTENT,
+			MODE_INSERT_AND_GATE,
+			MODE_INSERT_OR_GATE
         }
 
         public VisualEditorMode EditorMode { get; private set; } = VisualEditorMode.MODE_VIEW_ONLY;
@@ -163,54 +165,91 @@ namespace FaultTreeAnalysis.GUI.Windows
             EditorMode = VisualEditorMode.MODE_ADD_MARKOV_CHAIN;
         }
 
-	    private void RemoveComponent(object sender, RoutedEventArgs e)
+	    private void PathMouseDown(object sender, System.Windows.Input.MouseEventArgs e)
 	    {
-		    validSourceElements = new List<Type>() { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode), typeof(FaultTreeTerminalNode) };
-			EditorMode = VisualEditorMode.MODE_REMOVE_CONTENT;;
+			var edge = (Edge<FaultTreeNode>)((EdgeViewModel)((FrameworkElement)sender).DataContext).Edge;
+		    FaultTreeNode node;
+		    switch (EditorMode)
+		    {
+			    case VisualEditorMode.MODE_INSERT_AND_GATE:
+					node = new FaultTreeAndGateNode(viewModel.FaultTree.NextId());
+					break;
+			    case VisualEditorMode.MODE_INSERT_OR_GATE:
+					node = new FaultTreeOrGateNode(viewModel.FaultTree.NextId());
+					break;
+			    default:
+				    return;
+		    }
+
+		    edge.Source.Childs.Add(node);
+		    edge.Source.Childs.Remove(edge.Destination);
+		    node.Childs.Add(edge.Destination);
+
+		    viewModel.RaisePropertyChanged("FaultTree");
+		    EditorMode = VisualEditorMode.MODE_VIEW_ONLY;
+	    }
+
+
+	    private void InsertOrGate(object sneder, RoutedEventArgs e)
+	    {
+			EditorMode = VisualEditorMode.MODE_INSERT_OR_GATE;
 		}
 
-        private void AddAndGate(object sender, RoutedEventArgs e)
-        {
-            if (!GraphLayout.Graph.Vertices.Any())
-            {
-                viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeAndGateNode(0));
-            } else
-            {
-                EditorMode = VisualEditorMode.MODE_ADD_AND_GATE;
-                validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
-            }
-        }
+	    private void InsertAndGate(object sender, RoutedEventArgs e)
+	    {
+		    EditorMode = VisualEditorMode.MODE_INSERT_AND_GATE;
+	    }
 
-        private void AddOrGate(object sender, RoutedEventArgs e)
-        {
-            if (!GraphLayout.Graph.Vertices.Any())
-            {
-                viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeOrGateNode(0));
-            }
-            else
-            {
-                EditorMode = VisualEditorMode.MODE_ADD_OR_GATE;
-                validSourceElements = new List<Type>() { typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode) };
-            }
-        }
+	    private void RemoveComponent(object sender, RoutedEventArgs e)
+	    {
+		    validSourceElements = new List<Type>() {typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode), typeof(FaultTreeTerminalNode)};
+		    EditorMode = VisualEditorMode.MODE_REMOVE_CONTENT;
+		    ;
+	    }
 
-        private void AddBasicEvent(object sender, RoutedEventArgs e)
-        {
-            if (!GraphLayout.Graph.Vertices.Any()) return;
+	    private void AddAndGate(object sender, RoutedEventArgs e)
+	    {
+		    if (!GraphLayout.Graph.Vertices.Any())
+		    {
+			    viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeAndGateNode(0));
+		    }
+		    else
+		    {
+			    EditorMode = VisualEditorMode.MODE_ADD_AND_GATE;
+			    validSourceElements = new List<Type>() {typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode)};
+		    }
+	    }
 
-            EditorMode = VisualEditorMode.MODE_ADD_BASIC_EVENT;
-            validSourceElements = new List<Type>() {typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode)};
-        }
+	    private void AddOrGate(object sender, RoutedEventArgs e)
+	    {
+		    if (!GraphLayout.Graph.Vertices.Any())
+		    {
+			    viewModel.FaultTree = new FaultTree.FaultTree(new FaultTreeOrGateNode(0));
+		    }
+		    else
+		    {
+			    EditorMode = VisualEditorMode.MODE_ADD_OR_GATE;
+			    validSourceElements = new List<Type>() {typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode)};
+		    }
+	    }
 
-        private void ChangeRateClick(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount >= 2)
-            {
-                var t = (Edge<FaultTreeNode>)((EdgeLabelViewModel)((FrameworkElement)sender).DataContext).Edge;
-                viewModel.NewEdgeStart = t.Source;
-                viewModel.NewEdgeEnd = t.Destination;
-                viewModel.CreateEdge();
-            }
-        }
+	    private void AddBasicEvent(object sender, RoutedEventArgs e)
+	    {
+		    if (!GraphLayout.Graph.Vertices.Any()) return;
+
+		    EditorMode = VisualEditorMode.MODE_ADD_BASIC_EVENT;
+		    validSourceElements = new List<Type>() {typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode)};
+	    }
+
+	    private void ChangeRateClick(object sender, MouseButtonEventArgs e)
+	    {
+		    if (e.ClickCount >= 2)
+		    {
+			    var t = (Edge<FaultTreeNode>) ((EdgeLabelViewModel) ((FrameworkElement) sender).DataContext).Edge;
+			    viewModel.NewEdgeStart = t.Source;
+			    viewModel.NewEdgeEnd = t.Destination;
+			    viewModel.CreateEdge();
+		    }
+	    }
     }
 }
