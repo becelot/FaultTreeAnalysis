@@ -36,8 +36,8 @@
 
             <!-- Set UseContentPresenterForAllElements of GraphLayout to true -->
             <DataTemplate DataType="{x:Type edgeViewModels:EdgeLabelViewModel}">
-                <StackPanel>
-                    <TextBlock Text="{Binding Path=Label}" FontFamily="Comic Sans MS"/>
+                <StackPanel PreviewMouseDown="ChangeRateClick" DataContext="{Binding}" ToolTip="Double click to edit.">
+                    <TextBlock Text="{Binding Path=Label}"  FontFamily="Comic Sans MS" />
                 </StackPanel>
             </DataTemplate>
 
