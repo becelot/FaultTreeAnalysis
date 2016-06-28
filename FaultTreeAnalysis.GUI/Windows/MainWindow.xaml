@@ -89,7 +89,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeAndGateNode}">
-                <Grid DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                <Grid ToolTip="AND Gate" DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
                     <Grid.Style>
                         <Style TargetType="Grid">
                             <Style.Triggers>
@@ -153,7 +153,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeOrGateNode}">
-                <Grid DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                <Grid ToolTip="OR Gate" DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
                     <Grid.Style>
                         <Style TargetType="Grid">
                             <Style.Triggers>
@@ -217,7 +217,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeTerminalNode}">
-                <Grid DataContext="{Binding}" Background="Transparent" Width="40" Height="40" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                <Grid ToolTip="Basic Event" DataContext="{Binding}" Background="Transparent" Width="40" Height="40" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
                     <Grid.Style>
                         <Style TargetType="Grid">
                             <Style.Triggers>
