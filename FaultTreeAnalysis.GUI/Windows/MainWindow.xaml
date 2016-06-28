@@ -55,7 +55,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type edgeViewModels:EdgeViewModel}">
-                <Path Data="{Binding Data}" Stroke="Black" StrokeDashArray="{Binding Edge.DashArray}" ToolTip="{Binding Edge.Label}">
+                <Path MouseDown="PathMouseDown"  Data="{Binding Data}" DataContext="{Binding}" Stroke="Black" StrokeDashArray="{Binding Edge.DashArray}" ToolTip="{Binding Edge.Label}">
                     <Path.Style>
                         <Style TargetType="Path">
                             <Style.Triggers>
@@ -366,8 +366,8 @@
                 <MenuItem Header="Add OR-Gate" Click="AddOrGate" />
                 <MenuItem Header="Add Basic Event" Click="AddBasicEvent" />
                 <Separator></Separator>
-                <MenuItem Header="Insert AND-Gate"></MenuItem>
-                <MenuItem Header="Insert OR-Gate"></MenuItem>
+                <MenuItem Header="Insert AND-Gate" Click="InsertAndGate"></MenuItem>
+                <MenuItem Header="Insert OR-Gate" Click="InsertOrGate"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Add Edge">
                     <MenuItem Header="Markov Chain" Click="AddMarkovChain" />
