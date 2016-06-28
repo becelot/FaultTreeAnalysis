@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using FaultTreeAnalysis.FaultTree.Tree;
 using FaultTreeAnalysis.GUI.Util;
+using Graphviz4Net.Graphs;
+using Graphviz4Net.WPF.ViewModels;
 
 namespace FaultTreeAnalysis.GUI.Windows
 {
@@ -171,6 +174,17 @@ namespace FaultTreeAnalysis.GUI.Windows
 
             EditorMode = VisualEditorMode.MODE_ADD_BASIC_EVENT;
             validSourceElements = new List<Type>() {typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode)};
+        }
+
+        private void ChangeRateClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount >= 2)
+            {
+                var t = (Edge<FaultTreeNode>)((EdgeLabelViewModel)((FrameworkElement)sender).DataContext).Edge;
+                viewModel.NewEdgeStart = t.Source;
+                viewModel.NewEdgeEnd = t.Destination;
+                viewModel.CreateEdge();
+            }
         }
     }
 }
