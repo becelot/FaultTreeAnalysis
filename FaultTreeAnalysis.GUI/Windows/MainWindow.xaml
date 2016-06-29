@@ -391,7 +391,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="_ANALYZE">
+            <MenuItem Header="_ANALYZE" Click="AnalyzeClick">
                 <MenuItem.Icon>
                     <Rectangle Width="24" Height="16"  Margin="0,0,-10,0">
                         <Rectangle.Fill>

@@ -7,7 +7,9 @@ using FaultTreeAnalysis.GUI.ViewModel;
 
 namespace FaultTreeAnalysis.GUI.Windows
 {
-	public partial class MainWindow
+    using System.Linq;
+
+    public partial class MainWindow
     {
 		public readonly MainWindowViewModel ViewModel;
 
@@ -103,5 +105,11 @@ namespace FaultTreeAnalysis.GUI.Windows
 			    this.SaveToFile(filename);
 			}
 		}
+
+	    private void AnalyzeClick(object sender, RoutedEventArgs e)
+	    {
+	        MessageDialogs.ShowWarningAsync(this.ViewModel.FaultTree.Analyze(0.5, 40.0, 1e-16).ElementAt(80).ToString());
+	        ;
+	    }
 	}
 }
