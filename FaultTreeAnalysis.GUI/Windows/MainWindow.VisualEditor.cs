@@ -43,21 +43,22 @@
             switch(this.EditorMode)
             {
                 case VisualEditorMode.MODE_ADD_AND_GATE:
-                    vertex = new FaultTreeAndGateNode(this.viewModel.FaultTree.NextId());
+                    vertex = new FaultTreeAndGateNode(this.ViewModel.FaultTree.NextId());
                     break;
                 case VisualEditorMode.MODE_ADD_OR_GATE:
-                    vertex = new FaultTreeOrGateNode(this.viewModel.FaultTree.NextId());
+                    vertex = new FaultTreeOrGateNode(this.ViewModel.FaultTree.NextId());
                     break;
                 case VisualEditorMode.MODE_ADD_BASIC_EVENT:
-                    vertex = new FaultTreeTerminalNode(this.viewModel.FaultTree.NextId(), this.viewModel.FaultTree.NextBasicEvent());
+                    vertex = new FaultTreeTerminalNode(this.ViewModel.FaultTree.NextId(), this.ViewModel.FaultTree.NextBasicEvent());
+                    this.ViewModel.FaultTree.MarkovChain.InitialDistribution[(FaultTreeTerminalNode)vertex] = 1.0;
                     break;
                 default:
                     return;
             }
 
-            this.viewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
-            this.viewModel.NewEdgeEnd = vertex;
-            this.viewModel.CreateEdge();
+            this.ViewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
+            this.ViewModel.NewEdgeEnd = vertex;
+            this.ViewModel.CreateEdge();
             this.EditorMode = VisualEditorMode.MODE_VIEW_ONLY;
         }
 
@@ -86,7 +87,7 @@
 
                 canvas.Children.Add(line);
 
-                this.viewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
+                this.ViewModel.NewEdgeStart = (FaultTreeNode)sender.DataContext;
             }
             else
             {
@@ -97,8 +98,8 @@
 
                 canvas.Children.Remove(canvasLine);
 
-                this.viewModel.NewEdgeEnd = (FaultTreeNode)sender.DataContext;
-                this.viewModel.CreateEdge();
+                this.ViewModel.NewEdgeEnd = (FaultTreeNode)sender.DataContext;
+                this.ViewModel.CreateEdge();
             }
         }
 
@@ -108,17 +109,35 @@
 
 		    var t = await MessageDialogs.ShowWarningAsync("Are you sure you want to remove this node?");
 		    if (t != MessageDialogResult.Affirmative) return;
-		    var parents = this.viewModel.FaultTree.Traverse()?.Where(n => n.Childs.Contains(node)).ToList();
+		    var parents = this.ViewModel.FaultTree.Traverse()?.Where(n => n.Childs.Contains(node)).ToList();
 
 			parents?.ForEach(parent => parent.Childs.Remove(node));
 			parents?.ForEach(parent => parent.Childs.AddRange(node.Childs));
 			parents?.ForEach(parent => parent.Childs = parent.Childs.Distinct().ToList());
 
-	        this.viewModel.RaisePropertyChanged("FaultTree");
+	        this.ViewModel.RaisePropertyChanged("FaultTree");
 	    }
 
-        private void FaultTreeZoomControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void FaultTreeZoomControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (e.ClickCount >= 2 && ((FrameworkElement)sender).DataContext is FaultTreeTerminalNode)
+            {
+                var probabilityInput = await MessageDialogs.ShowInputDialogAsync(
+                    "Probability",
+                    "Specify an initial probability!",
+                    new MetroDialogSettings());
+
+                double probabiliy = 0.0d;
+                if (double.TryParse(probabilityInput, out probabiliy))
+                {
+                    if (probabiliy >= 0 && probabiliy <= 1)
+                    {
+                        this.ViewModel.FaultTree.MarkovChain.InitialDistribution[(FaultTreeTerminalNode)((FrameworkElement)sender).DataContext] = probabiliy;
+                        this.ViewModel.RaisePropertyChanged("FaultTree");
+                    }
+                }
+                return;
+            }
             switch (this.EditorMode)
             {
                 case VisualEditorMode.MODE_ADD_GATE_CONNECTION:
@@ -183,10 +202,10 @@
 		    switch (this.EditorMode)
 		    {
 			    case VisualEditorMode.MODE_ADD_AND_GATE:
-					node = new FaultTreeAndGateNode(this.viewModel.FaultTree.NextId());
+					node = new FaultTreeAndGateNode(this.ViewModel.FaultTree.NextId());
 					break;
 			    case VisualEditorMode.MODE_ADD_OR_GATE:
-					node = new FaultTreeOrGateNode(this.viewModel.FaultTree.NextId());
+					node = new FaultTreeOrGateNode(this.ViewModel.FaultTree.NextId());
 					break;
 			    default:
 				    return;
@@ -196,7 +215,7 @@
 		    edge.Source.Childs.Remove(edge.Destination);
 		    node.Childs.Add(edge.Destination);
 
-	        this.viewModel.RaisePropertyChanged("FaultTree");
+	        this.ViewModel.RaisePropertyChanged("FaultTree");
 	        this.EditorMode = VisualEditorMode.MODE_VIEW_ONLY;
 	    }
 
@@ -210,7 +229,7 @@
 	    {
 		    if (!this.GraphLayout.Graph.Vertices.Any())
 		    {
-		        this.viewModel.FaultTree = new FaultTree(new FaultTreeAndGateNode(0));
+		        this.ViewModel.FaultTree = new FaultTree(new FaultTreeAndGateNode(0));
 		    }
 		    else
 		    {
@@ -223,7 +242,7 @@
 	    {
 		    if (!this.GraphLayout.Graph.Vertices.Any())
 		    {
-		        this.viewModel.FaultTree = new FaultTree(new FaultTreeOrGateNode(0));
+		        this.ViewModel.FaultTree = new FaultTree(new FaultTreeOrGateNode(0));
 		    }
 		    else
 		    {
@@ -245,9 +264,9 @@
 		    if (e.ClickCount >= 2)
 		    {
 			    var t = (Edge<FaultTreeNode>) ((EdgeLabelViewModel) ((FrameworkElement) sender).DataContext).Edge;
-		        this.viewModel.NewEdgeStart = t.Source;
-		        this.viewModel.NewEdgeEnd = t.Destination;
-		        this.viewModel.CreateEdge();
+		        this.ViewModel.NewEdgeStart = t.Source;
+		        this.ViewModel.NewEdgeEnd = t.Destination;
+		        this.ViewModel.CreateEdge();
 		    }
 	    }
     }
