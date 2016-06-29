@@ -33,8 +33,10 @@ namespace FaultTreeAnalysis.FaultTree
         /// <summary>
         /// Gets or sets all Markov chains found in FaultTree
         /// </summary>
+        [DataMember]
 		public MarkovChain<FaultTreeTerminalNode> MarkovChain { get; set; }
 
+        /*
         /// <summary>
         /// Gets or sets the MarkovChain property. Used for serialization of MarkovChain.
         /// </summary>
@@ -57,7 +59,7 @@ namespace FaultTreeAnalysis.FaultTree
 			        this.MarkovChain[trans.Item1, trans.Item3] = trans.Item2;
 			    }
 		    }
-	    }
+	    }*/
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FaultTree"/> class.
