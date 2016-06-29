@@ -1,96 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FaultTree xmlns:i="http://www.w3.org/2001/XMLSchema-instance" z:Id="1" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/" xmlns="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree">
-  <MarkovArray xmlns:d2p1="http://schemas.datacontract.org/2004/07/System" z:Id="2">
-    <d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="3">
-      <d2p1:m_Item1 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="4">
-        <d4p1:Childs z:Id="5" z:Size="0" />
-        <d4p1:ID>2</d4p1:ID>
-        <d4p1:Label>1</d4p1:Label>
-      </d2p1:m_Item1>
-      <d2p1:m_Item2>0.2</d2p1:m_Item2>
-      <d2p1:m_Item3 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="6">
-        <d4p1:Childs z:Id="7" z:Size="0" />
-        <d4p1:ID>3</d4p1:ID>
-        <d4p1:Label>2</d4p1:Label>
-      </d2p1:m_Item3>
-    </d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
-    <d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="8">
-      <d2p1:m_Item1 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="6" i:nil="true" />
-      <d2p1:m_Item2>0.1</d2p1:m_Item2>
-      <d2p1:m_Item3 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="4" i:nil="true" />
-    </d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
-    <d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="9">
-      <d2p1:m_Item1 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="6" i:nil="true" />
-      <d2p1:m_Item2>0.1</d2p1:m_Item2>
-      <d2p1:m_Item3 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="10">
-        <d4p1:Childs z:Id="11" z:Size="0" />
-        <d4p1:ID>4</d4p1:ID>
-        <d4p1:Label>3</d4p1:Label>
-      </d2p1:m_Item3>
-    </d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
-    <d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="12">
-      <d2p1:m_Item1 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="10" i:nil="true" />
-      <d2p1:m_Item2>0.05</d2p1:m_Item2>
-      <d2p1:m_Item3 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="6" i:nil="true" />
-    </d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
-    <d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="13">
-      <d2p1:m_Item1 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="14">
-        <d4p1:Childs z:Id="15" z:Size="0" />
-        <d4p1:ID>5</d4p1:ID>
-        <d4p1:Label>4</d4p1:Label>
-      </d2p1:m_Item1>
-      <d2p1:m_Item2>0.1</d2p1:m_Item2>
-      <d2p1:m_Item3 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="16">
-        <d4p1:Childs z:Id="17" z:Size="0" />
-        <d4p1:ID>6</d4p1:ID>
-        <d4p1:Label>5</d4p1:Label>
-      </d2p1:m_Item3>
-    </d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
-    <d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="18">
-      <d2p1:m_Item1 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="16" i:nil="true" />
-      <d2p1:m_Item2>0.05</d2p1:m_Item2>
-      <d2p1:m_Item3 xmlns:d4p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="19">
-        <d4p1:Childs z:Id="20" z:Size="0" />
-        <d4p1:ID>7</d4p1:ID>
-        <d4p1:Label>6</d4p1:Label>
-      </d2p1:m_Item3>
-    </d2p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
-  </MarkovArray>
-  <Root xmlns:d2p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="21" i:type="d2p1:FaultTreeAndGateNode">
-    <d2p1:Childs z:Id="22" z:Size="1">
-      <d2p1:FaultTreeNode z:Id="23" i:type="d2p1:FaultTreeAndGateNode">
-        <d2p1:Childs z:Id="24" z:Size="3">
-          <d2p1:FaultTreeNode z:Id="25" i:type="d2p1:FaultTreeAndGateNode">
-            <d2p1:Childs z:Id="26" z:Size="2">
-              <d2p1:FaultTreeNode z:Ref="6" i:nil="true" />
-              <d2p1:FaultTreeNode z:Ref="16" i:nil="true" />
-            </d2p1:Childs>
-            <d2p1:ID>2</d2p1:ID>
-          </d2p1:FaultTreeNode>
-          <d2p1:FaultTreeNode z:Id="27" i:type="d2p1:FaultTreeOrGateNode">
-            <d2p1:Childs z:Id="28" z:Size="3">
-              <d2p1:FaultTreeNode z:Ref="25" i:nil="true" />
-              <d2p1:FaultTreeNode z:Id="29" i:type="d2p1:FaultTreeAndGateNode">
-                <d2p1:Childs z:Id="30" z:Size="2">
-                  <d2p1:FaultTreeNode z:Id="31" i:type="d2p1:FaultTreeOrGateNode">
-                    <d2p1:Childs z:Id="32" z:Size="2">
-                      <d2p1:FaultTreeNode z:Ref="4" i:nil="true" />
-                      <d2p1:FaultTreeNode z:Ref="6" i:nil="true" />
+  <MarkovChain xmlns:d2p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.MarkovChain" z:Id="2">
+    <d2p1:MarkovArray xmlns:d3p1="http://schemas.datacontract.org/2004/07/System" z:Id="3">
+      <d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="4">
+        <d3p1:m_Item1 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="5">
+          <d5p1:Childs z:Id="6" z:Size="0" />
+          <d5p1:ID>2</d5p1:ID>
+          <d5p1:Label>1</d5p1:Label>
+        </d3p1:m_Item1>
+        <d3p1:m_Item2>0.2</d3p1:m_Item2>
+        <d3p1:m_Item3 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="7">
+          <d5p1:Childs z:Id="8" z:Size="0" />
+          <d5p1:ID>3</d5p1:ID>
+          <d5p1:Label>2</d5p1:Label>
+        </d3p1:m_Item3>
+      </d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
+      <d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="9">
+        <d3p1:m_Item1 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="7" i:nil="true" />
+        <d3p1:m_Item2>0.1</d3p1:m_Item2>
+        <d3p1:m_Item3 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="5" i:nil="true" />
+      </d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
+      <d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="10">
+        <d3p1:m_Item1 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="7" i:nil="true" />
+        <d3p1:m_Item2>0.1</d3p1:m_Item2>
+        <d3p1:m_Item3 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="11">
+          <d5p1:Childs z:Id="12" z:Size="0" />
+          <d5p1:ID>4</d5p1:ID>
+          <d5p1:Label>3</d5p1:Label>
+        </d3p1:m_Item3>
+      </d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
+      <d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="13">
+        <d3p1:m_Item1 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="11" i:nil="true" />
+        <d3p1:m_Item2>0.05</d3p1:m_Item2>
+        <d3p1:m_Item3 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="7" i:nil="true" />
+      </d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
+      <d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="14">
+        <d3p1:m_Item1 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="15">
+          <d5p1:Childs z:Id="16" z:Size="0" />
+          <d5p1:ID>5</d5p1:ID>
+          <d5p1:Label>4</d5p1:Label>
+        </d3p1:m_Item1>
+        <d3p1:m_Item2>0.1</d3p1:m_Item2>
+        <d3p1:m_Item3 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="17">
+          <d5p1:Childs z:Id="18" z:Size="0" />
+          <d5p1:ID>6</d5p1:ID>
+          <d5p1:Label>5</d5p1:Label>
+        </d3p1:m_Item3>
+      </d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
+      <d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi z:Id="19">
+        <d3p1:m_Item1 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Ref="17" i:nil="true" />
+        <d3p1:m_Item2>0.05</d3p1:m_Item2>
+        <d3p1:m_Item3 xmlns:d5p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="20">
+          <d5p1:Childs z:Id="21" z:Size="0" />
+          <d5p1:ID>7</d5p1:ID>
+          <d5p1:Label>6</d5p1:Label>
+        </d3p1:m_Item3>
+      </d3p1:TupleOfFaultTreeTerminalNodedoubleFaultTreeTerminalNodeI33esjMi>
+    </d2p1:MarkovArray>
+  </MarkovChain>
+  <Root xmlns:d2p1="http://schemas.datacontract.org/2004/07/FaultTreeAnalysis.FaultTree.Tree" z:Id="22" i:type="d2p1:FaultTreeAndGateNode">
+    <d2p1:Childs z:Id="23" z:Size="2">
+      <d2p1:FaultTreeNode z:Id="24" i:type="d2p1:FaultTreeAndGateNode">
+        <d2p1:Childs z:Id="25" z:Size="2">
+          <d2p1:FaultTreeNode z:Id="26" i:type="d2p1:FaultTreeOrGateNode">
+            <d2p1:Childs z:Id="27" z:Size="3">
+              <d2p1:FaultTreeNode z:Id="28" i:type="d2p1:FaultTreeAndGateNode">
+                <d2p1:Childs z:Id="29" z:Size="2">
+                  <d2p1:FaultTreeNode z:Id="30" i:type="d2p1:FaultTreeOrGateNode">
+                    <d2p1:Childs z:Id="31" z:Size="2">
+                      <d2p1:FaultTreeNode z:Ref="5" i:nil="true" />
+                      <d2p1:FaultTreeNode z:Ref="7" i:nil="true" />
                     </d2p1:Childs>
                     <d2p1:ID>2</d2p1:ID>
                   </d2p1:FaultTreeNode>
-                  <d2p1:FaultTreeNode z:Ref="14" i:nil="true" />
+                  <d2p1:FaultTreeNode z:Ref="15" i:nil="true" />
                 </d2p1:Childs>
                 <d2p1:ID>2</d2p1:ID>
               </d2p1:FaultTreeNode>
-              <d2p1:FaultTreeNode z:Ref="10" i:nil="true" />
+              <d2p1:FaultTreeNode z:Ref="11" i:nil="true" />
+              <d2p1:FaultTreeNode z:Id="32" i:type="d2p1:FaultTreeAndGateNode">
+                <d2p1:Childs z:Id="33" z:Size="2">
+                  <d2p1:FaultTreeNode z:Ref="7" i:nil="true" />
+                  <d2p1:FaultTreeNode z:Ref="17" i:nil="true" />
+                </d2p1:Childs>
+                <d2p1:ID>5</d2p1:ID>
+              </d2p1:FaultTreeNode>
             </d2p1:Childs>
             <d2p1:ID>2</d2p1:ID>
           </d2p1:FaultTreeNode>
-          <d2p1:FaultTreeNode z:Ref="19" i:nil="true" />
+          <d2p1:FaultTreeNode z:Ref="32" i:nil="true" />
         </d2p1:Childs>
         <d2p1:ID>2</d2p1:ID>
       </d2p1:FaultTreeNode>
+      <d2p1:FaultTreeNode z:Ref="20" i:nil="true" />
     </d2p1:Childs>
     <d2p1:ID>0</d2p1:ID>
   </Root>
