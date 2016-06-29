@@ -17,10 +17,11 @@ namespace FaultTreeAnalysis.GUI.Windows
 
 		public MainWindow()
 		{
-		    this.ViewModel = new MainWindowViewModel();
+            ConsoleManager.Show();
+            this.ViewModel = new MainWindowViewModel();
 		    this.DataContext = this.ViewModel;
 		    this.InitializeComponent();
-			ConsoleManager.Show();
+			
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e) => this.FlyoutOptions.IsOpen = true;
@@ -108,8 +109,17 @@ namespace FaultTreeAnalysis.GUI.Windows
 
 	    private void AnalyzeClick(object sender, RoutedEventArgs e)
 	    {
-	        MessageDialogs.ShowWarningAsync(this.ViewModel.FaultTree.Analyze(0.5, 40.0, 1e-16).ElementAt(80).ToString());
-	        ;
+	        //MessageDialogs.ShowWarningAsync(this.ViewModel.FaultTree.Analyze(0.5, 40.0, 1e-16).ElementAt(80).ToString());
+	        this.AnalyzeFlyout.IsOpen = true;
 	    }
-	}
+
+        private void AnalyzeOpenChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.AnalyzeFlyout.IsOpen)
+            {
+                this.Analyze.Initialize();
+            }
+        }
+
+    }
 }
