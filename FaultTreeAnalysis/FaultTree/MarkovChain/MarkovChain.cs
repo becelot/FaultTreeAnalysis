@@ -19,7 +19,7 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
     /// </summary>
     /// <typeparam name="TVertex"></typeparam>
     [DataContract(Name = "MarkovChain")]
-    public class MarkovChain<TVertex>
+    public partial class MarkovChain<TVertex>
     {
         private Matrix<double> RateMatrix { get; set; }
 
