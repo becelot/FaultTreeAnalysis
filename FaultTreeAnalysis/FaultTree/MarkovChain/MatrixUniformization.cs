@@ -37,7 +37,7 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
         /// The <see>
         ///         <cref>Vector</cref>
         ///     </see>
-        ///     .
+        ///     containing the distribution after <value>time</value> has passed.
         /// </returns>
         public static Vector<double> Uniformization(
             this Matrix<double> matrix,
@@ -125,7 +125,7 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
         /// The <see>
         ///         <cref>Matrix</cref>
         ///     </see>
-        ///     .
+        ///     that represents a time step of "time". The matrix can be repeatedly applied to a distribution to find integral multiples of time. 
         /// </returns>
         public static Matrix<double> Uniformization(this Matrix<double> matrix, double time, double errorTolerance)
         {
