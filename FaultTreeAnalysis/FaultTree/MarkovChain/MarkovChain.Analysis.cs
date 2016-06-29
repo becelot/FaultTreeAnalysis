@@ -25,7 +25,7 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
         /// Gets the initial distribution.
         /// </summary>
         [DataMember]
-        public Dictionary<TVertex, double> InitialDistribution { get; private set; } = new Dictionary<TVertex, double>();
+        public Dictionary<TVertex, double> InitialDistribution { get; set; } = new Dictionary<TVertex, double>();
 
 #pragma warning disable 1591
         public Dictionary<TVertex, List<double>> ComputeProbability(double samplingRate, double timeSpan, double errorTolerance)
