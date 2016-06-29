@@ -23,6 +23,7 @@
             <converter:GraphFaultTreeConverter x:Key="GraphFtConverter" />
             <converter:VisibilityConverter x:Key="VisibilityConverter" />
             <converter:BDDGraphConverter x:Key="BDDGraphConverter" />
+            <converter:TerminalNodeToDistributionConverter x:Key="TerminalNodeToDistributionConverter"></converter:TerminalNodeToDistributionConverter>
 
             <DataTemplate DataType="{x:Type viewModel:DiamondArrow}">
                 <Canvas Width="6" Height="11">
@@ -217,7 +218,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeTerminalNode}">
-                <Grid ToolTip="Basic Event" DataContext="{Binding}" Background="Transparent" Width="40" Height="40" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                <Grid ToolTip="{Binding Converter={StaticResource TerminalNodeToDistributionConverter}}" DataContext="{Binding}" Background="Transparent" Width="40" Height="40" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
                     <Grid.Style>
                         <Style TargetType="Grid">
                             <Style.Triggers>
