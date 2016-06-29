@@ -15,16 +15,30 @@ namespace FaultTreeAnalysis.GUI.ViewModel
     public class MainWindowViewModel : INotifyPropertyChanged
     {
 		private bool faultTreeView = true;
-		public bool FaultTreeView { get { return faultTreeView; } set { faultTreeView = value; RaisePropertyChanged("FaultTreeView"); RaisePropertyChanged("BDDTreeView"); } }
+		public bool FaultTreeView {
+		    get
+		    {
+		        return this.faultTreeView;
+		    }
 
-		public bool BDDTreeView => !faultTreeView;
+            set
+            {
+		        this.faultTreeView = value;
+		        this.RaisePropertyChanged("FaultTreeView");
+		        this.RaisePropertyChanged("BDDTreeView");
+            }
+        }
+
+		public bool BDDTreeView => !this.faultTreeView;
 
 
         private FaultTree.FaultTree faultTree;
 		public FaultTree.FaultTree FaultTree
 		{
-			get { return faultTree; }
-			set { faultTree = value; RaisePropertyChanged("FaultTree"); }
+			get { return this.faultTree; }
+			set {
+			    this.faultTree = value;
+			    this.RaisePropertyChanged("FaultTree"); }
 		}
 
         public FaultTreeNode NewEdgeStart { get; set; }
@@ -33,40 +47,40 @@ namespace FaultTreeAnalysis.GUI.ViewModel
 
         public async void CreateEdge()
         {
-            if ((NewEdgeStart == null) ||
-                (NewEdgeEnd == null))
+            if ((this.NewEdgeStart == null) ||
+                (this.NewEdgeEnd == null))
             {
                 return;
             }
 
-            if (NewEdgeStart == NewEdgeEnd)
+            if (this.NewEdgeStart == this.NewEdgeEnd)
             {
                 return;
             }
 
-	        if (NewEdgeEnd is FaultTreeTerminalNode && NewEdgeStart is FaultTreeTerminalNode)
+	        if (this.NewEdgeEnd is FaultTreeTerminalNode && this.NewEdgeStart is FaultTreeTerminalNode)
 	        {
 		        string rateString = await MessageDialogs.ShowRateDialogAsync();
 		        double rate;
 				if (double.TryParse(rateString, out rate))
 		        {
-					FaultTree.MarkovChain[(FaultTreeTerminalNode) NewEdgeStart, (FaultTreeTerminalNode) NewEdgeEnd] = rate;
+		            this.FaultTree.MarkovChain[(FaultTreeTerminalNode)this.NewEdgeStart, (FaultTreeTerminalNode)this.NewEdgeEnd] = rate;
 				}
 		        
 	        }
 	        else
 	        {
-				NewEdgeStart.Childs.Add(NewEdgeEnd);
+	            this.NewEdgeStart.Childs.Add(this.NewEdgeEnd);
 			}
-            
-            RaisePropertyChanged("FaultTree");
+
+            this.RaisePropertyChanged("FaultTree");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void RaisePropertyChanged(string property)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

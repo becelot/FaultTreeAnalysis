@@ -11,38 +11,38 @@ namespace FaultTreeAnalysis.GUI.Windows
     {
 		private readonly MainWindowViewModel viewModel;
 
-		public Thickness TitleBarMargin => new Thickness(0, TitlebarHeight, 0, 0);
+		public Thickness TitleBarMargin => new Thickness(0, this.TitlebarHeight, 0, 0);
 
 		public MainWindow()
 		{
-			viewModel = new MainWindowViewModel();
-			DataContext = viewModel;
-			InitializeComponent();
+		    this.viewModel = new MainWindowViewModel();
+		    this.DataContext = this.viewModel;
+		    this.InitializeComponent();
 			ConsoleManager.Show();
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e) => FlyoutOptions.IsOpen = true;
+		private void Button_Click(object sender, RoutedEventArgs e) => this.FlyoutOptions.IsOpen = true;
 
-		private void Example1Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341861976041_NO_SEED-ft.dot");
-		private void Example2Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341861997385_NO_SEED-ft.dot");
-		private void Example3Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341862261326_NO_SEED-ft.dot");
-		private void Example4Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341916530531_NO_SEED-ft.dot");
-		private void Example5Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341916671953_NO_SEED-ft.dot");
-		private void Example6Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341916816272_NO_SEED-ft.dot");
-		private void Example7Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341916861497_NO_SEED-ft.dot");
-		private void Example8Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341916948985_NO_SEED-ft.dot");
-		private void Example9Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341917031842_NO_SEED-ft.dot");
-		private void Example10Open(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\1341917224042_NO_SEED-ft.dot");
-	    private void TestCaseOpen(object sender, RoutedEventArgs e) => LoadFromFile(@"examples\\TestCase.xml");
+		private void Example1Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341861976041_NO_SEED-ft.dot");
+		private void Example2Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341861997385_NO_SEED-ft.dot");
+		private void Example3Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341862261326_NO_SEED-ft.dot");
+		private void Example4Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341916530531_NO_SEED-ft.dot");
+		private void Example5Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341916671953_NO_SEED-ft.dot");
+		private void Example6Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341916816272_NO_SEED-ft.dot");
+		private void Example7Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341916861497_NO_SEED-ft.dot");
+		private void Example8Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341916948985_NO_SEED-ft.dot");
+		private void Example9Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341917031842_NO_SEED-ft.dot");
+		private void Example10Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341917224042_NO_SEED-ft.dot");
+	    private void TestCaseOpen(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\TestCase.xml");
 
 		private void ViewChanged(object sender, RoutedEventArgs e)
 		{
-			viewModel.FaultTreeView = FaultTreeView.IsChecked.GetValueOrDefault();
+		    this.viewModel.FaultTreeView = this.FaultTreeView.IsChecked.GetValueOrDefault();
 		}
 
 		private void LoadFromFile(string fileName)
 		{
-			viewModel.FaultTree = FaultTreeEncoderFactory.CreateFaultTreeCodec(fileName).Read(fileName);
+		    this.viewModel.FaultTree = FaultTreeEncoderFactory.CreateFaultTreeCodec(fileName).Read(fileName);
 		}
 
 		private void LoadFromFileClick(object sender, RoutedEventArgs e)
@@ -69,13 +69,13 @@ namespace FaultTreeAnalysis.GUI.Windows
 			{
 				// Open document 
 				string filename = dlg.FileName;
-				LoadFromFile(filename);
+			    this.LoadFromFile(filename);
 			}
 		}
 
 	    private void SaveToFile(string fileName)
 	    {
-		    FaultTreeEncoderFactory.CreateFaultTreeCodec(FaultTreeFormat.FAULT_TREE_XML).Write(viewModel.FaultTree, fileName);
+		    FaultTreeEncoderFactory.CreateFaultTreeCodec(FaultTreeFormat.FAULT_TREE_XML).Write(this.viewModel.FaultTree, fileName);
 	    }
 
 		private void SaveProjectClick(object sender, RoutedEventArgs e)
@@ -100,7 +100,7 @@ namespace FaultTreeAnalysis.GUI.Windows
 			{
 				// Open document 
 				string filename = dlg.FileName;
-				SaveToFile(filename);
+			    this.SaveToFile(filename);
 			}
 		}
 	}

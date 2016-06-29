@@ -7,7 +7,7 @@
 	{
 		public OptionsMain()
 		{
-			InitializeComponent();
+		    this.InitializeComponent();
 		}
 	}
 }
