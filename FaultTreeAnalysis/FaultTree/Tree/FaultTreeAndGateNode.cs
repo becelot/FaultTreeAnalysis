@@ -63,7 +63,10 @@ namespace FaultTreeAnalysis.FaultTree.Tree
         /// Resulting type of reduction.
         /// </typeparam>
         /// <returns>
-        /// The <see cref="T"/>.
+        /// The <see>
+        ///         <cref>T</cref>
+        ///     </see>
+        ///     .
         /// </returns>
         public override T Reduce<T>(FaultTreeTransformer<T> tr)
         {

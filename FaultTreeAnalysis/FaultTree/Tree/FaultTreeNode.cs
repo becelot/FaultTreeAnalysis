@@ -77,7 +77,10 @@ namespace FaultTreeAnalysis.FaultTree.Tree
         /// FaultTree will be reduced to type T.
         /// </typeparam>
         /// <returns>
-        /// The <see cref="T"/>.
+        /// The <see>
+        ///         <cref>T</cref>
+        ///     </see>
+        ///     .
         /// </returns>
         public abstract T Reduce<T>(FaultTreeTransformer<T> tr);
     }

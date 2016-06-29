@@ -13,124 +13,183 @@ using MathNet.Numerics.LinearAlgebra;
 
 namespace FaultTreeAnalysis.FaultTree.MarkovChain
 {
+    /// <summary>
+    /// Markov chain representation class
+    /// </summary>
+    /// <typeparam name="TVertex"></typeparam>
     public class MarkovChain<TVertex>
     {
         private Matrix<double> RateMatrix { get; set; }
 
-        public Matrix<double> GeneratorMatrix => RateMatrix;
+        /// <summary>
+        /// The generator matrix (deprecated).
+        /// </summary>
+        public Matrix<double> GeneratorMatrix => this.RateMatrix;
 
         private readonly Dictionary<TVertex, int> entryMap;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MarkovChain{TVertex}"/> class.
+        /// </summary>
+        /// <param name="rateMatrix"></param>
         public MarkovChain(Matrix<double> rateMatrix)
         {
-            RateMatrix = rateMatrix;
-            entryMap = new Dictionary<TVertex, int>();
+            this.RateMatrix = rateMatrix;
+            this.entryMap = new Dictionary<TVertex, int>();
         }
 
         private TVertex GetVertexFromIndex(int index)
         {
-            return entryMap.Keys.FirstOrDefault(k => entryMap[k] == index);
+            return this.entryMap.Keys.FirstOrDefault(k => this.entryMap[k] == index);
         }
 
         private int GetIndexOfVertex(TVertex vertex)
         {
-            if (entryMap.ContainsKey(vertex))
+            if (this.entryMap.ContainsKey(vertex))
             {
-                return entryMap[vertex];
+                return this.entryMap[vertex];
             }
 
-            int max = entryMap.Values.DefaultIfEmpty(-1).Max();
+            int max = this.entryMap.Values.DefaultIfEmpty(-1).Max();
 
-            if (max + 2 > RateMatrix.ColumnCount)
+            if (max + 2 > this.RateMatrix.ColumnCount)
             {
-                RateMatrix = Matrix<double>.Build.Dense(max + 2, max + 2, (i, j) => i == max+1 || j == max+1 ? 0 : RateMatrix[i,j]);
-            } 
+                this.RateMatrix = Matrix<double>.Build.Dense(max + 2, max + 2, (i, j) => i == max+1 || j == max+1 ? 0 : this.RateMatrix[i,j]);
+            }
 
-            entryMap.Add(vertex, max+1);
+            this.entryMap.Add(vertex, max+1);
 
             return max + 1;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MarkovChain{TVertex}"/> class.
+        /// </summary>
+        /// <param name="size">Initial size of Markov chain</param>
         public MarkovChain(int size)
         {
-            RateMatrix = Matrix<double>.Build.Dense(size, size);
-            entryMap = new Dictionary<TVertex, int>();
+            this.RateMatrix = Matrix<double>.Build.Dense(size, size);
+            this.entryMap = new Dictionary<TVertex, int>();
         }
 
+        /// <summary>
+        /// Maps two Vertices of the Markov chain to the transition rate.
+        /// </summary>
+        /// <param name="from">Source vertex.</param>
+        /// <param name="to">Destination vertex.</param>
         public double this[TVertex from, TVertex to] {
-            get { return GetRate(from, to); }
-            set { AddEdge(from, to, value); }
+            get { return this.GetRate(from, to); }
+            set {
+                this.AddEdge(from, to, value); }
         }
 
-        private double this[int i, int j] => RateMatrix[i,j];
+        private double this[int i, int j] => this.RateMatrix[i,j];
 
+        /// <summary>
+        /// Adds an edge to the markov chain from sourceVertex to destinationVertex with transition rate. 
+        /// If the source or destination vertex do not exist, the chain size is automatically adjusted 
+        /// to fit the new entry.
+        /// </summary>
+        /// <param name="sourceVertex">The source vertex.</param>
+        /// <param name="destinationVertex">The destination vertex.</param>
+        /// <param name="rate">The transition rate.</param>
         public void AddEdge(TVertex sourceVertex, TVertex destinationVertex, double rate)
         {
-	        int rowIndex = GetIndexOfVertex(sourceVertex);
-	        int colIndex = GetIndexOfVertex(destinationVertex);
-	        RateMatrix[rowIndex, colIndex] = rate;
+	        int rowIndex = this.GetIndexOfVertex(sourceVertex);
+	        int colIndex = this.GetIndexOfVertex(destinationVertex);
+            this.RateMatrix[rowIndex, colIndex] = rate;
         }
 
+
+	    /// <summary>
+	    /// Retrieves the rate of edge sourceVertex to destinationVertex.
+	    /// </summary>
+	    /// <param name="sourceVertex">The source vertex.</param>
+	    /// <param name="destinationVertex">The destination vertex.</param>
+	    /// <returns>The transition rate. Returns 0 if no edge exists or source/destinationVertex are not contained in this Markov chain collection.</returns>
 	    public double GetRate(TVertex sourceVertex, TVertex destinationVertex)
         {
-			int rowIndex = GetIndexOfVertex(sourceVertex);
-			int colIndex = GetIndexOfVertex(destinationVertex);
-			return RateMatrix[rowIndex, colIndex];
+			int rowIndex = this.GetIndexOfVertex(sourceVertex);
+			int colIndex = this.GetIndexOfVertex(destinationVertex);
+			return this.RateMatrix[rowIndex, colIndex];
         }
 
+        /// <summary>
+        /// Returns all outgoing vertices from vertex.
+        /// </summary>
+        /// <param name="vertex">The vertex.</param>
+        /// <returns>List of vertices. Returns emptylist if vertex is not contained in chain.</returns>
         public IEnumerable<TVertex> GetOutgoingVertices(TVertex vertex)
         {
-            int index = GetIndexOfVertex(vertex);
-            for (int i = 0; i < RateMatrix.RowCount; i++)
+            int index = this.GetIndexOfVertex(vertex);
+            for (int i = 0; i < this.RateMatrix.RowCount; i++)
             {
-                if (RateMatrix[index, i] != 0)
+                if (this.RateMatrix[index, i] != 0)
                 {
-                    yield return GetVertexFromIndex(i);
+                    yield return this.GetVertexFromIndex(i);
                 }
             }
         }
 
+        /// <summary>
+        /// Returns all incoming vertices in vertex.
+        /// </summary>
+        /// <param name="vertex">The vertex.</param>
+        /// <returns>List of vertices. Returns emptylist if vertex is not contained in chain.</returns>
         public IEnumerable<TVertex> GetIncomingVertices(TVertex vertex)
         {
-            int index = GetIndexOfVertex(vertex);
-            for (int i = 0; i < RateMatrix.RowCount; i++)
+            int index = this.GetIndexOfVertex(vertex);
+            for (int i = 0; i < this.RateMatrix.RowCount; i++)
             {
-                if (RateMatrix[i, index] != 0)
+                if (this.RateMatrix[i, index] != 0)
                 {
-                    yield return GetVertexFromIndex(i);
+                    yield return this.GetVertexFromIndex(i);
                 }
             }
         }
 
+        /// <summary>
+        /// Retrieve all added vertices.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<TVertex> GetAllVertices()
         {
-            foreach (var vertex in entryMap.Keys)
+            foreach (var vertex in this.entryMap.Keys)
             {
                 yield return vertex;
             }
         }
 
+        /// <summary>
+        /// Retrieve all edges in this Markov chain.
+        /// </summary>
+        /// <returns>List of edges as tuples. Format: (sourceVertex, transition rate, destination vertex).</returns>
         public IEnumerable<Tuple<TVertex, double, TVertex>> GetAllEdges()
         {
-            for (int i = 0; i < RateMatrix.ColumnCount; i++)
+            for (int i = 0; i < this.RateMatrix.ColumnCount; i++)
             {
-                for (int j = 0; j < RateMatrix.ColumnCount; j++)
+                for (int j = 0; j < this.RateMatrix.ColumnCount; j++)
                 {
                     if (this[i, j] != 0)
                     {
-                        yield return new Tuple<TVertex, double, TVertex>(GetVertexFromIndex(i), this[i,j], GetVertexFromIndex(j));
+                        yield return new Tuple<TVertex, double, TVertex>(this.GetVertexFromIndex(i), this[i,j], this.GetVertexFromIndex(j));
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Returns a list of all connected markov compoennts.
+        /// </summary>
+        /// <param name="vertices">Available vertices. Note that this parameter is required since the Markov Chain does not necessarily know all vertices in the system. Those vertices are assigned a connected component with one element.</param>
+        /// <returns></returns>
         public IEnumerable<IEnumerable<TVertex>> GetComponents(IEnumerable<TVertex> vertices)
         {
             HashSet<TVertex> visited = new HashSet<TVertex>();
 
             foreach (var vertex in vertices)
             {
-	            GetIndexOfVertex(vertex);
+                this.GetIndexOfVertex(vertex);
                 if (visited.Contains(vertex)) continue;
 
                 HashSet<TVertex> component = new HashSet<TVertex>();
@@ -145,8 +204,8 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
                     component.Add(current);
                     visited.Add(current);
 
-                    GetOutgoingVertices(current).ToList().ForEach(v => toVisit.Push(v));
-                    GetIncomingVertices(current).ToList().ForEach(v => toVisit.Push(v));
+                    this.GetOutgoingVertices(current).ToList().ForEach(v => toVisit.Push(v));
+                    this.GetIncomingVertices(current).ToList().ForEach(v => toVisit.Push(v));
                 }
 
                 yield return component;

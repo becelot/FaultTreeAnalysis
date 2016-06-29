@@ -28,7 +28,10 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
         /// The literal.
         /// </param>
         /// <returns>
-        /// The <see cref="T"/>.
+        /// The <see>
+        ///         <cref>T</cref>
+        ///     </see>
+        ///     .
         /// </returns>
         public abstract T Transform(FaultTreeLiteralNode literal);
 
@@ -39,7 +42,10 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
         /// The terminal.
         /// </param>
         /// <returns>
-        /// The <see cref="T"/>.
+        /// The <see>
+        ///         <cref>T</cref>
+        ///     </see>
+        ///     .
         /// </returns>
         public abstract T Transform(FaultTreeTerminalNode terminal);
 
@@ -53,7 +59,10 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
         /// The childs.
         /// </param>
         /// <returns>
-        /// The <see cref="T"/>.
+        /// The <see>
+        ///         <cref>T</cref>
+        ///     </see>
+        ///     .
         /// </returns>
         public abstract T Transform(FaultTreeOrGateNode gate, List<T> childs);
 
@@ -67,7 +76,10 @@ namespace FaultTreeAnalysis.FaultTree.Transformer
         /// The childs.
         /// </param>
         /// <returns>
-        /// The <see cref="T"/>.
+        /// The <see>
+        ///         <cref>T</cref>
+        ///     </see>
+        ///     .
         /// </returns>
         public abstract T Transform(FaultTreeAndGateNode gate, List<T> childs);
     }
