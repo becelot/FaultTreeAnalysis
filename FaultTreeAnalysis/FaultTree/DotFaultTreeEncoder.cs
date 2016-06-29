@@ -73,6 +73,8 @@ namespace FaultTreeAnalysis.FaultTree
 
 		    MarkovChain<FaultTreeTerminalNode> markovChain = new MarkovChain<FaultTreeTerminalNode>(terminals.Count);
 
+            terminals.ForEach(terminal => markovChain.InitialDistribution[terminal] = 0.0d);
+
 			if (symbolGroup.FirstOrDefault(g => g.Key == (int) DotParseToken.DOT_MARKOV_TRANSITION)?.Any() ?? false)
 			{
 				(from trans in symbolGroup.FirstOrDefault(g => g.Key == (int)DotParseToken.DOT_MARKOV_TRANSITION)
@@ -96,6 +98,7 @@ namespace FaultTreeAnalysis.FaultTree
 
 		                markovChain[newNode, existingNode] = double.Parse(implicitChain.Information.Groups["lambda"].Value);
 		                markovChain[existingNode, newNode] = double.Parse(implicitChain.Information.Groups["mu"].Value);
+		                markovChain.InitialDistribution[newNode] = 1.0d;
 		            }
 		    }
 
