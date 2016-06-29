@@ -130,5 +130,31 @@ namespace FaultTreeAnalysis.Tests.FaultTree.MarkovChain
 
 			CollectionAssert.AreEquivalent(new List<List<int>> { new List<int> { 0, 1, 2, 3 }, new List<int> { 4, 5 }, new List<int> { 6 } }, chains.GetComponents(new List<int> { 0, 1, 2, 3, 4, 5, 6 }).Select(c => c.OrderBy(v => v).ToList()).ToList());
 		}
-	}
+
+        [Test]
+	    public void ComputeProbability()
+	    {
+	        double samplingRate = 0.5d;
+	        double timeSpan = 40.0d;
+	        double errorTolerance = 1e-16;
+
+            MarkovChain<int> chains = new MarkovChain<int>(6);
+            chains.InitialDistribution[1] = 0.9;
+            chains.InitialDistribution[2] = 0.1;
+            chains.InitialDistribution[3] = 0;
+            chains.InitialDistribution[4] = 1;
+            chains.InitialDistribution[5] = chains.InitialDistribution[6] = 0;
+
+            chains.AddEdge(1, 2, 0.2d);
+            chains.AddEdge(2, 1, 0.1d);
+
+            chains[2, 3] = 0.1d;
+            chains[3, 2] = 0.05d;
+            chains[4, 5] = 0.1d;
+            chains[5, 6] = 0.05d;
+
+            var result = chains.ComputeProbability(samplingRate, timeSpan, errorTolerance);
+	    }
+
+    }
 }
