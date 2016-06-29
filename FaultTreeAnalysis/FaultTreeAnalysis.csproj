@@ -51,6 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BDD\BinaryDecisionDiagram.cs" />
+    <Compile Include="BDD\BinaryDecisionDiagram.Analyze.cs">
+      <DependentUpon>BinaryDecisionDiagram.cs</DependentUpon>
+      <SubType>Code</SubType>
+	</Compile>
     <Compile Include="BDD\BDDEncoderFactory.cs" />
     <Compile Include="BDD\BDDFactory.cs" />
     <Compile Include="BDD\BDDFactoryComponentConnection.cs" />
@@ -70,10 +74,10 @@
     <Compile Include="FaultTree\FaultTreeFormatException.cs" />
     <Compile Include="FaultTree\IFaultTreeCodec.cs" />
     <Compile Include="FaultTree\MarkovChain\MarkovChain.cs" />
-	<Compile Include="FaultTree\MarkovChain\MarkovChain.Analysis.cs" >
+    <Compile Include="FaultTree\MarkovChain\MarkovChain.Analysis.cs">
       <DependentUpon>MarkovChain.cs</DependentUpon>
       <SubType>Code</SubType>
-	</Compile>
+    </Compile>
     <Compile Include="FaultTree\MarkovChain\MatrixUniformization.cs" />
     <Compile Include="FaultTree\Transformer\AddTransformer.cs" />
     <Compile Include="FaultTree\Transformer\DeepCopyTransformer.cs" />
