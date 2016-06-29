@@ -36,31 +36,6 @@ namespace FaultTreeAnalysis.FaultTree
         [DataMember]
 		public MarkovChain<FaultTreeTerminalNode> MarkovChain { get; set; }
 
-        /*
-        /// <summary>
-        /// Gets or sets the MarkovChain property. Used for serialization of MarkovChain.
-        /// </summary>
-	    [DataMember]
-	    private IEnumerable<Tuple<FaultTreeTerminalNode, double, FaultTreeTerminalNode>> MarkovArray
-        {
-            get
-            {
-                return this.MarkovChain.GetAllEdges();
-            }
-
-            set
-            {
-			    int row = value.Select(v => v.Item1).Union(value.Select(v => v.Item3)).GroupBy(v => v).Count();
-
-		        // MarkovChain = new MarkovChain<FaultTreeTerminalNode>(Matrix<double>.Build.DenseOfIndexed(row, row, value));
-                this.MarkovChain = new MarkovChain<FaultTreeTerminalNode>(row);
-			    foreach (var trans in value)
-			    {
-			        this.MarkovChain[trans.Item1, trans.Item3] = trans.Item2;
-			    }
-		    }
-	    }*/
-
         /// <summary>
         /// Initializes a new instance of the <see cref="FaultTree"/> class.
         /// </summary>
