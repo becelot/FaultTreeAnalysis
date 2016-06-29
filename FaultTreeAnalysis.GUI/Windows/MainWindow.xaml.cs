@@ -9,14 +9,14 @@ namespace FaultTreeAnalysis.GUI.Windows
 {
 	public partial class MainWindow
     {
-		private readonly MainWindowViewModel viewModel;
+		public readonly MainWindowViewModel ViewModel;
 
 		public Thickness TitleBarMargin => new Thickness(0, this.TitlebarHeight, 0, 0);
 
 		public MainWindow()
 		{
-		    this.viewModel = new MainWindowViewModel();
-		    this.DataContext = this.viewModel;
+		    this.ViewModel = new MainWindowViewModel();
+		    this.DataContext = this.ViewModel;
 		    this.InitializeComponent();
 			ConsoleManager.Show();
 		}
@@ -37,12 +37,12 @@ namespace FaultTreeAnalysis.GUI.Windows
 
 		private void ViewChanged(object sender, RoutedEventArgs e)
 		{
-		    this.viewModel.FaultTreeView = this.FaultTreeView.IsChecked.GetValueOrDefault();
+		    this.ViewModel.FaultTreeView = this.FaultTreeView.IsChecked.GetValueOrDefault();
 		}
 
 		private void LoadFromFile(string fileName)
 		{
-		    this.viewModel.FaultTree = FaultTreeEncoderFactory.CreateFaultTreeCodec(fileName).Read(fileName);
+		    this.ViewModel.FaultTree = FaultTreeEncoderFactory.CreateFaultTreeCodec(fileName).Read(fileName);
 		}
 
 		private void LoadFromFileClick(object sender, RoutedEventArgs e)
@@ -75,7 +75,7 @@ namespace FaultTreeAnalysis.GUI.Windows
 
 	    private void SaveToFile(string fileName)
 	    {
-		    FaultTreeEncoderFactory.CreateFaultTreeCodec(FaultTreeFormat.FAULT_TREE_XML).Write(this.viewModel.FaultTree, fileName);
+		    FaultTreeEncoderFactory.CreateFaultTreeCodec(FaultTreeFormat.FAULT_TREE_XML).Write(this.ViewModel.FaultTree, fileName);
 	    }
 
 		private void SaveProjectClick(object sender, RoutedEventArgs e)
