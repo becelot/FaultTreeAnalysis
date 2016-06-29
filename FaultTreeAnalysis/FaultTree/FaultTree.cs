@@ -10,6 +10,7 @@
 namespace FaultTreeAnalysis.FaultTree
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.Serialization;
 
     using FaultTreeAnalysis.BDD;
@@ -185,7 +186,7 @@ namespace FaultTreeAnalysis.FaultTree
         public IEnumerable<double> Analyze(double samplingRate, double timeSpan, double errorTolerance)
         {
             BinaryDecisionDiagram bdd = this;
-            return bdd.Analyze(this.MarkovChain.ComputeProbability(samplingRate, timeSpan, errorTolerance), this.MarkovChain.GetComponents((List<FaultTreeTerminalNode>)this.Traverse()));
+            return bdd.Analyze(this.MarkovChain.ComputeProbability(samplingRate, timeSpan, errorTolerance), this.MarkovChain.GetComponents(this.Traverse().OfType<FaultTreeTerminalNode>()));
         }
 	}
 }
