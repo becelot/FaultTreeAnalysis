@@ -9,10 +9,10 @@
 
 namespace FaultTreeAnalysis.FaultTree
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.Serialization;
+
+    using FaultTreeAnalysis.BDD;
 
     using global::FaultTreeAnalysis.FaultTree.MarkovChain;
     using Transformer;
@@ -163,5 +163,29 @@ namespace FaultTreeAnalysis.FaultTree
 		        }
 		    }
 		}
+
+        /// <summary>
+        /// The analyze.
+        /// </summary>
+        /// <param name="samplingRate">
+        /// The sampling rate.
+        /// </param>
+        /// <param name="timeSpan">
+        /// The time span.
+        /// </param>
+        /// <param name="errorTolerance">
+        /// The error tolerance.
+        /// </param>
+        /// <returns>
+        /// The <see>
+        ///         <cref>IEnumerable</cref>
+        ///     </see>
+        ///     .
+        /// </returns>
+        public IEnumerable<double> Analyze(double samplingRate, double timeSpan, double errorTolerance)
+        {
+            BinaryDecisionDiagram bdd = this;
+            return bdd.Analyze(this.MarkovChain.ComputeProbability(samplingRate, timeSpan, errorTolerance), this.MarkovChain.GetComponents((List<FaultTreeTerminalNode>)this.Traverse()));
+        }
 	}
 }
