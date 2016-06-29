@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MathNet.Numerics.LinearAlgebra;
+using System.Runtime.Serialization;
 
 namespace FaultTreeAnalysis.FaultTree.MarkovChain
 {
@@ -17,6 +18,7 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
     /// Markov chain representation class
     /// </summary>
     /// <typeparam name="TVertex"></typeparam>
+    [DataContract(Name = "MarkovChain")]
     public class MarkovChain<TVertex>
     {
         private Matrix<double> RateMatrix { get; set; }
@@ -26,7 +28,33 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
         /// </summary>
         public Matrix<double> GeneratorMatrix => this.RateMatrix;
 
-        private readonly Dictionary<TVertex, int> entryMap;
+        private Dictionary<TVertex, int> entryMap;
+
+        /// <summary>
+        /// Gets or sets the MarkovChain property. Used for serialization of MarkovChain.
+        /// </summary>
+        [DataMember]
+        private IEnumerable<Tuple<TVertex, double, TVertex>> MarkovArray
+        {
+            get
+            {
+                return this.GetAllEdges();
+            }
+
+            set
+            {
+                int row = value.Select(v => v.Item1).Union(value.Select(v => v.Item3)).GroupBy(v => v).Count();
+
+                // MarkovChain = new MarkovChain<FaultTreeTerminalNode>(Matrix<double>.Build.DenseOfIndexed(row, row, value));
+                this.RateMatrix = Matrix<double>.Build.Dense(row, row);
+                this.entryMap = new Dictionary<TVertex, int>();
+                foreach (var trans in value)
+                {
+                    this[trans.Item1, trans.Item3] = trans.Item2;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MarkovChain{TVertex}"/> class.
