@@ -47,6 +47,14 @@
       <HintPath>..\packages\GraphViz4Net.2.0.23.0\lib\net45\Graphviz4Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.7.3.1, Culture=neutral, PublicKeyToken=c5935629d38af058, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.7.3.1\lib\portable40-net40+sl5+win8+wp8+wpa81\LiveCharts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.7.3.1, Culture=neutral, PublicKeyToken=3b585c2a5f1a92c1, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.7.3.1\lib\net452\LiveCharts.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
@@ -80,6 +88,10 @@
     <Compile Include="Converters\TerminalNodeToDistributionConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="Core.cs" />
+    <Compile Include="FlyoutControls\AnalyzeFlyout.xaml.cs">
+      <DependentUpon>AnalyzeFlyout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\StyledEdge.cs" />
     <Compile Include="Util\ConsoleManager.cs" />
     <Compile Include="Util\FaultTreeExtensions.cs" />
@@ -89,6 +101,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Windows\MessageDialogs.cs" />
+    <Page Include="FlyoutControls\AnalyzeFlyout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FlyoutControls\OptionsMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
