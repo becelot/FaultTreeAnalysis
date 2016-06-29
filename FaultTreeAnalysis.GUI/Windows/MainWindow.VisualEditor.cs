@@ -49,6 +49,16 @@
                     vertex = new FaultTreeOrGateNode(this.ViewModel.FaultTree.NextId());
                     break;
                 case VisualEditorMode.MODE_ADD_BASIC_EVENT:
+                    if (sender.DataContext is FaultTreeTerminalNode)
+                    {
+                        vertex = new FaultTreeTerminalNode(this.ViewModel.FaultTree.NextId(), this.ViewModel.FaultTree.NextBasicEvent());
+                        this.ViewModel.FaultTree.MarkovChain.InitialDistribution[(FaultTreeTerminalNode)vertex] = 1.0;
+                        this.ViewModel.FaultTree.MarkovChain[(FaultTreeTerminalNode)sender.DataContext, (FaultTreeTerminalNode)vertex] = 1.0;
+                        this.ViewModel.FaultTree.MarkovChain[(FaultTreeTerminalNode)vertex, (FaultTreeTerminalNode)sender.DataContext] = 1.0;
+                        this.ViewModel.RaisePropertyChanged("FaultTree");
+                        this.EditorMode = VisualEditorMode.MODE_VIEW_ONLY;
+                        return;
+                    }
                     vertex = new FaultTreeTerminalNode(this.ViewModel.FaultTree.NextId(), this.ViewModel.FaultTree.NextBasicEvent());
                     this.ViewModel.FaultTree.MarkovChain.InitialDistribution[(FaultTreeTerminalNode)vertex] = 1.0;
                     break;
@@ -256,7 +266,7 @@
 		    if (!this.GraphLayout.Graph.Vertices.Any()) return;
 
 	        this.EditorMode = VisualEditorMode.MODE_ADD_BASIC_EVENT;
-	        this.validSourceElements = new List<Type> {typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode)};
+	        this.validSourceElements = new List<Type> {typeof(FaultTreeOrGateNode), typeof(FaultTreeAndGateNode), typeof(FaultTreeTerminalNode)};
 	    }
 
 	    private void ChangeRateClick(object sender, MouseButtonEventArgs e)
