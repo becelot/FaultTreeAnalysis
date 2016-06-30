@@ -7,6 +7,7 @@ namespace FaultTreeAnalysis.GUI.FlyoutControls
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
     using System.Windows.Threading;
 
     using FaultTreeAnalysis.FaultTree;
@@ -83,10 +84,13 @@ namespace FaultTreeAnalysis.GUI.FlyoutControls
 
         public DispatcherTimer Timer { get; set; }
 
-        public void Initialize(FaultTree faultTree)
+        public async void Initialize(FaultTree faultTree)
         {
+            if (this.Timer != null) this.Timer.IsEnabled = false;
+            await Task.Delay(40);
             this.Values.Clear();
             this.Input = faultTree.Analyze(0.5, 40, 1e-16).ToList();
+            
             this.Timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(35) };
             this.Timer.Tick += this.TimerOnTick;
             this.Timer.Start();
