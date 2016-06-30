@@ -316,11 +316,11 @@
         </mahApps:WindowCommands>
     </mahApps:MetroWindow.RightWindowCommands>
     <mahApps:MetroWindow.Flyouts>
-        <mahApps:FlyoutsControl Margin="{Binding TitleBarMargin, RelativeSource={RelativeSource AncestorType=local:MainWindow}}">
-            <mahApps:Flyout x:Name="FlyoutOptions" Position="Left" Panel.ZIndex="102" Header="Options" Width="515">
+        <mahApps:FlyoutsControl >
+            <mahApps:Flyout x:Name="FlyoutOptions" Position="Left" Panel.ZIndex="102" Header="Options" Width="515" Margin="{Binding TitleBarMargin, RelativeSource={RelativeSource AncestorType=local:MainWindow}}">
                 <flyoutControls:OptionsMain x:Name="Options" />
             </mahApps:Flyout>
-            <mahApps:Flyout x:Name="AnalyzeFlyout" Position="Top" Panel.ZIndex="102" Header="Analyze" Width="1200" Height="800" IsOpenChanged="AnalyzeOpenChanged">
+            <mahApps:Flyout x:Name="AnalyzeFlyout" Position="Top" Panel.ZIndex="102" IsModal="True" Header="Analyze" Margin="100 0 100 0" Height="700"  IsOpenChanged="AnalyzeOpenChanged">
                 <flyoutControls:AnalyzeFlyout x:Name="Analyze" />
             </mahApps:Flyout>
         </mahApps:FlyoutsControl>
