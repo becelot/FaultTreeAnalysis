@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1200">
     <Grid>
-        <lvc:CartesianChart Margin="50,0,0,35">
+        <lvc:CartesianChart Margin="50,0,0,35" LegendLocation="Right">
             <lvc:CartesianChart.Series>
                 <lvc:LineSeries Values="{Binding Values}" Title="Probability" PointDiameter="6" StrokeThickness="4" />
             </lvc:CartesianChart.Series>
