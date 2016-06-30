@@ -17,12 +17,13 @@ namespace FaultTreeAnalysis.GUI.Windows
     {
 		public readonly MainWindowViewModel ViewModel;
 
-		public Thickness TitleBarMargin => new Thickness(0, this.TitlebarHeight, 0, 0);
+		public Thickness TitleBarMargin => new Thickness(0, this.TitlebarHeight / 2, 0, 0);
 
 		public MainWindow()
 		{
             ConsoleManager.Show();
-            this.ViewModel = new MainWindowViewModel();
+			Config.Load();
+			this.ViewModel = new MainWindowViewModel();
 		    this.DataContext = this.ViewModel;
 		    this.InitializeComponent();
 			
