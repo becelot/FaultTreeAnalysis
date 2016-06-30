@@ -110,13 +110,5 @@ namespace FaultTreeAnalysis.GUI.Windows
 			    this.SaveToFile(filename);
 			}
 		}
-
-	    private void AnalyzeClick(object sender, RoutedEventArgs e)
-	    {
-	        //MessageDialogs.ShowWarningAsync(this.ViewModel.FaultTree.Analyze(0.5, 40.0, 1e-16).ElementAt(80).ToString());
-	        this.EditorMode = VisualEditorMode.MODE_ANALYZE_CLICK;;
-	        this.validSourceElements = new List<Type> { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode) };
-	        //this.AnalyzeFlyout.IsOpen = true;
-	    }
     }
 }

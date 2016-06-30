@@ -171,6 +171,11 @@
             }
         }
 
+        private void AnalyzeClick(object sender, RoutedEventArgs e)
+        {
+            this.EditorMode = VisualEditorMode.MODE_ANALYZE_CLICK;
+        }
+
         private void FaultTreeZoomControl_MouseMove(object sender, MouseEventArgs e)
         {
             if (!this.validDestinationElements.Contains(((Grid)sender).DataContext.GetType()))
