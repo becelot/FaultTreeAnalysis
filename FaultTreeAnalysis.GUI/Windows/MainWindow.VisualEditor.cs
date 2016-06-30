@@ -31,7 +31,8 @@
             MODE_ADD_BASIC_EVENT, 
             MODE_ADD_GATE_CONNECTION, 
             MODE_ADD_MARKOV_CHAIN, 
-			MODE_REMOVE_CONTENT
+			MODE_REMOVE_CONTENT,
+            MODE_ANALYZE_CLICK
         }
 
         public VisualEditorMode EditorMode { get; private set; } = VisualEditorMode.MODE_VIEW_ONLY;
@@ -162,6 +163,11 @@
 				case VisualEditorMode.MODE_REMOVE_CONTENT:
                     this.EditorDownRemove((Grid)sender);
 					break;
+                case VisualEditorMode.MODE_ANALYZE_CLICK:
+                    FaultTree faultTree = new FaultTree((FaultTreeNode)(((Grid)sender).DataContext), this.ViewModel.FaultTree.MarkovChain);
+                    this.AnalyzeFlyout.IsOpen = true;
+                    this.Analyze.Initialize(faultTree);
+                    break;
             }
         }
 
