@@ -1,22 +1,17 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows.Threading;
+using FaultTreeAnalysis.GUI.Annotations;
+using LiveCharts;
+using LiveCharts.Configurations;
 
 namespace FaultTreeAnalysis.GUI.FlyoutControls
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Threading.Tasks;
-    using System.Windows.Threading;
-
-    using FaultTreeAnalysis.FaultTree;
-    using FaultTreeAnalysis.GUI.Annotations;
-
-    using LiveCharts;
-    using LiveCharts.Configurations;
-
-    public class MeasureModel
+	public class MeasureModel
     {
         public double Time { get; set; }
 
@@ -26,15 +21,16 @@ namespace FaultTreeAnalysis.GUI.FlyoutControls
     /// <summary>
     /// Interaction logic for AnalyzeFlyout.xaml
     /// </summary>
-    public partial class AnalyzeFlyout : UserControl, INotifyPropertyChanged
+    public partial class AnalyzeFlyout : INotifyPropertyChanged
     {
         private double axisMin;
 
         private double axisMax;
+	    private double axisStep;
 
-        public AnalyzeFlyout()
+	    public AnalyzeFlyout()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             var mapper = Mappers.Xy<MeasureModel>().X(model => model.Time).Y(model => model.Value);
 
             Charting.For<MeasureModel>(mapper);
@@ -53,13 +49,13 @@ namespace FaultTreeAnalysis.GUI.FlyoutControls
         {
             get
             {
-                return this.axisMin;
+                return axisMin;
             }
             set
             {
-                if (value.Equals(this.axisMin)) return;
-                this.axisMin = value;
-                this.OnPropertyChanged(nameof(this.AxisMin));
+                if (value.Equals(axisMin)) return;
+                axisMin = value;
+                OnPropertyChanged(nameof(AxisMin));
             }
         }
 
@@ -67,13 +63,13 @@ namespace FaultTreeAnalysis.GUI.FlyoutControls
         {
             get
             {
-                return this.axisMax;
+                return axisMax;
             }
             set
             {
-                if (value.Equals(this.axisMax)) return;
-                this.axisMax = value;
-                this.OnPropertyChanged(nameof(this.AxisMax));
+                if (value.Equals(axisMax)) return;
+                axisMax = value;
+                OnPropertyChanged(nameof(AxisMax));
             }
         }
 
@@ -84,22 +80,25 @@ namespace FaultTreeAnalysis.GUI.FlyoutControls
 
         public DispatcherTimer Timer { get; set; }
 
-        public async void Initialize(FaultTree faultTree)
+        public async void Initialize(FaultTree.FaultTree faultTree)
         {
             if (this.Timer != null) this.Timer.IsEnabled = false;
             await Task.Delay(40);
-            this.Values.Clear();
-            this.Input = faultTree.Analyze(0.5, 40, 1e-16).ToList();
-            
-            this.Timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(35) };
-            this.Timer.Tick += this.TimerOnTick;
+			this.Input = faultTree.Analyze(Config.Instance.SamplingRate, Config.Instance.TimeSpan, Config.Instance.ErrorTolerance).ToList();
+	        this.AxisMax = Config.Instance.TimeSpan;
+	        this.AxisStep = Config.Instance.TimeSpan * 0.2d;
+
+			this.Values.Clear();
+           
+            this.Timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(2800 / this.Input.Count) };
+            this.Timer.Tick += TimerOnTick;
             this.Timer.Start();
         }
 
         private void TimerOnTick(object sender, EventArgs eventArgs)
         {
             
-            this.Values.Add(new MeasureModel { Time = Values.DefaultIfEmpty(new MeasureModel { Time = -0.5, Value = 0}).Last().Time + 0.5, Value = Input[0] });
+            this.Values.Add(new MeasureModel { Time = this.Values.DefaultIfEmpty(new MeasureModel { Time = -Config.Instance.SamplingRate, Value = 0}).Last().Time + Config.Instance.SamplingRate, Value = Input[0] });
             this.Input.RemoveAt(0);
             if (!this.Input.Any())
             {
@@ -107,12 +106,21 @@ namespace FaultTreeAnalysis.GUI.FlyoutControls
             }
         }
 
-        public double AxisStep { get; set; }
+	    public double AxisStep
+	    {
+		    get { return axisStep; }
+		    set
+		    {
+			    if (value.Equals(axisStep)) return;
+			    axisStep = value;
+			    OnPropertyChanged();
+		    }
+	    }
 
-        [NotifyPropertyChangedInvocator]
+	    [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
