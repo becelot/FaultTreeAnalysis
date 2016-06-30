@@ -7,7 +7,8 @@
 	{
 		public OptionsMain()
 		{
-		    this.InitializeComponent();
+			this.DataContext = Config.Instance;
+			this.InitializeComponent();
 		}
 	}
 }
