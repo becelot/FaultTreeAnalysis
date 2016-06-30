@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Config.cs" />
     <Compile Include="Converters\BDDGraphConverter.cs" />
     <Compile Include="Converters\TerminalNodeToDistributionConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
@@ -92,6 +93,7 @@
       <DependentUpon>AnalyzeFlyout.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Util\XmlManager.cs" />
     <Compile Include="ViewModel\StyledEdge.cs" />
     <Compile Include="Util\ConsoleManager.cs" />
     <Compile Include="Util\FaultTreeExtensions.cs" />
