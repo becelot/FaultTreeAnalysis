@@ -320,7 +320,7 @@
             <mahApps:Flyout x:Name="FlyoutOptions" Position="Left" Panel.ZIndex="102" Header="Options" Width="515" Margin="{Binding TitleBarMargin, RelativeSource={RelativeSource AncestorType=local:MainWindow}}">
                 <flyoutControls:OptionsMain x:Name="Options" />
             </mahApps:Flyout>
-            <mahApps:Flyout x:Name="AnalyzeFlyout" Position="Top" Panel.ZIndex="102" IsModal="True" Header="Analyze" Margin="100 0 100 0" Height="700"  IsOpenChanged="AnalyzeOpenChanged">
+            <mahApps:Flyout x:Name="AnalyzeFlyout" Position="Top" Panel.ZIndex="102" IsModal="True" Header="Analyze" Margin="100 0 100 0" Height="700">
                 <flyoutControls:AnalyzeFlyout x:Name="Analyze" />
             </mahApps:Flyout>
         </mahApps:FlyoutsControl>
