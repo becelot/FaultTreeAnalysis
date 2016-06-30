@@ -7,7 +7,11 @@ using FaultTreeAnalysis.GUI.ViewModel;
 
 namespace FaultTreeAnalysis.GUI.Windows
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
+
+    using FaultTreeAnalysis.FaultTree.Tree;
 
     public partial class MainWindow
     {
@@ -110,16 +114,9 @@ namespace FaultTreeAnalysis.GUI.Windows
 	    private void AnalyzeClick(object sender, RoutedEventArgs e)
 	    {
 	        //MessageDialogs.ShowWarningAsync(this.ViewModel.FaultTree.Analyze(0.5, 40.0, 1e-16).ElementAt(80).ToString());
-	        this.AnalyzeFlyout.IsOpen = true;
+	        this.EditorMode = VisualEditorMode.MODE_ANALYZE_CLICK;;
+	        this.validSourceElements = new List<Type> { typeof(FaultTreeAndGateNode), typeof(FaultTreeOrGateNode) };
+	        //this.AnalyzeFlyout.IsOpen = true;
 	    }
-
-        private void AnalyzeOpenChanged(object sender, RoutedEventArgs e)
-        {
-            if (this.AnalyzeFlyout.IsOpen)
-            {
-                this.Analyze.Initialize();
-            }
-        }
-
     }
 }
