@@ -1,5 +1,7 @@
 ﻿
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using FaultTreeAnalysis.FaultTree;
 using FaultTreeAnalysis.GUI.Util;
@@ -13,13 +15,15 @@ namespace FaultTreeAnalysis.GUI.Windows
 
     using FaultTreeAnalysis.FaultTree.Tree;
 
-    public partial class MainWindow
+    public partial class MainWindow : INotifyPropertyChanged
     {
 		public readonly MainWindowViewModel ViewModel;
 
 		public Thickness TitleBarMargin => new Thickness(0, this.TitlebarHeight / 2, 0, 0);
 
-		public MainWindow()
+        public int FlyoutHeight => (int) (this.Height*0.75);
+
+        public MainWindow()
 		{
             ConsoleManager.Show();
 			Config.Load();
@@ -111,5 +115,12 @@ namespace FaultTreeAnalysis.GUI.Windows
 			    this.SaveToFile(filename);
 			}
 		}
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
