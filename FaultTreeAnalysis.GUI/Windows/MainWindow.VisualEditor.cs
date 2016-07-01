@@ -50,12 +50,13 @@
                     vertex = new FaultTreeOrGateNode(this.ViewModel.FaultTree.NextId());
                     break;
                 case VisualEditorMode.MODE_ADD_BASIC_EVENT:
-                    if (sender.DataContext is FaultTreeTerminalNode)
+                    FaultTreeTerminalNode node = sender.DataContext as FaultTreeTerminalNode;
+                    if (node != null)
                     {
                         vertex = new FaultTreeTerminalNode(this.ViewModel.FaultTree.NextId(), this.ViewModel.FaultTree.NextBasicEvent());
                         this.ViewModel.FaultTree.MarkovChain.InitialDistribution[(FaultTreeTerminalNode)vertex] = 1.0;
-                        this.ViewModel.FaultTree.MarkovChain[(FaultTreeTerminalNode)sender.DataContext, (FaultTreeTerminalNode)vertex] = 1.0;
-                        this.ViewModel.FaultTree.MarkovChain[(FaultTreeTerminalNode)vertex, (FaultTreeTerminalNode)sender.DataContext] = 1.0;
+                        this.ViewModel.FaultTree.MarkovChain[node, (FaultTreeTerminalNode)vertex] = 1.0;
+                        this.ViewModel.FaultTree.MarkovChain[(FaultTreeTerminalNode)vertex, node] = 1.0;
                         this.ViewModel.RaisePropertyChanged("FaultTree");
                         this.EditorMode = VisualEditorMode.MODE_VIEW_ONLY;
                         return;
@@ -145,7 +146,7 @@
                     "Specify an initial probability!",
                     new MetroDialogSettings());
 
-                double probabiliy = 0.0d;
+                double probabiliy;
                 if (double.TryParse(probabilityInput, out probabiliy))
                 {
                     if (probabiliy >= 0 && probabiliy <= 1)
