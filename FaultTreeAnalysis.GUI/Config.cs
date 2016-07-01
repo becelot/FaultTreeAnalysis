@@ -11,7 +11,7 @@ namespace FaultTreeAnalysis.GUI
 {
 	public class Config : INotifyPropertyChanged
 	{
-		private static Config _config;
+		private static Config config;
 
 		public static readonly string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
 													+ @"\FaultTreeAnalysis";
@@ -33,36 +33,36 @@ namespace FaultTreeAnalysis.GUI
 		[DefaultValue(40.0d)]
 		public double TimeSpan
 		{
-			get { return timeSpan; }
+			get { return this.timeSpan; }
 			set
 			{
-				if (value.Equals(timeSpan)) return;
-				timeSpan = value;
-				OnPropertyChanged();
+				if (value.Equals(this.timeSpan)) return;
+			    this.timeSpan = value;
+			    this.OnPropertyChanged();
 			}
 		}
 
 		[DefaultValue(0.5d)]
 		public double SamplingRate
 		{
-			get { return samplingRate; }
+			get { return this.samplingRate; }
 			set
 			{
-				if (value.Equals(samplingRate)) return;
-				samplingRate = value;
-				OnPropertyChanged();
+				if (value.Equals(this.samplingRate)) return;
+			    this.samplingRate = value;
+			    this.OnPropertyChanged();
 			}
 		}
 
 		[DefaultValue(1e-16)]
 		public double ErrorTolerance
 		{
-			get { return errorTolerance; }
+			get { return this.errorTolerance; }
 			set
 			{
-				if (value.Equals(errorTolerance)) return;
-				errorTolerance = value;
-				OnPropertyChanged();
+				if (value.Equals(this.errorTolerance)) return;
+			    this.errorTolerance = value;
+			    this.OnPropertyChanged();
 			}
 		}
 
@@ -70,11 +70,11 @@ namespace FaultTreeAnalysis.GUI
 		{
 			get
 			{
-				if (_config != null)
-					return _config;
-				_config = new Config();
-				_config.ResetAll();
-				return _config;
+				if (config != null)
+					return config;
+				config = new Config();
+				config.ResetAll();
+				return config;
 			}
 		}
 
@@ -100,12 +100,12 @@ namespace FaultTreeAnalysis.GUI
 			{
 				if (File.Exists("config.xml"))
 				{
-					_config = XmlManager<Config>.Load("config.xml");
+					config = XmlManager<Config>.Load("config.xml");
 					foundConfig = true;
 				}
 				else if (File.Exists(AppDataPath + @"\config.xml"))
 				{
-					_config = XmlManager<Config>.Load(AppDataPath + @"\config.xml");
+					config = XmlManager<Config>.Load(AppDataPath + @"\config.xml");
 					foundConfig = true;
 				}
 				else if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)))
@@ -147,7 +147,7 @@ namespace FaultTreeAnalysis.GUI
 
 		public void ResetAll()
 		{
-			foreach (var field in GetType().GetFields())
+			foreach (var field in this.GetType().GetFields())
 			{
 				var attr = (DefaultValueAttribute)field.GetCustomAttributes(typeof(DefaultValueAttribute), false).FirstOrDefault();
 				if (attr != null)
@@ -157,7 +157,7 @@ namespace FaultTreeAnalysis.GUI
 
 		public void Reset(string name)
 		{
-			var proper = GetType().GetFields().First(x => x.Name == name);
+			var proper = this.GetType().GetFields().First(x => x.Name == name);
 			var attr = (DefaultValueAttribute)proper.GetCustomAttributes(typeof(DefaultValueAttribute), false).First();
 			proper.SetValue(this, attr.Value);
 		}
@@ -168,7 +168,7 @@ namespace FaultTreeAnalysis.GUI
 			// This is a positional argument
 			public DefaultValueAttribute(object value)
 			{
-				Value = value;
+			    this.Value = value;
 			}
 
 			public object Value { get; }
@@ -179,8 +179,8 @@ namespace FaultTreeAnalysis.GUI
 		[NotifyPropertyChangedInvocator]
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-			Config.Save();
+		    this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			Save();
 		}
 	}
 }
