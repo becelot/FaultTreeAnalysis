@@ -198,7 +198,7 @@
                             <BlurEffect Radius="0" KernelType="Gaussian" />
                         </Border.Effect>
                         <Grid Width="100" Height="50" Background="LightSkyBlue">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text=">=0" FontWeight="Bold" >
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text=">=1" FontWeight="Bold" >
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
