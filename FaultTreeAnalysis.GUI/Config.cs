@@ -30,7 +30,9 @@ namespace FaultTreeAnalysis.GUI
 		private double samplingRate = 0.5d;
 		private double timeSpan = 40.0d;
 
-		[DefaultValue(40.0d)]
+	    private bool showWarningWhenRemoval = true;
+
+	    [DefaultValue(40.0d)]
 		public double TimeSpan
 		{
 			get { return this.timeSpan; }
@@ -66,7 +68,22 @@ namespace FaultTreeAnalysis.GUI
 			}
 		}
 
-		public static Config Instance
+	    [DefaultValue(true)]
+	    public bool ShowWarningWhenRemoval
+	    {
+	        get
+	        {
+	            return this.showWarningWhenRemoval;
+	        }
+	        set
+	        {
+	            if (value.Equals(this.showWarningWhenRemoval)) return;
+	            this.showWarningWhenRemoval = value;
+                this.OnPropertyChanged();
+	        }
+	    }
+
+	    public static Config Instance
 		{
 			get
 			{
