@@ -118,8 +118,12 @@
 	    {
 		    FaultTreeNode node = (FaultTreeNode) sender.DataContext;
 
-		    var t = await MessageDialogs.ShowWarningAsync("Are you sure you want to remove this node?");
-		    if (t != MessageDialogResult.Affirmative) return;
+	        if (Config.Instance.ShowWarningWhenRemoval)
+	        {
+                var t = await MessageDialogs.ShowWarningAsync("Are you sure you want to remove this node?");
+                if (t != MessageDialogResult.Affirmative) return;
+            }
+		    
 		    var parents = this.ViewModel.FaultTree.Traverse()?.Where(n => n.Childs.Contains(node)).ToList();
 
 			parents?.ForEach(parent => parent.Childs.Remove(node));
