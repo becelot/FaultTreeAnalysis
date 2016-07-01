@@ -126,10 +126,13 @@
 			parents?.ForEach(parent => parent.Childs.AddRange(node.Childs));
 			parents?.ForEach(parent => parent.Childs = parent.Childs.Distinct().ToList());
 
+            if (node is FaultTreeTerminalNode)
+                this.ViewModel.FaultTree.MarkovChain.RemoveVertex((FaultTreeTerminalNode)node);
+
 	        this.ViewModel.RaisePropertyChanged("FaultTree");
 	    }
 
-        private async void FaultTreeZoomControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void FaultTreeNodePress(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount >= 2 && ((FrameworkElement)sender).DataContext is FaultTreeTerminalNode)
             {
@@ -176,7 +179,7 @@
             this.EditorMode = VisualEditorMode.MODE_ANALYZE_CLICK;
         }
 
-        private void FaultTreeZoomControl_MouseMove(object sender, MouseEventArgs e)
+        private void FaultTreeNodeMouseMove(object sender, MouseEventArgs e)
         {
             if (!this.validDestinationElements.Contains(((Grid)sender).DataContext.GetType()))
             {
