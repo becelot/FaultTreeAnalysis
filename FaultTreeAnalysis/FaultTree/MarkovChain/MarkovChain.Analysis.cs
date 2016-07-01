@@ -36,32 +36,39 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
 
             // Components of system
             var components = this.GetComponents(this.entryMap.Keys);
-
+            int stepNum = (int)(timeSpan / samplingRate);
             // Connected component
             foreach (var component in components)
             {
-                // Construct Generator matrix (?)
+                
+                // Construct Generator matrix
                 var componentList = component.ToList();
-                Matrix<double> genMatrix = Matrix<double>.Build.Dense(componentList.Count(), componentList.Count(), (i,j) => this[componentList[i], componentList[j]]);
-                genMatrix -= Matrix<double>.Build.DenseIdentity(componentList.Count(), componentList.Count())
-                             * Matrix<double>.Build.Diagonal(genMatrix.RowSums().ToArray());
-
-                var uniformMatrix = genMatrix.Uniformization(samplingRate, errorTolerance);
-                Vector<double> currentProbability = Vector<double>.Build.Dense(
-                    componentList.Count(),
-                    i => this.InitialDistribution[componentList[i]]);
-
-
-
-                var stepNum = timeSpan / samplingRate;
-                for (int i = 0; i <= stepNum; i++)
+                if (componentList.Count == 1)
                 {
-                    for (int j = 0; j < componentList.Count(); j++)
-                    {
-                        result[componentList[j]].Add(currentProbability[j]);
-                    }
-                    currentProbability *= uniformMatrix;
+                    result[componentList[0]] =
+                        Enumerable.Repeat(this.InitialDistribution[componentList[0]], stepNum+1).ToList();
                 }
+                else
+                {
+                    Matrix<double> genMatrix = Matrix<double>.Build.Dense(componentList.Count(), componentList.Count(), (i, j) => this[componentList[i], componentList[j]]);
+                    genMatrix -= Matrix<double>.Build.DenseIdentity(componentList.Count(), componentList.Count())
+                                 * Matrix<double>.Build.Diagonal(genMatrix.RowSums().ToArray());
+
+                    var uniformMatrix = genMatrix.Uniformization(samplingRate, errorTolerance);
+                    Vector<double> currentProbability = Vector<double>.Build.Dense(
+                        componentList.Count(),
+                        i => this.InitialDistribution[componentList[i]]);
+
+                    for (int i = 0; i <= stepNum; i++)
+                    {
+                        for (int j = 0; j < componentList.Count(); j++)
+                        {
+                            result[componentList[j]].Add(currentProbability[j]);
+                        }
+                        currentProbability *= uniformMatrix;
+                    }
+                }
+
             }
 
             return result;
