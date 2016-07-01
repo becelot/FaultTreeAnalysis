@@ -15,7 +15,7 @@ namespace FaultTreeAnalysis.GUI.Windows
 
     using FaultTreeAnalysis.FaultTree.Tree;
 
-    public partial class MainWindow : INotifyPropertyChanged
+    public partial class MainWindow
     {
 		public readonly MainWindowViewModel ViewModel;
 
@@ -115,12 +115,5 @@ namespace FaultTreeAnalysis.GUI.Windows
 			    this.SaveToFile(filename);
 			}
 		}
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
