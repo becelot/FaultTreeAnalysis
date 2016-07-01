@@ -90,7 +90,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeAndGateNode}">
-                <Grid ToolTip="AND Gate" DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                <Grid ToolTip="AND Gate" DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeNodePress" MouseMove="FaultTreeNodeMouseMove">
                     <Grid.Style>
                         <Style TargetType="Grid">
                             <Style.Triggers>
@@ -154,7 +154,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeOrGateNode}">
-                <Grid ToolTip="OR Gate" DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                <Grid ToolTip="OR Gate" DataContext="{Binding}" Background="Transparent" Width="100" Height="50" MouseLeftButtonDown="FaultTreeNodePress" MouseMove="FaultTreeNodeMouseMove">
                     <Grid.Style>
                         <Style TargetType="Grid">
                             <Style.Triggers>
@@ -218,7 +218,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type ftaFaultTree:FaultTreeTerminalNode}">
-                <Grid ToolTip="{Binding Converter={StaticResource TerminalNodeToDistributionConverter}}" DataContext="{Binding}" Background="Transparent" Width="40" Height="40" MouseLeftButtonDown="FaultTreeZoomControl_MouseLeftButtonDown" MouseMove="FaultTreeZoomControl_MouseMove">
+                <Grid ToolTip="{Binding Converter={StaticResource TerminalNodeToDistributionConverter}}" DataContext="{Binding}" Background="Transparent" Width="40" Height="40" MouseLeftButtonDown="FaultTreeNodePress" MouseMove="FaultTreeNodeMouseMove">
                     <Grid.Style>
                         <Style TargetType="Grid">
                             <Style.Triggers>
