@@ -1,7 +1,4 @@
-﻿
-using System.ComponentModel;
-using System.IO;
-using System.Runtime.CompilerServices;
+﻿using System.IO;
 using System.Windows;
 using FaultTreeAnalysis.FaultTree;
 using FaultTreeAnalysis.GUI.Util;
@@ -9,31 +6,23 @@ using FaultTreeAnalysis.GUI.ViewModel;
 
 namespace FaultTreeAnalysis.GUI.Windows
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using FaultTreeAnalysis.FaultTree.Tree;
-
     public partial class MainWindow
     {
-		public readonly MainWindowViewModel ViewModel;
+		public MainWindowViewModel ViewModel { get; set; }
 
-		public Thickness TitleBarMargin => new Thickness(0, this.TitlebarHeight / 2, 0, 0);
-
-        public int FlyoutHeight => (int) (this.Height*0.75);
+		public Thickness TitleBarMargin => new Thickness(0, (int)(this.TitlebarHeight / 2), 0, 0);
 
         public MainWindow()
 		{
             ConsoleManager.Show();
 			Config.Load();
 			this.ViewModel = new MainWindowViewModel();
+            this.ViewModel.FlyoutHeight = (int)(this.Height * 0.75);
 		    this.DataContext = this.ViewModel;
 		    this.InitializeComponent();
-			
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e) => this.FlyoutOptions.IsOpen = true;
+		private void OptionsClick(object sender, RoutedEventArgs e) => this.FlyoutOptions.IsOpen = true;
 
 		private void Example1Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341861976041_NO_SEED-ft.dot");
 		private void Example2Open(object sender, RoutedEventArgs e) => this.LoadFromFile(@"examples\\1341861997385_NO_SEED-ft.dot");
@@ -115,5 +104,10 @@ namespace FaultTreeAnalysis.GUI.Windows
 			    this.SaveToFile(filename);
 			}
 		}
+
+        private void MetroWindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            this.ViewModel.FlyoutHeight = (int)(this.Height * 0.75);
+        }
     }
 }

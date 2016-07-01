@@ -4,7 +4,11 @@ using FaultTreeAnalysis.GUI.Windows;
 
 namespace FaultTreeAnalysis.GUI.ViewModel
 {
-	public class DiamondArrow
+    using System.Runtime.CompilerServices;
+
+    using FaultTreeAnalysis.GUI.Annotations;
+
+    public class DiamondArrow
     {
     }
 
@@ -24,7 +28,7 @@ namespace FaultTreeAnalysis.GUI.ViewModel
             set
             {
 		        this.faultTreeView = value;
-		        this.RaisePropertyChanged("FaultTreeView");
+		        this.RaisePropertyChanged();
 		        this.RaisePropertyChanged("BDDTreeView");
             }
         }
@@ -38,7 +42,7 @@ namespace FaultTreeAnalysis.GUI.ViewModel
 			get { return this.faultTree; }
 			set {
 			    this.faultTree = value;
-			    this.RaisePropertyChanged("FaultTree"); }
+			    this.RaisePropertyChanged(); }
 		}
 
         public FaultTreeNode NewEdgeStart { get; set; }
@@ -76,9 +80,22 @@ namespace FaultTreeAnalysis.GUI.ViewModel
             this.RaisePropertyChanged("FaultTree");
         }
 
+        private int flyoutHeight;
+        public int FlyoutHeight
+        {
+            get { return this.flyoutHeight; }
+            set
+            {
+                if (value.Equals(this.flyoutHeight)) return;
+                this.flyoutHeight = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void RaisePropertyChanged(string property)
+        [NotifyPropertyChangedInvocator]
+        public void RaisePropertyChanged([CallerMemberName] string property = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }

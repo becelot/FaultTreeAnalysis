@@ -14,7 +14,7 @@
         Title="Fault Tree Analysis Tool" 
         Icon="{StaticResource AppIcon}"
         Height="{Binding WindowHeight, Mode=OneWayToSource}" 
-        Width="{Binding WindowWidth, Mode=OneWayToSource}">
+        Width="{Binding WindowWidth, Mode=OneWayToSource}" SizeChanged="MetroWindowSizeChanged">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -303,7 +303,7 @@
     </Window.CommandBindings>
     <mahApps:MetroWindow.RightWindowCommands>
         <mahApps:WindowCommands>
-            <Button Click="Button_Click">
+            <Button Click="OptionsClick">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="16" Height="16">
                         <Rectangle.Fill>
@@ -320,7 +320,7 @@
             <mahApps:Flyout x:Name="FlyoutOptions" Position="Left" Panel.ZIndex="102" Header="Options" Width="350" Margin="{Binding TitleBarMargin, RelativeSource={RelativeSource AncestorType=local:MainWindow}}">
                 <flyoutControls:OptionsMain x:Name="Options" VerticalAlignment="Top" />
             </mahApps:Flyout>
-            <mahApps:Flyout x:Name="AnalyzeFlyout" Position="Top" Panel.ZIndex="102" IsModal="True" Header="Analyze" Margin="50 0 50 0" Height="{Binding FlyoutHeight, RelativeSource={RelativeSource AncestorType=local:MainWindow}}">
+            <mahApps:Flyout x:Name="AnalyzeFlyout" Position="Top" Panel.ZIndex="102" IsModal="True" Header="Analyze" Margin="50 0 50 0" DataContext="{Binding ViewModel, RelativeSource={RelativeSource AncestorType=local:MainWindow}}" Height="{Binding FlyoutHeight}">
                 <flyoutControls:AnalyzeFlyout x:Name="Analyze" />
             </mahApps:Flyout>
         </mahApps:FlyoutsControl>
