@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" Width="350" Height="276">
+             mc:Ignorable="d" Width="350" Height="339.692">
     <Grid >
         <GroupBox x:Name="groupBox" Header="Analyze Settings" HorizontalAlignment="Stretch" Height="171" Margin="10,10,10,0" VerticalAlignment="Top" >
             <Grid>
@@ -29,6 +29,23 @@
                 <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding TimeSpan}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBox>
                 <TextBlock Grid.Row="6" Grid.Column="1" Text="Uniformization tolerance" VerticalAlignment="Center" Height="16" Margin="0,5"></TextBlock>
                 <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding ErrorTolerance}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="General Settings" Margin="10,198,10,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.333"/>
+                    <RowDefinition Height="20.667"/>
+                    <RowDefinition Height="26"/>
+                    <RowDefinition Height="12"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="9*"/>
+                    <ColumnDefinition Width="147*"/>
+                    <ColumnDefinition Width="112*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Content="Show warning when gate removed" IsChecked="{Binding ShowWarningWhenRemoval}"></CheckBox>
             </Grid>
         </GroupBox>
     </Grid>
