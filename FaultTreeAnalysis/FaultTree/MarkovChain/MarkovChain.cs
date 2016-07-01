@@ -207,6 +207,19 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
         }
 
         /// <summary>
+        /// Removes vertex from chain.
+        /// </summary>
+        /// <param name="vertex">The vertex</param>
+        public void RemoveVertex(TVertex vertex)
+        {
+            if (!this.entryMap.ContainsKey(vertex)) return;
+            int index = this.GetIndexOfVertex(vertex);
+            this.RateMatrix = Matrix<double>.Build.Dense(this.RateMatrix.RowCount - 1, this.RateMatrix.ColumnCount - 1, (i, j) => this.RateMatrix[i < index ? i : i+1,j < index ? j : j+1]);
+            this.entryMap.Remove(vertex);
+            this.entryMap = this.entryMap.ToDictionary(v => v.Key, i => i.Value < index ? i.Value : i.Value - 1);
+        }
+
+        /// <summary>
         /// Returns a list of all connected markov compoennts.
         /// </summary>
         /// <param name="vertices">Available vertices. Note that this parameter is required since the Markov Chain does not necessarily know all vertices in the system. Those vertices are assigned a connected component with one element.</param>
