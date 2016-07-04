@@ -64,7 +64,7 @@
                                     <Trigger.EnterActions>
                                         <BeginStoryboard>
                                             <Storyboard>
-                                                <DoubleAnimation From="0" To="2" Duration="00:00:00.2" 
+                                                <DoubleAnimation From="0" To="0" Duration="00:00:00.2" 
                                                         Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
                                             </Storyboard>
                                         </BeginStoryboard>
@@ -72,7 +72,7 @@
                                     <Trigger.ExitActions>
                                         <BeginStoryboard>
                                             <Storyboard>
-                                                <DoubleAnimation From="2" To="0" Duration="00:00:00.2" 
+                                                <DoubleAnimation From="0" To="0" Duration="00:00:00.2" 
                                                         Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
                                             </Storyboard>
                                         </BeginStoryboard>
@@ -112,7 +112,7 @@
                                         <Trigger.EnterActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
-                                                    <DoubleAnimation From="0" To="2" Duration="00:00:00.2" 
+                                                    <DoubleAnimation From="0" To="0" Duration="00:00:00.2" 
                                                         Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
                                                 </Storyboard>
                                             </BeginStoryboard>
@@ -120,7 +120,7 @@
                                         <Trigger.ExitActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
-                                                    <DoubleAnimation From="2" To="0" Duration="00:00:00.2" 
+                                                    <DoubleAnimation From="0" To="0" Duration="00:00:00.2" 
                                                         Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
                                                 </Storyboard>
                                             </BeginStoryboard>
@@ -176,7 +176,7 @@
                                         <Trigger.EnterActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
-                                                    <DoubleAnimation From="0" To="2" Duration="00:00:00.2" 
+                                                    <DoubleAnimation From="0" To="0" Duration="00:00:00.2" 
                                                         Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
                                                 </Storyboard>
                                             </BeginStoryboard>
@@ -184,7 +184,7 @@
                                         <Trigger.ExitActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
-                                                    <DoubleAnimation From="2" To="0" Duration="00:00:00.2" 
+                                                    <DoubleAnimation From="0" To="0" Duration="00:00:00.2" 
                                                         Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
                                                 </Storyboard>
                                             </BeginStoryboard>
@@ -240,7 +240,7 @@
                                         <Trigger.EnterActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
-                                                    <DoubleAnimation From="0" To="2" Duration="00:00:00.2" 
+                                                    <DoubleAnimation From="0" To="0" Duration="00:00:00.2" 
                                                         Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
                                                 </Storyboard>
                                             </BeginStoryboard>
@@ -248,7 +248,7 @@
                                         <Trigger.ExitActions>
                                             <BeginStoryboard>
                                                 <Storyboard>
-                                                    <DoubleAnimation From="2" To="0" Duration="00:00:00.2" 
+                                                    <DoubleAnimation From="0" To="0" Duration="00:00:00.2" 
                                                         Storyboard.TargetProperty="Effect.Radius"></DoubleAnimation>
                                                 </Storyboard>
                                             </BeginStoryboard>
