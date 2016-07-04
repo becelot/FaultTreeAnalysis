@@ -109,5 +109,10 @@ namespace FaultTreeAnalysis.GUI.Windows
         {
             this.ViewModel.FlyoutHeight = (int)(this.Height * 0.75);
         }
+
+        private void NewProjectClick(object sender, RoutedEventArgs e)
+        {
+            this.ViewModel.FaultTree = null;
+        }
     }
 }

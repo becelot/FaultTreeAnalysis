@@ -339,6 +339,7 @@
                         </Rectangle.Fill>
                     </Rectangle>
                 </MenuItem.Icon>
+                <MenuItem Header="NEW PROJECT" Click="NewProjectClick"></MenuItem>
                 <MenuItem Header="FROM _FILE" Click="LoadFromFileClick" />
                 <MenuItem Header="_EXAMPLES">
                     <MenuItem Header="TestCase Example" Click="TestCaseOpen" />
