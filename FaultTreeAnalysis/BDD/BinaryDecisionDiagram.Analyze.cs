@@ -111,7 +111,7 @@ namespace FaultTreeAnalysis.BDD
             IEnumerable<Tuple<int, double>> variableProbability,
             IEnumerable<IEnumerable<int>> components)
         {
-            var calculatedNodes = new Dictionary<BDDNode, Tuple<double, double>>();
+            var calculatedNodes = new Dictionary<BDDNode, double>();
             return this.Analyze(variableProbability, components, this.Root, new Dictionary<int, bool>(), ref calculatedNodes);
         }
 
@@ -142,7 +142,7 @@ namespace FaultTreeAnalysis.BDD
             IEnumerable<IEnumerable<int>> components,
             BDDNode node,
             Dictionary<int, bool> variableAssignment,
-            ref Dictionary<BDDNode, Tuple<double, double>> calculatedBranches)
+            ref Dictionary<BDDNode, double> calculatedBranches)
         {
             if (node is BDDTerminalNode)
             {
@@ -151,17 +151,10 @@ namespace FaultTreeAnalysis.BDD
 
             if (calculatedBranches.ContainsKey(node))
             {
-                return GetProbability(components, node, variableAssignment, calculatedBranches);
+                return calculatedBranches[node];
             }
 
-            double normalizationFactor = 1;
-            var component = components.First(comp => comp.Contains(node.Variable)).ToList();
-            var alreadyVisitedVariables = component.Where(variableAssignment.ContainsKey).ToList();
-            normalizationFactor -= alreadyVisitedVariables.Select(variable => variableProbability.ToList().Find(tup => tup.Item1 == variable).Item2).DefaultIfEmpty(0.0d).Sum();
-            normalizationFactor = 1 / normalizationFactor;
-
             var lowDict = variableAssignment.ToDictionary(entry => entry.Key, entry => entry.Value);
-            lowDict.Add(node.Variable, false);
 
             double low = this.Analyze(
                 variableProbability,
@@ -169,21 +162,43 @@ namespace FaultTreeAnalysis.BDD
                 node.LowNode,
                 lowDict,
                 ref calculatedBranches);
-            low *= 1 - (variableProbability.ToList().Find(tup => tup.Item1 == node.Variable).Item2 * (alreadyVisitedVariables.ToList().FindAll(variable => variableAssignment[variable]).FirstOrDefault() != default(int) ? 1 : normalizationFactor));
 
             var highDict = variableAssignment.ToDictionary(entry => entry.Key, entry => entry.Value);
             highDict.Add(node.Variable, true);
 
+            var component = components.First(comp => comp.Contains(node.Variable)).ToList();
+            var nextDisjoint = node.HighNode;
+            while (component.Contains(nextDisjoint.Variable))
+            {
+                nextDisjoint = nextDisjoint.LowNode;
+            }
+
             double high = this.Analyze(
                 variableProbability,
                 components,
-                node.HighNode,
+                nextDisjoint,
                 highDict,
                 ref calculatedBranches);
-            high *= variableProbability.ToList().Find(tup => tup.Item1 == node.Variable).Item2 * normalizationFactor;
 
-            calculatedBranches[node] = new Tuple<double, double>(low, high);
-            return GetProbability(components, node, variableAssignment, calculatedBranches);
+            double pG;
+            
+            if (!component.Contains(node.LowNode.Variable))
+            {
+                pG = low + (variableProbability.ToList().Find(tup => tup.Item1 == node.Variable).Item2 * (high - low));
+            }
+            else
+            {
+                var i2 = node.LowNode;
+                while (component.Contains(i2.Variable))
+                {
+                    i2 = i2.LowNode;
+                }
+
+                pG = low + (variableProbability.ToList().Find(tup => tup.Item1 == node.Variable).Item2 * (high - this.Analyze(variableProbability, components, i2, highDict, ref calculatedBranches)));
+            }
+
+            calculatedBranches[node] = pG;
+            return pG;
         }
     }
 }
