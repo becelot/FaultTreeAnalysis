@@ -169,7 +169,7 @@ namespace FaultTreeAnalysis.BDD
                 node.LowNode,
                 lowDict,
                 ref calculatedBranches);
-            low *= 1 - (variableProbability.ToList().Find(tup => tup.Item1 == node.Variable).Item2 * normalizationFactor);
+            low *= 1 - (variableProbability.ToList().Find(tup => tup.Item1 == node.Variable).Item2 * (alreadyVisitedVariables.ToList().FindAll(variable => variableAssignment[variable]).FirstOrDefault() != default(int) ? 1 : normalizationFactor));
 
             var highDict = variableAssignment.ToDictionary(entry => entry.Key, entry => entry.Value);
             highDict.Add(node.Variable, true);
