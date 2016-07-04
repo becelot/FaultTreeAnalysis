@@ -178,8 +178,8 @@ namespace FaultTreeAnalysis.BDD
         /// The <see cref="BDDNode"/>.
         /// </returns>
         public override BDDNode CreateBDD(FaultTree.FaultTree ft)
-	    {
-	        int maxBasicEventNumber = ft.Reduce(new MaxTerminalTransformer());
+        {
+            int maxBasicEventNumber = ft.MarkovChain.InitialDistribution.Count + 1;
 	        BDDNodeFactory nodeFactory = new BDDNodeFactory();
 	        nodeFactory.SetBasicEventCount(maxBasicEventNumber);
 	        return this.CreateBDD(ft.Root, nodeFactory);
