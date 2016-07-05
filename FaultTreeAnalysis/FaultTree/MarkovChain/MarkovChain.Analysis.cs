@@ -27,6 +27,25 @@ namespace FaultTreeAnalysis.FaultTree.MarkovChain
         [DataMember]
         public Dictionary<TVertex, double> InitialDistribution { get; set; } = new Dictionary<TVertex, double>();
 
+	    internal void NormalizeDistribution()
+	    {
+		    var components = this.GetComponents(entryMap.Keys);
+		    foreach (var component in components)
+		    {
+			    var componentList = component.ToList();
+			    double sum = componentList.Select(vertex => InitialDistribution[vertex]).Sum();
+			    if (sum == 0)
+			    {
+				    double val = 1.0d/componentList.Count();
+					componentList.ForEach(vertex => InitialDistribution[vertex] = val);
+			    }
+			    else
+			    {
+				    componentList.ForEach(vertex => InitialDistribution[vertex] /= sum);
+			    }
+		    }
+	    }
+
 #pragma warning disable 1591
         public Dictionary<TVertex, List<double>> ComputeProbability(double samplingRate, double timeSpan, double errorTolerance)
 #pragma warning restore 1591

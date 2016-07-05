@@ -186,6 +186,7 @@ namespace FaultTreeAnalysis.FaultTree
         public IEnumerable<double> Analyze(double samplingRate, double timeSpan, double errorTolerance)
         {
             BinaryDecisionDiagram bdd = this;
+	        this.MarkovChain.NormalizeDistribution();
             return bdd.Analyze(this.MarkovChain.ComputeProbability(samplingRate, timeSpan, errorTolerance), this.MarkovChain.GetComponents(this.Traverse().OfType<FaultTreeTerminalNode>()));
         }
 	}
