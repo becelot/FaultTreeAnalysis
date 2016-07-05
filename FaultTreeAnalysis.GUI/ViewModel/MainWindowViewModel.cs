@@ -66,7 +66,7 @@ namespace FaultTreeAnalysis.GUI.ViewModel
 	        {
 		        string rateString = await MessageDialogs.ShowRateDialogAsync();
 		        double rate;
-				if (double.TryParse(rateString, out rate))
+				if (double.TryParse(rateString, out rate) && rate >= 0)
 		        {
 		            this.FaultTree.MarkovChain[(FaultTreeTerminalNode)this.NewEdgeStart, (FaultTreeTerminalNode)this.NewEdgeEnd] = rate;
 				}
